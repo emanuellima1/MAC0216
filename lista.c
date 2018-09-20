@@ -4,55 +4,56 @@
 
 /* conferir https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html */
 
-Lista cria()
+Lista lista_cria()
 {
-  Lista l = NULL; // Lista vazia: aponta para NULL
+  Lista l; // Lista vazia: aponta para NULL
+  l = malloc (sizeof(Elo));
+  l -> next = NULL;
   return l;
 }
 
-void destroi(Lista l)
+void lista_destroi(Lista l)
 {
-
   Elo * p_elo, * tmp = l;
 
   for (p_elo = l -> next; p_elo != NULL; p_elo = p_elo -> next) {
     free(tmp);
     tmp = p_elo;
   }
-
   free(tmp);
   free(p_elo);
 }
 
-Lista insere(Lista l, Elemento val)
-{
-  Elo *p_elo;
-
-  for (p_elo = l; p_elo != NULL; p_elo = p_elo -> next)
-    continue;
-  /* Iniciliza elo como l (ou seja, como ponteiro do primeiro elo) 
-   * se não for NULL, soma 1 no índice e elo torna-se o
-   * ponteiro do próximo elo */
-  
-  p_elo = malloc(sizeof(Elo));
-  p_elo -> next = NULL;
-  p_elo -> val = val;
-  return p_elo;
-}
-
-Elemento busca(Lista l, char * n)
+Lista lista_insere(Lista l, Elemento val)
 {
   Elo * p_elo = l;
-  while (p_elo != NULL && (p_elo -> val) -> n != n)
+
+  while (p_elo -> next != NULL) {
     p_elo = p_elo -> next;
+  }
+  p_elo -> next = malloc (sizeof(Elo));
+  (p_elo -> next) -> next = NULL;
+  (p_elo -> next) -> val = val;
   
-  return p_elo -> val;
+  return p_elo -> next;
 }
 
-void retira(Lista l, Elemento val)
+Elemento lista_busca(Lista l, char * n)
 {
-  Elo * p1, * p2 = l;
-  p2 = l;
+  Elo * p1, * p2 = l -> next;
+  while (p2 != NULL && (p2 -> val) -> n != n) {
+    p1 = p2;
+    p2 = p2 -> next;
+  }
+  
+  if (p2 == NULL)
+    return NULL;
+  return p2 -> val;
+}
+
+void lista_retira(Lista l, Elemento val)
+{
+  Elo * p1 = l, * p2 = l -> next;
   while (p2 != NULL && p2 -> val != val) {
     p1 = p2;
     p2 = p2 -> next;

@@ -13,18 +13,18 @@ typedef struct elo Elo;
 typedef Elo * Lista;
 
 
-Lista cria();
-void destroi(Lista l);
-Lista insere(Lista l, Elemento val);
+Lista lista_cria();
+void lista_destroi(Lista l);
+Lista lista_insere(Lista l, Elemento val);
 // Lista insere(Lista l, Elemento *val) caso Elemento não seja ponteiro
 
 /* Essa função devolve Lista pois Lista é um ponteiro para Elo. Portanto,
  * ela devolve o ponteiro para o elo do elemento que acabamos de inserir */
 
-Elemento busca(Lista l, char *n);
+Elemento lista_busca(Lista l, char *n);
 // Deve retornar NULL caso o elemento não seja encontrado. 
 
-void retira(Lista l, Elemento val);
+void lista_retira(Lista l, Elemento val);
 // Elemento *retira(Lista l, Elemento *val) caso Elemento não seja ponteiro
 // remove o elemento *val da tabela, sem removê-lo da memória.
 

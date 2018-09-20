@@ -1,9 +1,9 @@
-TabSim cria(int tam);
+TabSim hash_cria(int tam);
 
-void destroi(TabSim t);
+void hash_destroi(TabSim t);
 
-int insere(TabSim t, char *n, Elemento *val);
+int hash_insere(TabSim t, char *n, Elemento val);
 
-Elemento* busca(TabSim t, char *n);
+Elemento hash_busca(TabSim t, char *n);
 
-int retira(TabSim t, char, *n);
+int hash_retira(TabSim t, char, *n);
