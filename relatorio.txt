@@ -1,0 +1,17 @@
+RASCUNHO DO RELATÓRIO DA PRIMEIRA PARTE
+
+Optamos por definir dois tipos para elemento: "elemento" e "Elemento". O segundo é um ponteiro para o primeiro. A desvantagem é que precisamos criar duas funções "elemento_cria" e "elemento_destroi", mas em compensação o restante do código, nos módulos de lista e tabelas, fica mais limpo e legível.
+
+Com essa diferença, algumas funções têm sua declaração alterada:
+
+Lista insere(Lista l, Elemento *val) torna-se Lista insere(Lista l, Elemento val);
+Elemento *busca(Lista l, char *n)    torna-se Elemento busca(Lista l, char *n);
+Elemento *retira(Lista l, Elemento *val) torna-se Elemento retira(Lista l, Elemento val)
+
+Além disso, decidimos não seguir a sugestão do enunciado para a implementação da lista ligada à risca. Ele sugeria que o tipo lista fosse definido como:
+
+typedef struct {
+  Elo * cabec ;
+} Lista ;
+
+No entanto, optamos por definir o tipo Lista simplesmente como um ponteiro para o tipo Elo. Assim, a cabeça de toda lista é criada pela função cria_lista, e é ela mesma um "Elo" cujo "val" não aponta para nenhum lugar relevante. Se é verdade que essa implementação gasta o espaço desse "val", que não é usado, também é verdade que evitamos novas definições, que pareciam tornar o código menos claro. O benefício apresentado pelo enunciado, qual seja, "o endereço da lista não muda com inserções e deleções", continua valendo, pela definição de "Lista".
