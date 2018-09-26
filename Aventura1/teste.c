@@ -1,17 +1,23 @@
+/********************************************************************\         
+* Aventura - Parte 1. Teste                                         *
+*                                                                   *
+* Emanuel Lima                                                      *
+* João Seckler                                                      *
+*                                                                   *
+\********************************************************************/
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include "lista.h"
 
 int main() {
-
   int i, j, r1, r2;
   char c[80];
   time_t t;
   Elemento vetor_el[500];
   
   /* Cria vetor de elementos de nomes aleatórios */
-  
   srand((unsigned) time(&t));
   for (i = 0; i < 500; i++) {
     r2 = rand() % 79; // 80 - 1: Tem que deixar 1 para o '\0';
@@ -24,7 +30,6 @@ int main() {
   }
 
   /* TESTE DO MÓDULO DE LISTAS */
-  
   Lista l = lista_cria(), vetor_l[500]; // TESTA "CRIA"
   
   for (i = 0; i < 500; i++)

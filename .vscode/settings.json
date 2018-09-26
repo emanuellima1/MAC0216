@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "elemento.h": "c",
+        "cstdlib": "c"
+    }
+}
