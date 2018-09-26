@@ -5,4 +5,3 @@
 Equipe: 
 * Emanuel Lima
 * João Seckler
-* José Eduardo
