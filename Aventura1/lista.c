@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "lista.h"
 
 /* conferir https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html */
@@ -36,7 +37,9 @@ Lista lista_insere (Lista l, Elemento val) {
 
 Elemento lista_busca (Lista l, char *n) {
   Elo *p = l->next;
-  while (p != NULL && (p->val)->n != n) {
+  int compara_string;
+  compara_string = strcmp((p->val->n), n);
+  while (p != NULL && compara_string != 0) {
     p = p->next;
   }
   
