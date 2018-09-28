@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "lista.h"
 
 /* conferir https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html */
@@ -37,15 +36,14 @@ Lista lista_insere (Lista l, Elemento val) {
 
 Elemento lista_busca (Lista l, char *n) {
   Elo *p = l->next;
-  int compara_string;
-  compara_string = strcmp((p->val->n), n);
-  while (p != NULL && compara_string != 0) {
+  
+  while (p != NULL && compara_str((p->val)->n, n) == 0) {
     p = p->next;
   }
   
-  if (p == NULL)
+  if (p == NULL) {
     return NULL;
-
+  }
   return p->val;
 }
 
@@ -59,4 +57,14 @@ void lista_retira (Lista l, Elemento val) {
   if (p2 != NULL) {
     p1->next = p2->next;
   }
+}
+
+int compara_str(char *n, char *m) {
+  int i;
+  for (i = 0; n[i] != 0 && m[i] != 0; i++)
+    if (n[i] != m[i])
+      return 0;
+  if (n[i] != m[i])
+    return 0;
+  return 1;
 }

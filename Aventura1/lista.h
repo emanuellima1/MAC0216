@@ -26,3 +26,6 @@ Elemento lista_busca (Lista l, char *n);
 
 void lista_retira (Lista l, Elemento val);
 // remove o elemento *val da tabela, sem removê-lo da memória.
+
+int compara_str(char *n, char *m);
+// Devolve 1 se as strings são iguais, 0 caso contrário.
