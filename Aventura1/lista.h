@@ -1,8 +1,7 @@
 #include "elemento.h"
 
-/* conferir https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html 
- * Fazemos de acordo com PF, que diz que uma lista é simplesmente um ponteiro
- * para um elo.
+/* Conferir https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html 
+ * Fizemos de acordo com PF, que diz que uma lista é simplesmente um ponteiro para um elo.
  */
 
 typedef struct elo {

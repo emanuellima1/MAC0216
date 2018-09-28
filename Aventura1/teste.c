@@ -26,9 +26,10 @@ int main() {
   time_t t;
   Elemento vetor_el[500];
   
-  printf("===========================================\n");
+  printf("===================================================================\n");
   printf("Iniciando o Teste.\n");
-  printf("===========================================\n");
+  printf("Autores: Emanuel Lima e João Seckler.\n");
+  printf("===================================================================\n");
   printf("\nTeste de Elemento:\n\n");
   printf("Criando um elemento isolado...\n");
 
@@ -55,7 +56,7 @@ int main() {
 
   printf("Foram criados %d elementos.\n\n", i);
   printf("Se não houve mensage de erro, todos os testes de elemento passaram.\n");
-  printf("===========================================\n");
+  printf("===================================================================\n");
   
 
   /* --------------- TESTE DO MÓDULO DE LISTAS ---------------- */
@@ -97,7 +98,7 @@ int main() {
   lista_destroi(l); // TESTA DESTROI
 
   printf("Todos os testes de lista passaram\n");
-  printf("===========================================\n");
+  printf("===================================================================\n");
 
 
   /* -------- TESTE DO MÓDULO DE TABELAS ---------------- */
@@ -105,9 +106,9 @@ int main() {
   printf("\nTeste de Tabela:\n\n");
   printf("Tentando criar uma tabela de 10 entradas...\n");
 
-  Tabela tab;
+  Tabela tab, tab2;
   Elemento elem1, elem2;
-  int retorno_erro;
+  int retorno_erro, status_retira;
   tab = tabela_cria (10);
 
   printf("Feito.\n");
@@ -128,15 +129,16 @@ int main() {
   tabela_destroi(tab);
 
   printf("Feito.\n\n");
+
   printf("Tentando criar uma nova tabela...\n");
 
-  tab = tabela_cria(10);
+  tab2 = tabela_cria(10);
 
   printf("Feito.\n");
 
   elem1 = elemento_cria("novo_elemento");
   
-  if (tabela_insere(tab, "Chave", elem1)) {
+  if (tabela_insere(tab2, "Chave", elem1)) {
     printf("Inserido um novo elemento na Tabela 2.\n");
   } else {
     printf("Erro ao inserir. Saindo...\n");
@@ -145,14 +147,27 @@ int main() {
 
   printf("Tentando buscar o elemento recém inserido na tabela...\n");
 
-  elem2 = tabela_busca(tab, "Chave");
+  elem2 = tabela_busca(tab2, "Chave");
   if (elem1 == elem2) {
     printf("Busca realizada com sucesso.\n");
   } else {
     printf("Erro na busca. Saindo...\n");
     return EXIT_FAILURE;
   }
+
+  printf("Tentando retirar um elemento da tabela.\n");
+  status_retira = tabela_retira(tab2, "Chave");
+  if (status_retira) {
+    printf("Elemento retirado da tabela com sucesso.\n\n");
+  }
+  else {
+    printf("Erro ao tentar remover da tabela. Saindo...\n");
+    return EXIT_FAILURE;
+  }
   
+  printf("Todos os testes de tabela passaram.\n");
+  printf("===================================================================\n\n");
+
   return EXIT_SUCCESS;
 }
 

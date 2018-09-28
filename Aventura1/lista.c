@@ -2,7 +2,17 @@
 #include <stdlib.h>
 #include "lista.h"
 
-/* conferir https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html */
+/* Conferir https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html */
+
+int compara_str(char *n, char *m) {
+  int i;
+  for (i = 0; n[i] != 0 && m[i] != 0; i++)
+    if (n[i] != m[i])
+      return 0;
+  if (n[i] != m[i])
+    return 0;
+  return 1;
+}
 
 Lista lista_cria () {
   Lista l; // Lista vazia: aponta para NULL
@@ -58,14 +68,4 @@ void lista_retira (Lista l, char *chave) {
   if (p2 != NULL) {
     p1->next = p2->next;
   }
-}
-
-int compara_str(char *n, char *m) {
-  int i;
-  for (i = 0; n[i] != 0 && m[i] != 0; i++)
-    if (n[i] != m[i])
-      return 0;
-  if (n[i] != m[i])
-    return 0;
-  return 1;
 }
