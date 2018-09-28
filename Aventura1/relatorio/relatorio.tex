@@ -26,28 +26,46 @@ Optamos por definir dois tipos para elemento: "elemento" e "Elemento". O segundo
 
 Com essa diferença, algumas funções têm sua declaração alterada:
 
-Lista insere(Lista l, Elemento *val)
+\begin{spverbatim}
+  Lista insere(Lista l, Elemento *val)
+\end{spverbatim} \medskip
 torna-se Lista
-insere(Lista l, Elemento val);
+\begin{spverbatim}
+  insere(Lista l, Elemento val);
+\end{spverbatim} \medskip
 
-Elemento *busca(Lista l, char *n)
+\begin{spverbatim}
+  Elemento *busca(Lista l, char *n)
+\end{spverbatim} \medskip
 torna-se
-Elemento busca(Lista l, char *n); e
+\begin{spverbatim}
+  Elemento busca(Lista l, char *n); e
+\end{spverbatim} \medskip
 
-Elemento *retira(Lista l, Elemento *val)
+\begin{spverbatim}
+  Elemento *retira(Lista l, Elemento *val)
+\end{spverbatim} \medskip
 torna-se
-Elemento retira(Lista l, Elemento val)
+\begin{spverbatim}
+  Elemento retira(Lista l, Elemento val)
+\end{spverbatim} \medskip
 
 Além disso, decidimos não seguir a sugestão do enunciado para a implementação da lista ligada à risca. Ele sugeria que o tipo lista fosse definido como:
 
-typedef struct {
+\begin{spverbatim}
+  typedef struct {
   Elo * cabec ;
 } Lista ;
+\end{spverbatim} \medskip
 
 No entanto, optamos por definir o tipo Lista simplesmente como um ponteiro para o tipo Elo. Assim, a cabeça de toda lista é criada pela função cria\_lista, e é ela mesma um "Elo" cujo "val" não aponta para nenhum lugar relevante. Se é verdade que essa implementação gasta o espaço desse "val", que não é usado, também é verdade que evitamos novas definições, que pareciam tornar o código menos claro. O benefício apresentado pelo enunciado, qual seja, "o endereço da lista não muda com inserções e deleções", continua valendo, pela definição de "Lista". Essa estratégia é inspirada nas página sobre lista encadeada do Prof. Paulo Feofiloff (https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html).
 
-Na implementação da função tabela\_insere(Tabela T, char *n, Elemento val), optamos por devolver um código de erro se o valor val associado à chave n já estiver armazenado no mesmo índice de T. Esse evento pode ter dois significados: (i) que o usuário tentou associar uma mesma chave a um mesmo valor mais de uma vez ou (ii) que o usuário associou duas chaves a um mesmo valor, e essas chaves colidem na função hash.
+Na implementação da função
+\begin{spverbatim}
+  tabela\_insere(Tabela T, char *n, Elemento val)
+\end{spverbatim} \medskip
+optamos por devolver um código de erro se o valor val associado à chave n já estiver armazenado no mesmo índice de T. Esse evento pode ter dois significados: (i) que o usuário tentou associar uma mesma chave a um mesmo valor mais de uma vez ou (ii) que o usuário associou duas chaves a um mesmo valor, e essas chaves colidem na função hash.
 
-Referência para a função de hash: http://www.cse.yorku.ca/~oz/hash.html 
+Implementamos a função hash da tabela de símboloso inspirados no seguinte material: http://www.cse.yorku.ca/~oz/hash.html 
 
 \end{document}
