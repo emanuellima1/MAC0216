@@ -157,7 +157,7 @@ int main() {
 
   printf("Tentando retirar um elemento da tabela.\n");
   status_retira = tabela_retira(tab2, "Chave");
-  if (status_retira) {
+  if (status_retira && tabela_busca(tab2, "chave") == NULL) {
     printf("Elemento retirado da tabela com sucesso.\n\n");
   }
   else {
