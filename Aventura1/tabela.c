@@ -13,13 +13,16 @@ Tabela tabela_cria (int tam) {
 }
 
 int tabela_hash (char *n, int tam) {
-  unsigned long int h = 5831;
+  int h = 5831;
   for(int i = 0; n[i] != '\0'; i++)
-    h = (h * 33) ^ n[i];
-  return (h % tam);
+    h = ((h * 33) ^ n[i]) % tam;
+  return h;
 }
 
 void tabela_destroi (Tabela T) {
+  int i;
+  for (i = 0; i < T->tam; i++)
+    lista_destroi(T->v[i]);
   free (T->v);
   free (T);
 }
@@ -30,7 +33,7 @@ int tabela_insere(Tabela T, char *n, Elemento val) {
 
   // Checa se o Elemento é repetido
   if (lista_busca(T->v[i], val->n) == NULL) {
-    lista_insere(T->v[i], val);
+    lista_insere(T->v[i], val, n);
     return SUCESSO;
   }
   return FALHA;
@@ -43,15 +46,13 @@ Elemento tabela_busca (Tabela T, char *n) {
 }
 
 int tabela_retira (Tabela T, char *n) {
-  Elemento el;
   int i;
   i = tabela_hash(n, T->tam);
-  el = tabela_busca(T, n);
 
-  if (el == NULL) {
+  if (lista_busca(T->v[i], n) == NULL) {
     return FALHA;
   }
 
-  lista_retira(T->v[i], el);
+  lista_retira(T->v[i], n);
   return SUCESSO;
 }

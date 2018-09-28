@@ -8,6 +8,7 @@
 typedef struct elo {
   struct elo *next;
   Elemento val;
+  char *chave;
 } Elo;
 
 typedef Elo *Lista;
@@ -16,7 +17,7 @@ Lista lista_cria ();
 
 void lista_destroi (Lista l);
 
-Lista lista_insere (Lista l, Elemento val);
+Lista lista_insere (Lista l, Elemento val, char *chave);
 
 /* Essa função devolve Lista pois Lista é um ponteiro para Elo. Portanto,
  * ela devolve o ponteiro para o elo do elemento que acabamos de inserir */
@@ -24,7 +25,7 @@ Lista lista_insere (Lista l, Elemento val);
 Elemento lista_busca (Lista l, char *n);
 // Deve retornar NULL caso o elemento não seja encontrado. 
 
-void lista_retira (Lista l, Elemento val);
+void lista_retira (Lista l, char *chave);
 // remove o elemento *val da tabela, sem removê-lo da memória.
 
 int compara_str(char *n, char *m);

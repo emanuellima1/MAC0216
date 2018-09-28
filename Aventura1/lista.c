@@ -21,7 +21,7 @@ void lista_destroi (Lista l) {
   free(tmp);
 }
 
-Lista lista_insere (Lista l, Elemento val) {
+Lista lista_insere (Lista l, Elemento val, char *chave) {
   Elo *p_elo = l;
 
   while (p_elo->next != NULL) {
@@ -30,6 +30,7 @@ Lista lista_insere (Lista l, Elemento val) {
   p_elo->next = malloc (sizeof(Elo));
   (p_elo->next)->next = NULL;
   (p_elo->next)->val = val;
+  (p_elo->next)->chave = chave;
   
   return p_elo->next;
 }
@@ -37,7 +38,7 @@ Lista lista_insere (Lista l, Elemento val) {
 Elemento lista_busca (Lista l, char *n) {
   Elo *p = l->next;
   
-  while (p != NULL && compara_str((p->val)->n, n) == 0) {
+  while (p != NULL && compara_str(p->chave, n) == 0) {
     p = p->next;
   }
   
@@ -47,9 +48,9 @@ Elemento lista_busca (Lista l, char *n) {
   return p->val;
 }
 
-void lista_retira (Lista l, Elemento val) {
+void lista_retira (Lista l, char *chave) {
   Elo *p1 = l, *p2 = l->next;
-  while (p2 != NULL && p2->val != val) {
+  while (p2 != NULL && compara_str(p2->chave, chave) == 0) {
     p1 = p2;
     p2 = p2 -> next;
   }
