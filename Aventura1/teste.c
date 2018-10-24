@@ -22,7 +22,7 @@ int main() {
   /* --------------- TESTE DO MÓDULO DE ELEMENTOS ---------------- */
 
   int i, r;
-  char c[TAM_NOME];
+  char *c = malloc(sizeof(char) * TAM_NOME);
   time_t t;
   Elemento vetor_el[500];
   
@@ -108,14 +108,15 @@ int main() {
 
   Tabela tab, tab2;
   Elemento elem1, elem2;
-  int retorno_erro, status_retira;
+  int retorno_erro, status_retira, j;
   tab = tabela_cria (10);
 
   printf("Feito.\n");
   printf("Tentando preencher a tabela usando elementos e strings aleatórias...\n");
 
-  for(i = 0; i < 500; i++) {
-    gera_string(c, 80);
+  for(i = 0; i < 100; i++) {
+    c = malloc(sizeof(char) * 40);
+    gera_string(c, 40);
     retorno_erro = tabela_insere (tab, c, vetor_el[i]);
     if (retorno_erro == FALHA) {
       printf("Erro ao inserir na tabela. Saindo...\n");
@@ -125,8 +126,8 @@ int main() {
 
   printf("Foram inseridos %d chaves e valores na tabela.\n", i);
   printf("Destruindo a tabela...\n");
-
-  tabela_destroi(tab);
+  
+tabela_destroi(tab);
 
   printf("Feito.\n\n");
 

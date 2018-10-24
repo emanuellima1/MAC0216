@@ -14,7 +14,7 @@ Tabela tabela_cria (int tam);
 
 void tabela_destroi (Tabela T);
 
-int tabela_insere (Tabela T, char *n, Elemento val);
+int tabela_insere (Tabela T, char *n, void *val);
 // Devolve 1 se o elemento foi inserido com sucesso, 0 caso contrário
 
 Elemento tabela_busca (Tabela T, char *n);

@@ -31,7 +31,7 @@ void lista_destroi (Lista l) {
   free(tmp);
 }
 
-Lista lista_insere (Lista l, Elemento val, char *chave) {
+Lista lista_insere (Lista l, void *val, char *chave) {
   Elo *p_elo = l;
 
   while (p_elo->next != NULL) {
@@ -45,7 +45,7 @@ Lista lista_insere (Lista l, Elemento val, char *chave) {
   return p_elo->next;
 }
 
-Elemento lista_busca (Lista l, char *n) {
+void * lista_busca(Lista l, char *n) {
   Elo *p = l->next;
   
   while (p != NULL && compara_str(p->chave, n) == 0) {
@@ -55,7 +55,22 @@ Elemento lista_busca (Lista l, char *n) {
   if (p == NULL) {
     return NULL;
   }
+  /* printf("\nEu sou o lista_busca e eu achei o val %s associado à chave %s\n\n", ((Elemento)p->val)->n, n); */
+  /* printf("Isso quer dizer que as strings \n%s\n%s \n são iguais\n", p->chave, n); */
   return p->val;
+}
+
+char * lista_busca_valor (Lista l, void *val) {
+  Elo *p = l->next;
+  
+  while (p != NULL && val != p->val) {
+    p = p->next;
+  }
+  
+  if (p == NULL) {
+    return NULL;
+  }
+  return p->chave;
 }
 
 void lista_retira (Lista l, char *chave) {
@@ -68,4 +83,15 @@ void lista_retira (Lista l, char *chave) {
   if (p2 != NULL) {
     p1->next = p2->next;
   }
+}
+
+void lista_imprime_chaves(Lista l) {
+  
+  Elo *p = l->next;
+  while (p != NULL) {
+    printf("%s ", p->chave);
+    p = p->next;
+  }
+
+  printf("\n");
 }

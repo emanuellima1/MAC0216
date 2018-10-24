@@ -27,12 +27,12 @@ void tabela_destroi (Tabela T) {
   free (T);
 }
 
-int tabela_insere(Tabela T, char *n, Elemento val) {
+int tabela_insere(Tabela T, char *n, void * val) {
   int i;
   i = tabela_hash (n, T->tam);
 
   // Checa se o Elemento é repetido
-  if (lista_busca(T->v[i], val->n) == NULL) {
+  if (lista_busca(T->v[i], n) == NULL) {
     lista_insere(T->v[i], val, n);
     return SUCESSO;
   }
