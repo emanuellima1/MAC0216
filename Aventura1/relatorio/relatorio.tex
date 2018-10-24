@@ -5,7 +5,7 @@
 
 \title{Relatório - Parte I da Aventura}
 \date{26/09/2018}
-\author{Emanuel Lima e João Seckler} 
+\author{Emanuel Lima (9009493) e João Seckler (4603521)} 
 
 
 \begin{document}
@@ -62,7 +62,7 @@ No entanto, optamos por definir o tipo Lista simplesmente como um ponteiro para 
 
 Na implementação da função
 \begin{spverbatim}
-  tabela\_insere(Tabela T, char *n, Elemento val)
+  tabela_insere(Tabela T, char *n, Elemento val)
 \end{spverbatim} \medskip
 optamos por devolver um código de erro se o valor val associado à chave n já estiver armazenado no mesmo índice de T. Esse evento pode ter dois significados: (i) que o usuário tentou associar uma mesma chave a um mesmo valor mais de uma vez ou (ii) que o usuário associou duas chaves a um mesmo valor, e essas chaves colidem na função hash.
 
