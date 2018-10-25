@@ -108,7 +108,7 @@ int main() {
 
   Tabela tab, tab2;
   Elemento elem1, elem2;
-  int retorno_erro, status_retira, j;
+  int retorno_erro, status_retira;
   tab = tabela_cria (10);
 
   printf("Feito.\n");
