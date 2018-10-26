@@ -39,7 +39,7 @@ int tabela_insere(Tabela T, char *n, void * val) {
   return FALHA;
 }
 
-Elemento tabela_busca (Tabela T, char *n) {
+void * tabela_busca (Tabela T, char *n) {
   int i;
   i = tabela_hash(n, T->tam);
   return (lista_busca(T->v[i], n));

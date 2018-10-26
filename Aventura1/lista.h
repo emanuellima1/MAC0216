@@ -1,5 +1,3 @@
-#include "elemento.h"
-
 /* Essa biblioteca implementa uma lista ligada, em que cada elo tem
  * 3 campos: o ponteiro "next" para o próximo elo, um ponteiro void
  * "val" e uma string "chave" */
@@ -23,7 +21,7 @@ void lista_destroi (Lista l);
 
 Lista lista_insere (Lista l, void *val, char *chave);
 /* Essa função devolve Lista pois Lista é um ponteiro para Elo. Portanto,
- * ela devolve o ponteiro para o elo do elemento que acabamos de inserir */
+ * ela devolve o ponteiro para o elo do valor que acabamos de inserir */
 
 void * lista_busca (Lista l, char *n);
 /* Recebe uma chave e devolve o valor associada a ela*/
@@ -35,7 +33,7 @@ char * lista_busca_valor (Lista l, void *);
 
 
 void lista_retira (Lista l, char *chave);
-/* remove o elemento *val da tabela, sem removê-lo da memória. */
+/* remove o valor associado à chave dada da tabela, sem removê-lo da memória. */
 
 int compara_str(char *n, char *m);
 /* Devolve 1 se as strings são iguais, 0 caso contrário. */

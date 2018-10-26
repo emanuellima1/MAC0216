@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "tabela.h"
+#include "elemento.h"
 
 void gera_string (char *s, int tamanho);
 void testa_elemento();
@@ -35,8 +35,8 @@ int main() {
 
   Elemento vida_curta = elemento_cria("Vida Curta");
   
-  printf("Foi criado um elemento chamado %s.\n", vida_curta->n);
-  printf("Tentando destruir o %s...\n", vida_curta->n);
+  printf("Foi criado um elemento chamado %s.\n", vida_curta->nome);
+  printf("Tentando destruir o %s...\n", vida_curta->nome);
 
   elemento_destroi(vida_curta);
   
@@ -70,13 +70,13 @@ int main() {
   printf("Tentando inserir 500 elementos na lista\n");
 
   for (i = 0; i < 500; i++)
-    vetor_l[i] = lista_insere(l, vetor_el[i], vetor_el[i]->n); // TESTA "INSERE"
+    vetor_l[i] = lista_insere(l, vetor_el[i], vetor_el[i]->nome); // TESTA "INSERE"
 
   printf("Foram inseridos %d elementos na lista vazia.\n", i);
   printf("Executando busca e retirada na lista...\n");
 
   for (i = 0; i < 500; i++) {
-    if (vetor_el[i] != lista_busca(l, vetor_el[i]->n)) { // "TESTA BUSCA"
+    if (vetor_el[i] != lista_busca(l, vetor_el[i]->nome)) { // "TESTA BUSCA"
       printf("Erro de busca para %d\n", i);
       return EXIT_FAILURE;
     }
@@ -84,10 +84,10 @@ int main() {
       printf("Erro de retorno da função insere para vetor_l[%d]\n", i); // TESTA O RETORNO DE "INSERE"
       return EXIT_FAILURE;
     }
-    lista_retira(l, vetor_el[i]->n); // TESTA "RETIRA"
-    if (lista_busca(l, vetor_el[i]->n) != NULL) { // TESTA O RETORNO DE "BUSCA"
+    lista_retira(l, vetor_el[i]->nome); // TESTA "RETIRA"
+    if (lista_busca(l, vetor_el[i]->nome) != NULL) { // TESTA O RETORNO DE "BUSCA"
       printf("Erro ao retirar %d\n", i);
-      printf("Busquei %s em l, que não deveria estar lá\n", vetor_el[i]->n);
+      printf("Busquei %s em l, que não deveria estar lá\n", vetor_el[i]->nome);
       return EXIT_FAILURE;
     }
   }
