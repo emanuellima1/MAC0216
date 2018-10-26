@@ -1,7 +1,9 @@
 # Others
 *.pdf
 *.vscode
-
+*.aux
+*.log
+relatorio/auto
 
 # Prerequisites
 *.d
