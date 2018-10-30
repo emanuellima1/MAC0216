@@ -12,6 +12,7 @@ Elemento elemento_cria (char *nome) {
 
   el->curta = NULL;
   el->longa = NULL;
+  el->artigo = NULL;
   el->ativo = 0;
   el->visivel = 0;
   el->conhecido = 0;
@@ -27,9 +28,9 @@ void elemento_destroi (Elemento el) {
   free(el->nome);
   free(el->curta);
   free(el->longa);
+  free(el->artigo);
   lista_destroi(el->conteudo);
   lista_destroi(el->acoes);
   lista_destroi(el->detalhe.atributos);
   free(el);
 }
-
