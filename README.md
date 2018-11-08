@@ -1,7 +1,12 @@
 # MAC0216
 
-## Técnicas de Programação 1
+## Aventura!
+Para testar, basta rodar:
+> make  
+> make teste
+> make relatorio
+> make clean
 
 Equipe: 
-* Emanuel Lima
-* João Seckler
+* Emanuel Lima:  NUSP 9009493    
+* João Seckler:  NUSP 4603521
