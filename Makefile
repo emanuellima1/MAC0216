@@ -27,4 +27,4 @@ relatorio:
 
 .PHONY: clean
 clean: 
-	-rm teste.out $(OBJ) relatorio.pdf relatorio.aux relatorio.log
+	-rm -f teste.out $(OBJ) relatorio.pdf relatorio.aux relatorio.log
