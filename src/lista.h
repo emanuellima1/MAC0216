@@ -40,3 +40,6 @@ int compara_str(char *n, char *m);
 
 void lista_imprime_chaves(Lista l);
 /* Dada uma Lista l, imprime todas as suas chaves, na ordem em que estão */
+
+int lista_vazia(Lista l);
+/* Devolve 1 se a lista l está vazia, 0 caso contrario */

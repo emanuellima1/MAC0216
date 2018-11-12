@@ -67,6 +67,14 @@ int main() {
   Lista l = lista_cria(), vetor_l[500]; // TESTA "CRIA"
 
   printf("Criada uma lista vazia.\n");
+
+  printf("Testando se a lista é vazia..."); // TESTA "LISTA_VAZIA"
+  if (!lista_vazia(l)) {
+    printf("\nErro na função lista_vazia\n");
+    return EXIT_FAILURE;
+  }
+  printf(" ok.\n");
+
   printf("Tentando inserir 500 elementos na lista\n");
 
   for (i = 0; i < 500; i++)

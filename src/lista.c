@@ -85,7 +85,7 @@ void lista_retira (Lista l, char *chave) {
   }
 }
 
-void lista_imprime_chaves(Lista l) {
+void lista_imprime_chaves (Lista l) {
   
   Elo *p = l->next;
   while (p != NULL) {
@@ -94,4 +94,10 @@ void lista_imprime_chaves(Lista l) {
   }
 
   printf("\n");
+}
+
+int lista_vazia (Lista l) {
+  if (l->next == NULL)
+    return 1;
+  return 0;
 }
