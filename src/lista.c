@@ -92,8 +92,6 @@ void lista_imprime_chaves (Lista l) {
     printf("%s ", p->chave);
     p = p->next;
   }
-
-  printf("\n");
 }
 
 int lista_vazia (Lista l) {

@@ -9,7 +9,6 @@
 
 typedef struct{
   char *nome; // Nome padrão
-  char *artigo; // Qual artigo é para ser usado com o nome
   char *curta; // Descrição curta do Elemento
   char *longa; // Descrição detalhada do elemento
   char *artigo; // Indica que artigo (o, um, ...) usa-se com esse elemento
