@@ -3,11 +3,16 @@
 
 CC=gcc
 CFLAGS=-Wall -pedantic -O2
-EXEC=teste.out
-OBJ=src/elemento.o src/lista.o src/tabela.o src/teste.o
+EXEC=jogo.out
+OBJ=src/elemento.o src/lista.o src/tabela.o src/jogo.o
+
+jogo.out: $(OBJ)
+	$(CC) $(FLAGS) -o jogo.out $(OBJ)
 
 teste.out: $(OBJ) 
-	$(CC) $(CFLAGS) -o teste.out $(OBJ)
+	$(CC) $(CFLAGS) -o teste.out $(OBJ) src/teste.o
+
+jogo.o: src/tabela.h src/lista.h src/elemento.h 
 
 elemento.o: src/elemento.h
 
@@ -18,7 +23,7 @@ tabela.o: src/tabela.h
 teste.o: src/tabela.h
 
 .PHONY: teste
-teste: 
+teste: ./teste.out
 	./teste.out	
 
 .PHONY: relatorio
@@ -27,4 +32,4 @@ relatorio:
 
 .PHONY: clean
 clean: 
-	-rm -f teste.out $(OBJ) relatorio.pdf relatorio.aux relatorio.log
+	-rm -f teste.out jogo.out $(OBJ) src/jogo.o src/teste.o relatorio.pdf relatorio.aux relatorio.log
