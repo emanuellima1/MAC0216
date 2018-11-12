@@ -5,7 +5,6 @@ Para testar, basta rodar:
 > make teste
 
 Para rodar o jogo:
-
 > make
 > ./jogo.out
 

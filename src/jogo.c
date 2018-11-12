@@ -44,7 +44,6 @@ int main () {
         l = l->next;
       }
     }
-    
 
     scanf("%s", c);
   }
