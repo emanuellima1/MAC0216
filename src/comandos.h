@@ -1,27 +1,26 @@
 /* Esse módulo implementa os comandos que o jogador pode usar  */
 
-/* Comandos de percepção */
-int (*examinar)(Elemento e1, Elemento e2);
+#include "elemento.h"
+typedef Elemento (*p_comando)(Elemento e1, Elemento e2, Elemento e3);
 
-/* Comandos de movimento */
-int (*ir_para)(Elemento e1, NULL);
+
+/* Comandos de percepção */
+Elemento examinar(Elemento e1, Elemento e2, Elemento e3);
 
 /* Comandos de interação humana */
 
-int (*falar)(Elemento e1, NULL);
-int (*perguntar)(Elemento e1, NULL);
-
+Elemento falar(Elemento e1, Elemento e2, Elemento e3);
+Elemento perguntar(Elemento e1, Elemento e2, Elemento e3);
 
 /* Comandos de interação com objetos*/
 
-int (*pegar)(Elemento e1, NULL);
-int (*abrir)(Elemento e1, NULL);
-int (*fechar)(Elemento e1, NULL);
+Elemento pegar(Elemento e1, Elemento e2, Elemento e3);
+Elemento abrir(Elemento e1, Elemento e2, Elemento e3);
+Elemento fechar(Elemento e1, Elemento e2, Elemento e3);
 
-int (*atirar)(Elemento e1, Elemento e2);
-int (*deixar)(Elemento e1, NULL);
+Elemento deixar(Elemento e1, Elemento e2, Elemento e3);
 
-int (*comer)(Elemento e1, NULL);
-int (*beber)(Elemento e1, NULL);
+Elemento comer(Elemento e1, Elemento e2, Elemento e3);
+Elemento beber(Elemento e1, Elemento e2, Elemento e3);
 
 

@@ -4,17 +4,19 @@
 CC=gcc
 CFLAGS=-Wall -pedantic -O2
 EXEC=jogo.out
-OBJ=src/elemento.o src/lista.o src/tabela.o src/jogo.o
+OBJ=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o
 
 jogo.out: $(OBJ)
-	$(CC) $(FLAGS) -o jogo.out $(OBJ)
+	$(CC) $(FLAGS) -o jogo.out $(OBJ) 
 
 teste.out: $(OBJ) 
-	$(CC) $(CFLAGS) -o teste.out $(OBJ) src/teste.o
+	$(CC) $(CFLAGS) -o teste.out $(OBJ) src/teste.o 
 
 jogo.o: src/tabela.h src/lista.h src/elemento.h 
 
-elemento.o: src/elemento.h
+comandos.o: src/comandos.h src/elemento.h
+
+elemento.o: src/elemento.h 
 
 lista.o: src/lista.h
 

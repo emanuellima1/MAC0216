@@ -1,8 +1,7 @@
-#include "elemento.h"
+#include "comandos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 
 #define TAM_TABELA 50
 
@@ -16,6 +15,9 @@ int main () {
   lugar = inicializa_elementos(tab_jogo);
   char *c;
 
+
+  p_comando lista_comandos[] = {examinar, falar, perguntar, pegar, abrir, fechar, deixar, comer, beber};
+
   char introducao[] = "Você está na sala de IC e de repente um monte de coisa ruim acontece. O que você quer fazer? (isso é a introdução do jogo!)\n";
   printf("%s", introducao);
 
@@ -23,15 +25,16 @@ int main () {
   while (1) {
 
     /* Apresenta o local */
-    printf("\n%s\n\n", lugar->nome); 
+    printf("\n%s\n\n", lugar->nome);  // título (nome da sala)
     if (lugar -> conhecido)
       printf("%s", lugar->curta);
     else
       printf("%s", lugar->longa);
 
+
     /* Relaciona o conteúdo visível */
     if (!lista_vazia (lugar->conteudo)) {
-      printf("Aqui você ve: ");
+      printf("Aqui você vê: ");
       l = lugar->conteudo;
       l = l->next;
       while (l != NULL) {
@@ -41,6 +44,8 @@ int main () {
         l = l->next;
       }
     }
+    
+
     scanf("%s", c);
   }
 }
