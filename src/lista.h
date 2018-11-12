@@ -28,7 +28,7 @@ void * lista_busca (Lista l, char *n);
 /* retorna NULL caso o valor não seja encontrado.  */
 
 char * lista_busca_valor (Lista l, void *);
-/* Recebe uma chave e devolve o valor associada a ela */
+/* Recebe um valor e devolve a chave associada a ela */
 /* retorna NULL caso o valor não seja encontrado.  */
 
 
