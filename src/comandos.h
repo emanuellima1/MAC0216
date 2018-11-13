@@ -1,8 +1,8 @@
 /* Esse módulo implementa os comandos que o jogador pode usar  */
 
 #include "elemento.h"
-typedef Elemento (*p_comando)(Elemento e1, Elemento e2, Elemento e3);
 
+typedef Elemento (*p_comando)(Elemento e1, Elemento e2, Elemento e3);
 
 /* Comandos de percepção */
 Elemento examinar(Elemento e1, Elemento e2, Elemento e3);

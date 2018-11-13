@@ -10,13 +10,33 @@ Elemento inicializa_elementos (Tabela tab);
 int main () {
 
   Lista l;
+  Lista_f l_comandos = lista_f_cria();
+  p_funcao_void p;
+  p_comando q;
   Tabela tab_jogo = tabela_cria(TAM_TABELA);
-  Elemento lugar, el;
+  Elemento lugar, el, el_b, el_c, el_d;
   lugar = inicializa_elementos(tab_jogo);
-  char *c;
+  char a[100];
+  char b[100];
+  char c[100];
+  char d[100];
 
-
-  p_comando lista_comandos[] = {examinar, falar, perguntar, pegar, abrir, fechar, deixar, comer, beber};
+  p = (p_funcao_void)examinar;
+  lista_f_insere(l_comandos, p, "examinar");
+  p = (p_funcao_void)falar;
+  lista_f_insere(l_comandos, p, "falar");
+  p = (p_funcao_void)perguntar;
+  lista_f_insere(l_comandos, p, "perguntar");
+  p = (p_funcao_void)pegar;
+  lista_f_insere(l_comandos, p, "pegar");
+  p = (p_funcao_void)abrir;
+  lista_f_insere(l_comandos, p, "abrir");
+  p = (p_funcao_void)fechar;
+  lista_f_insere(l_comandos, p, "fechar");
+  p = (p_funcao_void)deixar;
+  lista_f_insere(l_comandos, p, "deixar");
+  p = (p_funcao_void)beber;
+  lista_f_insere(l_comandos, p, "beber");
 
   char introducao[] = "Você está na sala de IC e de repente um monte de coisa ruim acontece. O que você quer fazer? (isso é a introdução do jogo!)\n";
   printf("%s", introducao);
@@ -45,7 +65,23 @@ int main () {
       }
     }
 
+    printf("Digite o nome da acao que quer executar:\n");
+    scanf("%s", a);
+    printf("Digite o nome do primeiro parametro (digite espaço se não houver):\n");
+    scanf("%s", b);
+    printf("Digite o nome do segundo parametro (digite espaco se nao houver):\n");
     scanf("%s", c);
+    printf("Digite o nome do terceiro parametro (digite espaco se nao houver):\n");
+    scanf("%s", d);
+    
+    printf("Estou aqui!");
+
+    el_b = tabela_busca(tab_jogo, b);
+    el_c = tabela_busca(tab_jogo, c);
+    el_d = tabela_busca(tab_jogo, d);
+    p = lista_f_busca(l_comandos, a);
+    q = (p_comando)p;
+    examinar(el_b, el_c, el_d);
   }
 }
 

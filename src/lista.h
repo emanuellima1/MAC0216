@@ -43,3 +43,30 @@ void lista_imprime_chaves(Lista l);
 
 int lista_vazia(Lista l);
 /* Devolve 1 se a lista l está vazia, 0 caso contrario */
+
+
+
+
+/* LISTA LIGADA DE PONTEIRO DE FUNÇÃO */
+/* As funções abaixo impelementam uma biblioteca de listas equivalente, mas para
+   lista ligada de ponteiro de função
+ */
+
+typedef void (*p_funcao_void)(void);
+
+typedef struct elo_f {
+  struct elo_f *next;
+  p_funcao_void val;
+  char *chave;
+} Elo_f;
+
+typedef Elo_f *Lista_f;
+
+Lista_f lista_f_cria ();
+void lista_f_destroi (Lista_f l);
+Lista_f lista_f_insere (Lista_f l, p_funcao_void val, char *chave);
+p_funcao_void  lista_f_busca (Lista_f l, char *n);
+char * lista_f_busca_valor (Lista_f l, p_funcao_void );
+void lista_f_retira (Lista_f l, char *chave);
+void lista_f_imprime_chaves(Lista_f l);
+int lista_f_vazia(Lista_f l);

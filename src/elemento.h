@@ -16,7 +16,7 @@ typedef struct{
   short int visivel; // Booleano que indica se o elemento está visível
   short int conhecido; // Indica se o elemento já é conhecido do jogador
   Lista conteudo; // Lista de objetos contidos no elemento
-  Lista acoes; // Lista de funções especiais para este elemento.
+  Lista_f acoes; // Lista de funções especiais para este elemento.
   int (*animacao)();
   // Ponteiro para função que será chamada ao final de cada iteração.
   union {

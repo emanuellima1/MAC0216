@@ -17,7 +17,7 @@ Elemento elemento_cria (char *nome) {
   el->visivel = 0;
   el->conhecido = 0;
   el->conteudo = lista_cria();
-  el->acoes = lista_cria();
+  el->acoes = lista_f_cria();
   el->animacao = NULL;
   el->detalhe.atributos = lista_cria();
 
@@ -30,7 +30,7 @@ void elemento_destroi (Elemento el) {
   free(el->longa);
   free(el->artigo);
   lista_destroi(el->conteudo);
-  lista_destroi(el->acoes);
+  lista_f_destroi(el->acoes);
   lista_destroi(el->detalhe.atributos);
   free(el);
 }
