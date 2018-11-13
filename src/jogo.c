@@ -74,14 +74,14 @@ int main () {
     printf("Digite o nome do terceiro parametro (digite espaco se nao houver):\n");
     scanf("%s", d);
     
-    printf("Estou aqui!");
 
     el_b = tabela_busca(tab_jogo, b);
     el_c = tabela_busca(tab_jogo, c);
     el_d = tabela_busca(tab_jogo, d);
+
     p = lista_f_busca(l_comandos, a);
     q = (p_comando)p;
-    examinar(el_b, el_c, el_d);
+    q(el_b, el_c, el_d);
   }
 }
 

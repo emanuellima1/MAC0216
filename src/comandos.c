@@ -3,10 +3,18 @@
 
 Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
   /* Examina e1 com e2. Se e2 tiver uma ação de examinar, executa ela.
-   Se não, imprime que não consegue. Se e2 for NULL, descreve e1 */
+   Se não, imprime que não consegue. Se e2 for NULL, descreve e1
+  */
+
 
   p_funcao_void p;
   p_comando q;
+
+  if (e1 == NULL) {
+    printf("Erro: chamou a funcao examinar sem nenhum elemento");
+    return(NULL);
+  }
+
   if (e2 == NULL)
     printf("%s\n", e1->longa);
   return (NULL);
