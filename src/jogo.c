@@ -99,18 +99,54 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
-  tabela_insere(tab, "Você", el);
+  tabela_insere(tab, el->nome, el);
 
 
   /* Inicializa salas */
-  el = elemento_cria("A sala de IC");
-  el->artigo = "";
-  el->curta = "A sala de iniciação científica é grande, tem alguns computadores e uma mesa, onde você sempre trabalha.\n";
-  el->longa = "A sala de iniciação científica é grande. À sua esquerda, vê-se três computadores, um do adolfo, outro do rodrigo, seus colegas, e outro é um servidor. É gelado, por que o ar condicionado está sempre ligado. Tem uma porta que leva ao corredor, ao sul.\n";
+  el = elemento_cria("Sala dos alunos de IC");
+  el->artigo = "a";
+  el->curta = "Tomando duas paredes, uma mesa grande, em L, usada por todos os alunos, cheia de papéis, livros e alguns notebooks espalhados.";
+  el->longa = "Tomando duas paredes, uma mesa grande, em L, usada por todos os alunos, cheia de papéis e livros espalhados. Vários notebooks repousam sobre a mesa, um deles ligado. Neste, um terminal diz:\n leonardo@CLIAR: ~ $\n Em outra parede, uma estante de madeira repleta de livros sobre inteligência artificial, álgebra linear e probabilidade.\n De uma pequena janela é possível ver o céu noturno. ";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
-  tabela_insere(tab, "A sala de IC", el);
+  tabela_insere(tab, el->nome, el);
+
+  el = elemento_cria("Sala dos pesquisadores");
+  el->artigo = "a";
+  el->curta = "Três mesas em frente a três paredes compõem o visual da sala. Cada mesa contém um misto de papéis, livros e monitores de computador.";
+  el->longa = "Três mesas em frente a três paredes compõem o visual da sala. Cada mesa contém um misto de papéis, livros e monitores de computador. Em uma das mesas, uma xícara de café frio faz as vezes de peso de papel. Em outra, há um porta retrato com a foto de uma mulher sorridente. O porta retrato está úmido. Você reconhece na foto a esposa do seu orientador. Um calafrio sobe a sua coluna quando você lembra que recentemente ela se envolveu num acidente de carro e que atualmente está de coma num hospital.\n Os computadores da sala estão ligados, mas protegidos por senha.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  tabela_insere(tab, el->nome, el);
+
+  el = elemento_cria("Sala de Máquinas");
+  el->artigo = "a";
+  el->curta = "É uma sala fria e barulhenta, repleta de cabos espalhados pelo chão. Um nobreak imponente toma a maior parte do espaço da sala.";
+  el->longa = "É uma sala fria e barulhenta, repleta de cabos espalhados pelo chão. Um nobreak imponente toma a maior parte do espaço da sala.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  tabela_insere(tab, el->nome, el);
+
+  el = elemento_cria("Pátio");
+  el->artigo = "o";
+  el->curta = "Um grande pátio que se estende por todo o comprimento do andar. Possui um café, mesas e várias plantas decorativas. Uma parede separa a área de convivência da mesa de recepção. A porta de saída se encontra logo à frente.";
+  el->longa = "Um grande pátio que se estende por todo o comprimento do andar. Possui um café, mesas e várias plantas decorativas. Uma parede separa a área de convivência da mesa de recepção. A porta de saída se encontra logo à frente.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  tabela_insere(tab, el->nome, el);
+  
+  el = elemento_cria("Sala do servidor");
+  el->artigo = "a";
+  el->curta = "A maior sala do andar. Muito fria e barulhenta. Possui um supercomputador enorme que ocupa quase toda a sala.";
+  el->longa = "A maior sala do andar. Muito fria e barulhenta. Possui um supercomputador enorme que ocupa quase toda a sala.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  tabela_insere(tab, el->nome, el);
 
   return(el);
 }

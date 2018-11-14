@@ -9,15 +9,15 @@
 
 typedef struct{
   char *nome; // Nome padrão
+  char *artigo; // Indica que artigo (o, um, ...) usa-se com esse elemento
   char *curta; // Descrição curta do Elemento
   char *longa; // Descrição detalhada do elemento
-  char *artigo; // Indica que artigo (o, um, ...) usa-se com esse elemento
   short int ativo; // Booleano que indica se o elemento está ativo no jogo
   short int visivel; // Booleano que indica se o elemento está visível
   short int conhecido; // Indica se o elemento já é conhecido do jogador
   Lista conteudo; // Lista de objetos contidos no elemento
   Lista_f acoes; // Lista de funções especiais para este elemento.
-  int (*animacao)();
+  p_funcao_void animacao;
   // Ponteiro para função que será chamada ao final de cada iteração.
   union {
     Lista atributos; // Campo para objetos
