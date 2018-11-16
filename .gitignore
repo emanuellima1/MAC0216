@@ -3,6 +3,7 @@
 *.vscode
 *.aux
 *.log
+mapa.jpg
 relatorio/auto
 
 # Prerequisites
