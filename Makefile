@@ -4,26 +4,26 @@
 CC=gcc
 CFLAGS=-Wall -pedantic -O2
 EXEC=jogo.out
-OBJ=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o
-OBJ_FULL=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o src/teste.o 
+OBJ_TESTE=src/elemento.o src/lista.o src/tabela.o src/teste.o
+OBJ_JOGO=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o src/teste.o 
 
 jogo.out: $(OBJ)
-	$(CC) $(CFLAGS) -o jogo.out $(OBJ) 
+	$(CC) $(CFLAGS) -o jogo.out $(OBJ_JOGO) 
 
 teste.out: $(OBJ_FULL) 
-	$(CC) $(CFLAGS) -o teste.out $(OBJ_FULL)
-
-jogo.o: src/tabela.h src/lista.h src/elemento.h 
-
-comandos.o: src/comandos.h src/elemento.h
-
-elemento.o: src/elemento.h 
+	$(CC) $(CFLAGS) -o teste.out $(OBJ_TESTE)
 
 lista.o: src/lista.h
 
-tabela.o: src/tabela.h
+tabela.o: src/tabela.h src/lista.h
 
-teste.o: src/tabela.h
+elemento.o: src/elemento.h src/tabela.h src/lista.h
+
+teste.o: src/elemento.h src/tabela.h src/lista.h 
+
+comandos.o: src/comandos.h src/elemento.h src/tabela.h src/lista.h
+
+jogo.o: src/comandos.h src/elemento.h src/tabela.h src/lista.h
 
 .PHONY: teste
 teste: ./teste.out
@@ -36,4 +36,4 @@ relatorio:
 
 .PHONY: clean
 clean: 
-	-rm -f teste.out jogo.out $(OBJ_FULL) relatorio.pdf
+	-rm -f teste.out jogo.out $(OBJ_JOGO) relatorio.pdf
