@@ -28,8 +28,10 @@ Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
     return(NULL);
   }
 
-  if (e2 == NULL)
+  if (e2 == NULL) {
     printf("%s\n", e1->longa);
+    e1->conhecido = 1;
+  }
   return (NULL);
 
   p = lista_f_busca(e2->acoes, "examinar");
