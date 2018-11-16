@@ -36,20 +36,20 @@ int main () {
   /* Laço principal*/
   while (1) {
 
-    /* Apresenta o local */
     if (acabei_de_chegar) {
+      /* Apresenta o local */
       printf("\n%s\n\n", lugar_atual->nome);  // título (nome da sala)
       if (lugar_atual->conhecido)
         printf("%s", lugar_atual->curta);
       else
         printf("%s", lugar_atual->longa);
       acabei_de_chegar = 0;
-    }
 
-    /* Relaciona o conteúdo visível */
-    if (!lista_vazia(lugar_atual->conteudo)) {
-      printf("Aqui você vê:\n");
-      elemento_imprime_conteudo(lugar_atual);
+      /* Relaciona o conteúdo visível */
+      if (!lista_vazia(lugar_atual->conteudo)) {
+        printf("Aqui você vê:\n");
+        elemento_imprime_conteudo(lugar_atual);
+      }
     }
 
     scanf("%d", &i);
@@ -320,10 +320,13 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
+  /* Aventureiro é conteúdo da sala do início */
+  el = tabela_busca(tab, "Você");
+  el2 = tabela_busca(tab, "Sala dos alunos de IC"); 
+  lista_insere(el2->conteudo, el, el->nome);
 
   /* Devolve o lugar de início */
-  el = tabela_busca(tab, "Sala dos alunos de IC");
-  return(el);
+  return(el2);
 }
 
 
@@ -352,6 +355,7 @@ void animacoes_automaticas(Tabela tab, Elemento lugar_atual) {
     p = p->next;
     while (p != NULL) {
       el = p->val;
+      printf("%s\n", el->nome);
       if (el->animacao != NULL) {
         f = (p_comando)el->animacao;
         f(lugar_atual, NULL, NULL);

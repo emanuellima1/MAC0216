@@ -18,6 +18,7 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
 }
 
 Elemento inventario(Elemento e1, Elemento e2, Elemento e3) {
+
   /* e1 é o jogador */
   if (e1 == NULL) {
     printf("Erro: tentou mostrar o inventário mas não passou o jogador como parâmetro\n");
@@ -85,6 +86,14 @@ Elemento perguntar(Elemento e1, Elemento e2, Elemento e3) {
 Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
   /* e1 é o objeto, e2 é o jogador e e3 é a sala */
 
+  p_funcao_void p;
+  p_comando q;
+  p = lista_f_busca(e2->acoes, "perguntar");
+  if (p != NULL) {
+    q = (p_comando)p;
+    return(q(e1, e2, e3));
+  }
+  
   lista_retira(e3->conteudo, e1->nome);
   lista_insere(e2->conteudo, e1, e1->nome);
   printf("Você pegou %s %s\n", e1->artigo, e1->nome);
@@ -93,6 +102,7 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
 
 
 Elemento abrir(Elemento e1, Elemento e2, Elemento e3) {
+
   p_funcao_void p;
   p_comando q;
   p = lista_f_busca(e2->acoes, "abrir");
@@ -150,4 +160,181 @@ Elemento beber(Elemento e1, Elemento e2, Elemento e3) {
   }
   q = (p_comando)p;
   return(q(e1, e2, e3));
+}
+
+
+
+/* -------------------------------------------------------------------*/
+/* -------------- Comandos específicos de elementos ------------------*/
+/* -------------------------------------------------------------------*/
+
+Elemento janela_abrir(Elemento e1, Elemento e2, Elemento e3) {
+
+  Lista l;
+  short int *p, i = 1;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 1) {
+    printf("A janela já está aberta.\n");
+    return NULL;
+  }
+
+  printf("Você abre a janela e sente a brisa e o frescor da noite entrar na sala.");
+
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 1;
+}
+
+Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
+
+  Lista l;
+  short int *p, i = 1;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 1) {
+    printf("Você já abriu o livro.\n");
+    return NULL;
+  }
+
+  printf("Você abre um livro de álgebra linear, e começa a ler: \"Vectors  in R n are  impossible to visualize unless n is 1, 2, or 3. However, familiar objects like lines and planes still make sense for any value of n. Die Geschichte aller bisherigen Gesellschaft ist die Geschichte von Klassenkämpfen\". Seus olhos desfocam, e você pisca. Você passou o dia inteiro lendo esses livros, e não aguenta mais!\n");
+
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 1;
+}
+
+Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
+  Lista l;
+  short int *p, i = 1;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 1) {
+    printf("O notebook já está aberto.\n");
+    return NULL;
+  }
+  printf("Você abre o notebook e vê a tela inicial do gdm3 (o pessoal usa debian por aqui). Você não sabe a senha do Pedro.\n");
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 1;
+}
+
+Elemento notebook_da_alice_abrir(Elemento e1, Elemento e2, Elemento e3) {
+
+  Lista l;
+  short int *p, i = 1;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 1) {
+    printf("O notebook já está aberto.\n");
+    return NULL;
+  }
+  printf("Você abre o notebook e vê a tela inicial do gdm3 (o pessoal usa debian por aqui). Você não sabe a senha da Alice.\n");
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 1;
+}
+
+Elemento supercomputador_abrir(Elemento e1, Elemento e2, Elemento e3) {
+
+  Lista l;
+  short int *p, i = 1;
+
+  printf("O exterior desse supercomputador são placas metálicas parafusadas. Os parafusos parecem bem firmes. Você tem um chave de fenda?\n");
+  return (NULL);
+}
+
+Elemento janela_fechar(Elemento e1, Elemento e2, Elemento e3) {
+
+  Lista l;
+  short int *p, i = 0;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 0) {
+    printf("A janela já está aberta.\n");
+    return NULL;
+  }
+  printf("Você fecha a janela.\n");
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 0;
+}
+
+Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
+
+  Lista l;
+
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 0) {
+    printf("O livro já está fechado.\n");
+    return NULL;
+  }
+  printf("Você fecha o livro de álgebra linear.\n");
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 0;
+}
+
+Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
+  Lista l;
+  short int *p, i = 1;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 0) {
+    printf("O notebook já está fechado.\n");
+    return NULL;
+  }
+  printf("Você fecha o notebook.\n");
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 0;
+}
+Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
+  Lista l;
+  short int *p, i = 1;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (*p == 0) {
+    printf("O notebook já está fechado.\n");
+    return NULL;
+  }
+  printf("Você fecha o notebook.\n");
+  if (p == NULL)
+    lista_insere(l, &i, "aberto");
+  else
+    *p = 0;
+}
+
+Elemento supercomputador_fechar(Elemento e1, Elemento e2, Elemento e3) {
+
+  Lista l;
+  short int *p, i = 1;
+  printf("Você fecha o supercomputador. Eu só me pergunto como você conseguiu abrir ele.");
+  return (NULL);
+}
+
+Elemento papeis_comer(Elemento e1, Elemento e2, Elemento e3) {
+  printf("Voce coloca alguns papéis na boca e mastiga eles. Não dá muito certo engolir eles, mas as anotações sobre funções lineares em hiperplanos eram as mais gostosas.");
+  return (NULL);
+}
+
+Elemento cafe_comer(Elemento e1, Elemento e2, Elemento e3) {
+  printf("Você tenta muito mastigar o café, mas tudo que você consegue fazer é babar um pouco e beber o resto!");
+  return(NULL);
 }
