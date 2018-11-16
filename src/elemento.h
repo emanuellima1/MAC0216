@@ -34,5 +34,6 @@ Elemento elemento_cria (char *nome);
 
 void elemento_destroi (Elemento el);
 
-/* Imprime os nomes dos elementos que são conteúdo do elemento el, um por linha */
+/* Imprime os nomes dos elementos que são conteúdo do elemento el
+   e que estão visíveis, um por linha */
 void elemento_imprime_conteudo(Elemento el);

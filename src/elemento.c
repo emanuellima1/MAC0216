@@ -39,8 +39,7 @@ void elemento_destroi (Elemento el) {
 void elemento_imprime_conteudo (Elemento el) {
 
   Lista l;
-  l = el->conteudo;
-  l = l->next;
+  l = el->conteudo->next;
 
   while (l != NULL) {
     el = l->val;
