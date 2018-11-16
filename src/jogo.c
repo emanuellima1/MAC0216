@@ -5,7 +5,18 @@
 
 #define TAM_TABELA 50
 
+/* Inicializa todos os elementos do jogo e devolve o lugar de inicio */
 Elemento inicializa_elementos (Tabela tab);
+
+/* Percorre todos os elementos da tabela e em cada um, se houver,
+   executa o campo animacao
+ */
+void animacoes_automaticas(Tabela tab, Elemento lugar_atual);
+
+/* Recebe duas strings que são o nome de duas salas, e liga a saida
+   uma na outra
+*/
+void liga_salas(Tabela tab, char * s1, char * s2);
 
 int main () {
 
@@ -41,7 +52,10 @@ int main () {
       elemento_imprime_conteudo(lugar_atual);
     }
 
-    scanf("%d", i);
+    scanf("%d", &i);
+
+    /* Faz todas as animações */
+    animacoes_automaticas(tab_jogo, lugar_atual);
   }
 }
 
@@ -71,10 +85,6 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
-  lista_insere(el->detalhe.saidas, NULL, "norte");
-  lista_insere(el->detalhe.saidas, NULL, "sul");
-  lista_insere(el->detalhe.saidas, NULL, "leste");
-  lista_insere(el->detalhe.saidas, NULL, "oeste");
   tabela_insere(tab, el->nome, el);
 
   el = elemento_cria("Sala dos pesquisadores");
@@ -84,23 +94,15 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
-  lista_insere(el->detalhe.saidas, NULL, "norte");
-  lista_insere(el->detalhe.saidas, NULL, "sul");
-  lista_insere(el->detalhe.saidas, NULL, "leste");
-  lista_insere(el->detalhe.saidas, NULL, "oeste");
   tabela_insere(tab, el->nome, el);
 
-  el = elemento_cria("Sala de Máquinas");
+  el = elemento_cria("Sala de máquinas");
   el->artigo = "a";
   el->curta = "É uma sala fria e barulhenta, repleta de cabos espalhados pelo chão. Um nobreak imponente toma a maior parte do espaço da sala.";
   el->longa = "É uma sala fria e barulhenta, repleta de cabos espalhados pelo chão. Um nobreak imponente toma a maior parte do espaço da sala.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
-  lista_insere(el->detalhe.saidas, NULL, "norte");
-  lista_insere(el->detalhe.saidas, NULL, "sul");
-  lista_insere(el->detalhe.saidas, NULL, "leste");
-  lista_insere(el->detalhe.saidas, NULL, "oeste");
   tabela_insere(tab, el->nome, el);
 
   el = elemento_cria("Pátio");
@@ -110,10 +112,6 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
-  lista_insere(el->detalhe.saidas, NULL, "norte");
-  lista_insere(el->detalhe.saidas, NULL, "sul");
-  lista_insere(el->detalhe.saidas, NULL, "leste");
-  lista_insere(el->detalhe.saidas, NULL, "oeste");
   tabela_insere(tab, el->nome, el);
   
   el = elemento_cria("Sala do servidor");
@@ -123,14 +121,13 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
-  lista_insere(el->detalhe.saidas, NULL, "norte");
-  lista_insere(el->detalhe.saidas, NULL, "sul");
-  lista_insere(el->detalhe.saidas, NULL, "leste");
-  lista_insere(el->detalhe.saidas, NULL, "oeste");
   tabela_insere(tab, el->nome, el);
 
   /* Liga as saídas das salas umas nas outras*/
-  //TODO
+  liga_salas(tab, "Sala dos alunos de IC", "Pátio");
+  liga_salas(tab, "Sala dos pesquisadores", "Pátio");
+  liga_salas(tab, "Sala de máquinas", "Pátio");
+  liga_salas(tab, "Sala do servidor", "Pátio");
 
   /* Elementos na sala dos alunos de IC */
   el2 = tabela_busca(tab, "Sala dos alunos de IC");
@@ -252,7 +249,7 @@ Elemento inicializa_elementos (Tabela tab) {
   tabela_insere(tab, el->nome, el);
 
   /* Elementos na sala de máquinas */
-  el2 = tabela_busca(tab, "Sala de Máquinas");
+  el2 = tabela_busca(tab, "Sala de máquinas");
   l = el2->conteudo;
 
   el = elemento_cria("cabos");
@@ -313,7 +310,6 @@ Elemento inicializa_elementos (Tabela tab) {
   el2 = tabela_busca(tab, "Sala do servidor");
   l = el2->conteudo;
   
-  /* Modelo */
   el = elemento_cria("supercomputador");
   el->artigo = "o";
   el->curta = "É um computador grande e barulhento.";
@@ -328,4 +324,39 @@ Elemento inicializa_elementos (Tabela tab) {
   /* Devolve o lugar de início */
   el = tabela_busca(tab, "Sala dos alunos de IC");
   return(el);
+}
+
+
+void liga_salas(Tabela tab, char * s1, char * s2) {
+
+  Elemento el1, el2;
+  el1 = tabela_busca(tab, s1);
+  el2 = tabela_busca(tab, s2);
+  if (el1 == NULL || el2 == NULL) {
+    printf("Erro: liga_salas recebeu um nome que não é nenhum elemento");
+    return;
+  }
+  lista_insere(el1->detalhe.saidas, el2, el2->nome);
+  lista_insere(el2->detalhe.saidas, el1, el1->nome);
+}
+
+void animacoes_automaticas(Tabela tab, Elemento lugar_atual) {
+  /* Ver tabela.h e tabela.c para ver porque funciona assim */
+  int i;
+  Elo * p;
+  Elemento el;
+  p_comando f;
+
+  for (i = 0; i < tab->tam; i++) {
+    p = tab->v[i];
+    p = p->next;
+    while (p != NULL) {
+      el = p->val;
+      if (el->animacao != NULL) {
+        f = (p_comando)el->animacao;
+        f(lugar_atual, NULL, NULL);
+      }
+      p = p->next;
+    }
+  }
 }
