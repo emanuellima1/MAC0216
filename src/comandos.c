@@ -1,11 +1,24 @@
 #include "comandos.h"
 #include <stdio.h>
 
-Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
-  /* Examina e1 com e2. Se e2 tiver uma ação de examinar, executa ela.
-   Se não, imprime que não consegue. Se e2 for NULL, descreve e1
+Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
+  /* e1 é a nova sala, e2 é o jogador e e3 é a velha sala.
+     Devolve a nova sala
   */
 
+  if (lista_buca_valor(e3->detalhe.saidas, e1) == NULL) {
+    printf("Não é possível ir para %s %s a partir daqui.\n",
+           e1->artigo, e1->nome);
+    return (NULL);
+  }
+
+  lista_retira(e3->conteudo, e2->nome); //Remove o jogador da sala antiga
+  lista_insere(e1->conteudo, e2, e2->nome); //Insere o jogador da sala nova
+  return (e1);
+}
+
+
+Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
 
   p_funcao_void p;
   p_comando q;
