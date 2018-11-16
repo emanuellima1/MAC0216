@@ -144,7 +144,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
-  lista_insere(l, el->nome, el);
+  lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
   el = elemento_cria("notebook do Pedro");
@@ -154,7 +154,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
-  lista_insere(l, el->nome, el);
+  lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
   el = elemento_cria("notebook da Alice");
@@ -164,7 +164,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
-  lista_insere(l, el->nome, el);
+  lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
   el = elemento_cria("estante");
@@ -174,7 +174,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
-  lista_insere(l, el->nome, el);
+  lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
   el = elemento_cria("janela");
@@ -184,7 +184,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
-  lista_insere(l, el->nome, el);
+  lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
 

@@ -6,7 +6,7 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
      Devolve a nova sala
   */
 
-  if (lista_buca_valor(e3->detalhe.saidas, e1) == NULL) {
+  if (lista_busca_valor(e3->detalhe.saidas, e1) == NULL) {
     printf("Não é possível ir para %s %s a partir daqui.\n",
            e1->artigo, e1->nome);
     return (NULL);
