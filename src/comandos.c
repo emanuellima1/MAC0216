@@ -17,6 +17,17 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
   return (e1);
 }
 
+Elemento inventario(Elemento e1, Elemento e2, Elemento e3) {
+  /* e1 é o jogador */
+  if (e1 == NULL) {
+    printf("Erro: tentou mostrar o inventário mas não passou o jogador como parâmetro\n");
+    return (NULL);
+  }
+
+  printf("Inventário:\n");
+  elemento_imprime_conteudo(e1);
+  return (NULL);
+}
 
 Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
 

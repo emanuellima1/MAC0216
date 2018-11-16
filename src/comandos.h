@@ -4,9 +4,11 @@
 
 typedef Elemento (*p_comando)(Elemento e1, Elemento e2, Elemento e3);
 
-/* e1 é o jogador e e2 é a sala */
+/* e1 é o jogador e e2 é a sala. Devolve a nova sala */
 Elemento ir_para(Elemento e1, Elemento e2, Elemento e3);
 
+/* Imprime o inventário. e1 é o jogador*/
+Elemento inventario(Elemento e1, Elemento e2, Elemento e3);
 
 /* Comandos de percepção */
 
