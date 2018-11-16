@@ -5,9 +5,9 @@ CC=gcc
 CFLAGS=-Wall -pedantic -O2
 EXEC=jogo.out
 OBJ_TESTE=src/elemento.o src/lista.o src/tabela.o src/teste.o
-OBJ_JOGO=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o src/teste.o 
+OBJ_JOGO=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o 
 
-jogo.out: $(OBJ)
+jogo.out: $(OBJ_JOGO)
 	$(CC) $(CFLAGS) -o jogo.out $(OBJ_JOGO) 
 
 teste.out: $(OBJ_FULL) 
