@@ -275,16 +275,54 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
+  /* Elementos no Pátio */
+  el2 = tabela_busca(tab, "Pátio");
+  l = el2->conteudo;
+  
+  el = elemento_cria("café");
+  el->artigo = "o";
+  el->curta = "É o café do CLIAR.";
+  el->longa = "É o café do CLIAR. Aqui você sempre pega o seu café e vai senta na mesa, muitas vezes sozinho. Agora, no entanto, ele está fechado, e todos os funcionários foram para casa.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  lista_insere(l, el, el->nome);
+  tabela_insere(tab, el->nome, el);
+
+  el = elemento_cria("mesas");
+  el->artigo = "as";
+  el->curta = "São cinco mesas com cadeiras no meio do pátio.";
+  el->longa = "São cinco mesas com cadeiras no meio do pátio. Você sempre toma café aqui. Uma delas está suja de (surprise, surprise) café.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  lista_insere(l, el, el->nome);
+  tabela_insere(tab, el->nome, el);
+
+  el = elemento_cria("plantas");
+  el->artigo = "as";
+  el->curta = "São duas pequenas palmeiras em dois grandes vasos, uma de cada lado da sala.";
+  el->longa = "São duas pequenas palmeiras em dois grandes vasos, uma de cada lado da sala.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  lista_insere(l, el, el->nome);
+  tabela_insere(tab, el->nome, el);
+
+  /* Elementos na Sala do servidor */
+  el2 = tabela_busca(tab, "Sala do servidor");
+  l = el2->conteudo;
+  
   /* Modelo */
-  /* el = elemento_cria(""); */
-  /* el->artigo = ""; */
-  /* el->curta = ""; */
-  /* el->longa = ""; */
-  /* el->ativo = 1; */
-  /* el->visivel = 1; */
-  /* el->conhecido = 0; */
-  /* lista_insere(l, el, el->nome); */
-  /* tabela_insere(tab, el->nome, el); */
+  el = elemento_cria("supercomputador");
+  el->artigo = "o";
+  el->curta = "É um computador grande e barulhento.";
+  el->longa = "É um computador grande e barulhento. Você sabe que aí rodam os programas mais sofisticados de inteligência artificial que esse centro de pesquisa produz.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  lista_insere(l, el, el->nome);
+  tabela_insere(tab, el->nome, el);
 
 
   /* Devolve o lugar de início */
