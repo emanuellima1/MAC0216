@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "elemento.h"
 
 Elemento elemento_cria (char *nome) {
@@ -33,4 +34,18 @@ void elemento_destroi (Elemento el) {
   lista_f_destroi(el->acoes);
   lista_destroi(el->detalhe.atributos);
   free(el);
+}
+
+void elemento_imprime_conteudo (Elemento el) {
+
+  Lista l;
+  l = el->conteudo;
+  l = l->next;
+
+  while (l != NULL) {
+    el = l->val;
+    if (el->visivel)
+      printf("%s %s\n", el->artigo, el->nome);
+    l = l->next;
+  }
 }
