@@ -23,7 +23,7 @@ teste.o: src/elemento.h src/tabela.h src/lista.h
 
 comandos.o: src/comandos.h src/elemento.h src/tabela.h src/lista.h
 
-jogo.o: src/comandos.h src/elemento.h src/tabela.h src/lista.h
+jogo.o: src/jogo.h src/comandos.h src/elemento.h src/tabela.h src/lista.h
 
 .PHONY: teste
 teste: ./teste.out

@@ -1,23 +1,4 @@
-#include "comandos.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define TAM_TABELA 50
-#define QTDE_COMANDOS 1 
-
-/* Inicializa todos os elementos do jogo e devolve o lugar de inicio */
-Elemento inicializa_elementos (Tabela tab);
-
-/* Percorre todos os elementos da tabela e em cada um, se houver,
-   executa o campo animacao
- */
-void animacoes_automaticas(Tabela tab, Elemento lugar_atual);
-
-/* Recebe duas strings que são o nome de duas salas, e liga a saida
-   uma na outra
-*/
-void liga_salas(Tabela tab, char * s1, char * s2);
+#include "jogo.h"
 
 int main () {
 
@@ -31,14 +12,19 @@ int main () {
      conhecida ou não) */
   short int acabei_de_chegar = 1;
 
-  char introducao[] = "Você está na sala de IC e de repente um monte de coisa ruim acontece. O que você quer fazer? (isso é a introdução do jogo!)\n";
+  char introducao[] = "\n\n\t LEONARDO E IARA\n\nVocê está na sala de IC e de repente um monte de coisa ruim acontece. O que você quer fazer? (isso é a introdução do jogo!)\n";
   printf("%s", introducao);
 
 
-  p_comando v_verbos[] = {examinar, examinar};
-  char *s1[] = { "janela", "notebook do Pedro" };
-  char *s2[] = {"", ""};
-  char *s3[] = {"", ""};
+  p_comando v_verbos[] = {examinar, examinar, abrir, fechar, ir_para, comer, fechar};
+  /* O vetor abaixo é só para imprimir na tela que comando
+     está sendo executado a cada iteração */
+  char *nomes_comandos[] = {"examinar", "examinar", "abrir", "fechar", "ir_para","comer", "fechar"};
+
+  char *s1[] = { "janela", "notebook do Pedro", "notebook do Pedro", "notebook do Pedro", "Pátio", "xícara", "notebook do Pedro"};
+  char *s2[] = {"NULL", "NULL", "NULL", "NULL", "Você", "NULL", "NULL"};
+  char *s3[] = {"NULL", "NULL", "NULL", "NULL", "Sala dos alunos de IC", "NULL", "NULL"};
+
   Elemento v_arg1[QTDE_COMANDOS];
   Elemento v_arg2[QTDE_COMANDOS];
   Elemento v_arg3[QTDE_COMANDOS];
@@ -63,11 +49,13 @@ int main () {
 
       /* Relaciona o conteúdo visível */
       if (!lista_vazia(lugar_atual->conteudo)) {
-        printf("Aqui você vê:\n");
+        printf("\nAqui você vê:\n");
         elemento_imprime_conteudo(lugar_atual);
       }
     }
     
+    printf("\n--> Executando o comando %s(%s, %s, %s) <--\n\n",
+           nomes_comandos[i], s1[i], s2[i], s3[i]);
     el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]);
 
     /* Caso especial: se o comando é ir_para */    
@@ -92,7 +80,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el = elemento_cria("Você");
   el->artigo = "";
   el->curta = "Voce é jovem e feio.\n";
-  el->longa = "Voce é um estudante de ciência da computação, que faz iniciação científica em Inteligência Artificial. Teve uma infância feliz e superprotegida, mas uma adolescência solitária por ser muito tímido. Você nunca se achou particularmente bonito, atlético ou popular, mas sempre pôde contar com sua própria inteligência. Isso te fez achar que nada mais importava e que a razão irá resolver todos os problemas do planeta.\n Mas seres humanos são falhos. São emotivos. São irracionais.\n Você, então, pôs em si próprio a missão de criar uma máquina de raciocínio perfeito. Racional, justa e infalível. E está obcecado com a ideia.\n";
+  el->longa = "Voce é um estudante de ciência da computação, que faz iniciação científica em Inteligência Artificial. Teve uma infância feliz e superprotegida, mas uma adolescência solitária por ser muito tímido. Você nunca se achou particularmente bonito, atlético ou popular, mas sempre pôde contar com sua própria inteligência. Isso te fez achar que nada mais importava e que a razão irá resolver todos os problemas do planeta.\n Mas seres humanos são falhos. São emotivos. São irracionais.\n Você, então, pôs em si próprio a missão de criar uma máquina de raciocínio perfeito. Racional, justa e infalível. E está obcecado com a ideia.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
@@ -103,7 +91,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el = elemento_cria("Sala dos alunos de IC");
   el->artigo = "a";
   el->curta = "Tomando duas paredes, uma mesa grande, em L, usada por todos os alunos, cheia de papéis, livros e alguns notebooks espalhados.";
-  el->longa = "Tomando duas paredes, uma mesa grande, em L, usada por todos os alunos, cheia de papéis e livros espalhados. Vários notebooks repousam sobre a mesa, um deles ligado. Neste, um terminal diz:\n leonardo@CLIAR: ~ $\n Em outra parede, uma estante de madeira repleta de livros sobre inteligência artificial, álgebra linear e probabilidade.\n De uma pequena janela é possível ver o céu noturno. ";
+  el->longa = "Tomando duas paredes, uma mesa grande, em L, usada por todos os alunos, cheia de papéis e livros espalhados. Vários notebooks repousam sobre a mesa, um deles ligado. Neste, um terminal diz:\n\n\tleonardo@CLIAR: ~ $\n\nEm outra parede, uma estante de madeira repleta de livros sobre inteligência artificial, álgebra linear e probabilidade.\nDe uma pequena janela é possível ver o céu noturno.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
@@ -170,7 +158,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el = elemento_cria("notebook do Pedro");
   el->artigo = "o";
   el->curta = "É o notebook do seu colega Pedro";
-  el->longa = "É o notebook do seu colega Pedro, que também pesquisa inteligência artificial aqui no CLIAR. Se você abre ele, vê que o gdm está pedindo a senha de usuário.";
+  el->longa = "É o notebook do seu colega Pedro, que também pesquisa inteligência artificial aqui no CLIAR.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
@@ -182,7 +170,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el = elemento_cria("notebook da Alice");
   el->artigo = "o";
   el->curta = "É o notebook da sua colega Alice";
-  el->longa = "É o notebook da sua colega Alice que também pesquisa inteligência artificial aqui no CLIAR. Se você abre ele, vê que o gdm está pedindo a senha de usuário.";
+  el->longa = "É o notebook da sua colega Alice que também pesquisa inteligência artificial aqui no CLIAR.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
@@ -268,6 +256,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  lista_f_insere(el->acoes, (p_funcao_void)xicara_comer, "comer");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -312,7 +301,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el = elemento_cria("café");
   el->artigo = "o";
   el->curta = "É o café do CLIAR.";
-  el->longa = "É o café do CLIAR. Aqui você sempre pega o seu café e vai senta na mesa, muitas vezes sozinho. Agora, no entanto, ele está fechado, e todos os funcionários foram para casa.";
+  el->longa = "É o café do CLIAR. Aqui você sempre pega o seu café e senta na mesa, muitas vezes sozinho. Agora, no entanto, ele está fechado, e todos os funcionários foram para casa.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;

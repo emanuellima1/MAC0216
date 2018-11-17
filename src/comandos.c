@@ -1,5 +1,6 @@
 #include "comandos.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
   /* e1 é a nova sala, e2 é o jogador e e3 é a velha sala.
@@ -118,7 +119,7 @@ Elemento abrir(Elemento e1, Elemento e2, Elemento e3) {
 Elemento fechar(Elemento e1, Elemento e2, Elemento e3) {
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e1->acoes, "abrir");
+  p = lista_f_busca(e1->acoes, "fechar");
   if (p == NULL) {
     printf("Você não consegue fechar %s %s.\n",
            e1->artigo, e1->nome);
@@ -171,7 +172,7 @@ Elemento beber(Elemento e1, Elemento e2, Elemento e3) {
 Elemento janela_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   Lista l;
-  short int *p, i = 1;
+  short int *p;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -182,10 +183,14 @@ Elemento janela_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   printf("Você abre a janela e sente a brisa e o frescor da noite entrar na sala.");
 
-  if (p == NULL)
-    lista_insere(l, &i, "aberto");
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 1;
+    lista_insere(l, p, "aberto");
+  }
   else
     *p = 1;
+  return (NULL);
 
   return (NULL);
 }
@@ -193,7 +198,7 @@ Elemento janela_abrir(Elemento e1, Elemento e2, Elemento e3) {
 Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   Lista l;
-  short int *p, i = 1;
+  short int *p;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -204,8 +209,11 @@ Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   printf("Você abre um livro de álgebra linear, e começa a ler: \"Vectors  in R n are  impossible to visualize unless n is 1, 2, or 3. However, familiar objects like lines and planes still make sense for any value of n. Die Geschichte aller bisherigen Gesellschaft ist die Geschichte von Klassenkämpfen\". Seus olhos desfocam, e você pisca. Você passou o dia inteiro lendo esses livros, e não aguenta mais!\n");
 
-  if (p == NULL)
-    lista_insere(l, &i, "aberto");
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 1;
+    lista_insere(l, p, "aberto");
+  }
   else
     *p = 1;
   return (NULL);
@@ -213,7 +221,7 @@ Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
 Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
   Lista l;
-  short int *p, i = 1;
+  short int *p;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -222,8 +230,11 @@ Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
     return NULL;
   }
   printf("Você abre o notebook e vê a tela inicial do gdm3 (o pessoal usa debian por aqui). Você não sabe a senha do Pedro.\n");
-  if (p == NULL)
-    lista_insere(l, &i, "aberto");
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 1;
+    lista_insere(l, p, "aberto");
+  }
   else
     *p = 1;
 
@@ -233,7 +244,7 @@ Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
 Elemento notebook_da_alice_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   Lista l;
-  short int *p, i = 1;
+  short int *p;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -242,11 +253,13 @@ Elemento notebook_da_alice_abrir(Elemento e1, Elemento e2, Elemento e3) {
     return NULL;
   }
   printf("Você abre o notebook e vê a tela inicial do gdm3 (o pessoal usa debian por aqui). Você não sabe a senha da Alice.\n");
-  if (p == NULL)
-    lista_insere(l, &i, "aberto");
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 1;
+    lista_insere(l, p, "aberto");
+  }
   else
     *p = 1;
-
   return (NULL);
 }
 
@@ -258,7 +271,7 @@ Elemento supercomputador_abrir(Elemento e1, Elemento e2, Elemento e3) {
 Elemento janela_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
   Lista l;
-  short int *p, i = 0;
+  short int *p;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -267,8 +280,12 @@ Elemento janela_fechar(Elemento e1, Elemento e2, Elemento e3) {
     return NULL;
   }
   printf("Você fecha a janela.\n");
-  if (p == NULL)
-    lista_insere(l, &i, "aberto");
+
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 0;
+    lista_insere(l, p, "aberto");
+  }
   else
     *p = 0;
   return (NULL);
@@ -277,7 +294,7 @@ Elemento janela_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
 Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
   Lista l;
-  short int *p, i = 1;
+  short int *p;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -286,8 +303,11 @@ Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
     return NULL;
   }
   printf("Você fecha o livro de álgebra linear.\n");
-  if (p == NULL)
-    lista_insere(l, &i, "aberto");
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 0;
+    lista_insere(l, p, "aberto");
+  }
   else
     *p = 0;
   return (NULL);
@@ -295,7 +315,7 @@ Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
 Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
   Lista l;
-  short int *p, i = 1;
+  short int *p, i;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -304,8 +324,10 @@ Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
     return NULL;
   }
   printf("Você fecha o notebook.\n");
-  if (p == NULL)
+  if (p == NULL) {
+    i = 0;
     lista_insere(l, &i, "aberto");
+  }
   else
     *p = 0;
   return (NULL);
@@ -313,7 +335,7 @@ Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
 Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
   Lista l;
-  short int *p, i = 1;
+  short int *p;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -321,9 +343,11 @@ Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
     printf("O notebook já está fechado.\n");
     return NULL;
   }
-  printf("Você fecha o notebook.\n");
-  if (p == NULL)
-    lista_insere(l, &i, "aberto");
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 0;
+    lista_insere(l, p, "aberto");
+  }
   else
     *p = 0;
   return (NULL);
@@ -331,16 +355,16 @@ Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
 Elemento supercomputador_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
-  printf("Você fecha o supercomputador. Eu só me pergunto como você conseguiu abrir ele.");
+  printf("Você fecha o supercomputador. Eu só me pergunto como você conseguiu abrir ele.\n");
   return (NULL);
 }
 
 Elemento papeis_comer(Elemento e1, Elemento e2, Elemento e3) {
-  printf("Voce coloca alguns papéis na boca e mastiga eles. Não dá muito certo engolir eles, mas as anotações sobre funções lineares em hiperplanos eram as mais gostosas.");
+  printf("Voce coloca alguns papéis na boca e mastiga eles. Não dá muito certo engolir eles, mas as anotações sobre funções lineares em hiperplanos eram as mais gostosas.\n");
   return (NULL);
 }
 
-Elemento cafe_comer(Elemento e1, Elemento e2, Elemento e3) {
-  printf("Você tenta muito mastigar o café, mas tudo que você consegue fazer é babar um pouco e beber o resto!");
+Elemento xicara_comer(Elemento e1, Elemento e2, Elemento e3) {
+  printf("Você tenta muito mastigar o café, mas tudo que você consegue fazer é babar um pouco e beber o resto!\n");
   return(NULL);
 }

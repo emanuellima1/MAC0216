@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define TAM_TABELA 50
-#define QTDE_COMANDOS 5 
+#define QTDE_COMANDOS 7
 
 /* Inicializa todos os elementos do jogo e devolve o lugar de inicio */
 Elemento inicializa_elementos (Tabela tab);
