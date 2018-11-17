@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define TAM_TABELA 50
+#define QTDE_COMANDOS 1 
 
 /* Inicializa todos os elementos do jogo e devolve o lugar de inicio */
 Elemento inicializa_elementos (Tabela tab);
@@ -33,8 +34,23 @@ int main () {
   char introducao[] = "Você está na sala de IC e de repente um monte de coisa ruim acontece. O que você quer fazer? (isso é a introdução do jogo!)\n";
   printf("%s", introducao);
 
+
+  p_comando v_verbos[] = {examinar, examinar};
+  char *s1[] = { "janela", "notebook do Pedro" };
+  char *s2[] = {"", ""};
+  char *s3[] = {"", ""};
+  Elemento v_arg1[QTDE_COMANDOS];
+  Elemento v_arg2[QTDE_COMANDOS];
+  Elemento v_arg3[QTDE_COMANDOS];
+
+  for (i = 0; i < QTDE_COMANDOS; i++) {
+    v_arg1[i] = tabela_busca(tab_jogo, s1[i]);
+    v_arg2[i] = tabela_busca(tab_jogo, s2[i]);
+    v_arg3[i] = tabela_busca(tab_jogo, s3[i]);
+  }
+
   /* Laço principal*/
-  while (1) {
+  for (i = 0; i < QTDE_COMANDOS; i++) {
 
     if (acabei_de_chegar) {
       /* Apresenta o local */
@@ -51,9 +67,15 @@ int main () {
         elemento_imprime_conteudo(lugar_atual);
       }
     }
+    
+    el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]);
 
-    scanf("%d", &i);
-
+    /* Caso especial: se o comando é ir_para */    
+    if (v_verbos[i] == ir_para && el != NULL) {
+      acabei_de_chegar = 1;
+      lugar_atual = el;
+    }
+    
     /* Faz todas as animações */
     animacoes_automaticas(tab_jogo, lugar_atual);
   }
@@ -123,11 +145,13 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
 
+
   /* Liga as saídas das salas umas nas outras*/
   liga_salas(tab, "Sala dos alunos de IC", "Pátio");
   liga_salas(tab, "Sala dos pesquisadores", "Pátio");
   liga_salas(tab, "Sala de máquinas", "Pátio");
   liga_salas(tab, "Sala do servidor", "Pátio");
+
 
   /* Elementos na sala dos alunos de IC */
   el2 = tabela_busca(tab, "Sala dos alunos de IC");
@@ -150,6 +174,8 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
+  lista_f_insere(el->acoes, (p_funcao_void)notebook_do_pedro_abrir, "abrir");
+  lista_f_insere(el->acoes, (p_funcao_void)notebook_do_pedro_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -160,6 +186,8 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
+  lista_f_insere(el->acoes, (p_funcao_void)notebook_da_alice_abrir, "abrir");
+  lista_f_insere(el->acoes, (p_funcao_void)notebook_da_alice_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -180,6 +208,8 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
+  lista_f_insere(el->acoes, (p_funcao_void)janela_abrir, "abrir");
+  lista_f_insere(el->acoes, (p_funcao_void)janela_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -205,6 +235,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  lista_f_insere(el->acoes, (p_funcao_void)papeis_comer, "comer");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
   
@@ -215,6 +246,8 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  lista_f_insere(el->acoes, (p_funcao_void)livros_abrir, "abrir");
+  lista_f_insere(el->acoes, (p_funcao_void)livros_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -307,8 +340,7 @@ Elemento inicializa_elementos (Tabela tab) {
   tabela_insere(tab, el->nome, el);
 
   /* Elementos na Sala do servidor */
-  el2 = tabela_busca(tab, "Sala do servidor");
-  l = el2->conteudo;
+
   
   el = elemento_cria("supercomputador");
   el->artigo = "o";
@@ -317,6 +349,8 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  lista_f_insere(el->acoes, (p_funcao_void)supercomputador_abrir, "abrir");
+  lista_f_insere(el->acoes, (p_funcao_void)supercomputador_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -355,7 +389,7 @@ void animacoes_automaticas(Tabela tab, Elemento lugar_atual) {
     p = p->next;
     while (p != NULL) {
       el = p->val;
-      printf("%s\n", el->nome);
+      /* printf("%s\n", el->nome); */
       if (el->animacao != NULL) {
         f = (p_comando)el->animacao;
         f(lugar_atual, NULL, NULL);
