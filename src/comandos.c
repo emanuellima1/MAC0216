@@ -49,7 +49,7 @@ Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
   p = lista_f_busca(e2->acoes, "examinar");
   if (p == NULL) {
     printf("Não consigo examinar %s %s com %s %s.\n",
-           e1-> artigo, e1->nome, e2->artigo, e2->nome);
+           e1->artigo, e1->nome, e2->artigo, e2->nome);
    return(NULL);
   }
   q = (p_comando)p;
@@ -59,7 +59,7 @@ Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
 Elemento falar(Elemento e1, Elemento e2, Elemento e3) {
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e2->acoes, "falar");
+  p = lista_f_busca(e1->acoes, "falar");
   if (p == NULL) {
     printf("Acho que você não quer falar com %s %s.\n", e1->artigo, e1->nome);
     return(NULL);
@@ -72,7 +72,7 @@ Elemento falar(Elemento e1, Elemento e2, Elemento e3) {
 Elemento perguntar(Elemento e1, Elemento e2, Elemento e3) {
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e2->acoes, "perguntar");
+  p = lista_f_busca(e1->acoes, "perguntar");
   if (p == NULL) {
     printf("Acho que você não quer perguntar sobre %s %s para %s %s.\n",
            e2->artigo, e2->nome, e1->artigo, e1->nome);
@@ -88,7 +88,7 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
 
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e2->acoes, "perguntar");
+  p = lista_f_busca(e1->acoes, "perguntar");
   if (p != NULL) {
     q = (p_comando)p;
     return(q(e1, e2, e3));
@@ -102,10 +102,10 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
 
 
 Elemento abrir(Elemento e1, Elemento e2, Elemento e3) {
-
+ 
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e2->acoes, "abrir");
+  p = lista_f_busca(e1->acoes, "abrir");
   if (p == NULL) {
     printf("Você não consegue abrir %s %s.\n",
            e1->artigo, e1->nome);
@@ -118,7 +118,7 @@ Elemento abrir(Elemento e1, Elemento e2, Elemento e3) {
 Elemento fechar(Elemento e1, Elemento e2, Elemento e3) {
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e2->acoes, "abrir");
+  p = lista_f_busca(e1->acoes, "abrir");
   if (p == NULL) {
     printf("Você não consegue fechar %s %s.\n",
            e1->artigo, e1->nome);
@@ -141,7 +141,7 @@ Elemento deixar(Elemento e1, Elemento e2, Elemento e3) {
 Elemento comer(Elemento e1, Elemento e2, Elemento e3) {
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e2->acoes, "comer");
+  p = lista_f_busca(e1->acoes, "comer");
   if (p == NULL) {
     printf("Você não consegue comer %s %s.\n", e1->artigo, e1->nome);
     return(NULL);
@@ -153,7 +153,7 @@ Elemento comer(Elemento e1, Elemento e2, Elemento e3) {
 Elemento beber(Elemento e1, Elemento e2, Elemento e3) {
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e2->acoes, "comer");
+  p = lista_f_busca(e1->acoes, "comer");
   if (p == NULL) {
     printf("Você não consegue comer %s %s.\n", e1->artigo, e1->nome);
     return(NULL);
@@ -175,7 +175,7 @@ Elemento janela_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 1) {
+  if (p != NULL && *p == 1) {
     printf("A janela já está aberta.\n");
     return NULL;
   }
@@ -197,7 +197,7 @@ Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 1) {
+  if (p != NULL && *p == 1) {
     printf("Você já abriu o livro.\n");
     return NULL;
   }
@@ -217,7 +217,7 @@ Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 1) {
+  if (p != NULL && *p == 1) {
     printf("O notebook já está aberto.\n");
     return NULL;
   }
@@ -262,7 +262,7 @@ Elemento janela_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 0) {
+  if (p != NULL && *p == 0) {
     printf("A janela já está aberta.\n");
     return NULL;
   }
@@ -281,7 +281,7 @@ Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 0) {
+  if (p != NULL && *p == 0) {
     printf("O livro já está fechado.\n");
     return NULL;
   }
@@ -299,7 +299,7 @@ Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 0) {
+  if (p != NULL && *p == 0) {
     printf("O notebook já está fechado.\n");
     return NULL;
   }
@@ -317,7 +317,7 @@ Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 0) {
+  if (p != NULL && *p == 0) {
     printf("O notebook já está fechado.\n");
     return NULL;
   }
