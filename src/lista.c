@@ -47,7 +47,10 @@ Lista lista_insere (Lista l, void *val, char *chave) {
 
 void * lista_busca(Lista l, char *n) {
   Elo *p = l->next;
-  
+
+  if (n == NULL || n[0] == '\0')
+    return (NULL);
+
   while (p != NULL && compara_str(p->chave, n) == 0) {
     p = p->next;
   }
@@ -136,6 +139,9 @@ Lista_f lista_f_insere (Lista_f l, p_funcao_void val, char *chave) {
 p_funcao_void lista_f_busca(Lista_f l, char *n) {
   Elo_f *p = l->next;
   
+  if (n == NULL || n[0] == '\0')
+    return (NULL);
+
   while (p != NULL && compara_str(p->chave, n) == 0) {
     p = p->next;
   }

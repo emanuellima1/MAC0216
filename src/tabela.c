@@ -41,6 +41,10 @@ int tabela_insere(Tabela T, char *n, void * val) {
 
 void * tabela_busca (Tabela T, char *n) {
   int i;
+  
+  if (n == NULL || n[0] == '\0')
+    return NULL;
+
   i = tabela_hash(n, T->tam);
   return (lista_busca(T->v[i], n));
 }
