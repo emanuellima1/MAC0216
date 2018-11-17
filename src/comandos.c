@@ -36,7 +36,7 @@ Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
 
   if (e1 == NULL) {
-    printf("Erro: chamou a funcao examinar sem nenhum elemento");
+    printf("Erro: chamou a funcao examinar sem nenhum elemento\n");
     return(NULL);
   }
 
@@ -186,6 +186,8 @@ Elemento janela_abrir(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 1;
+
+  return (NULL);
 }
 
 Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
@@ -206,6 +208,7 @@ Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 1;
+  return (NULL);
 }
 
 Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
@@ -223,6 +226,8 @@ Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 1;
+
+  return (NULL);
 }
 
 Elemento notebook_da_alice_abrir(Elemento e1, Elemento e2, Elemento e3) {
@@ -241,13 +246,11 @@ Elemento notebook_da_alice_abrir(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 1;
+
+  return (NULL);
 }
 
 Elemento supercomputador_abrir(Elemento e1, Elemento e2, Elemento e3) {
-
-  Lista l;
-  short int *p, i = 1;
-
   printf("O exterior desse supercomputador são placas metálicas parafusadas. Os parafusos parecem bem firmes. Você tem um chave de fenda?\n");
   return (NULL);
 }
@@ -268,12 +271,13 @@ Elemento janela_fechar(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 0;
+  return (NULL);
+
 }
 
 Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
-
   Lista l;
-
+  short int *p, i = 1;
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
@@ -286,6 +290,7 @@ Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 0;
+  return (NULL);
 }
 
 Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
@@ -303,7 +308,9 @@ Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 0;
+  return (NULL);
 }
+
 Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
   Lista l;
   short int *p, i = 1;
@@ -319,12 +326,11 @@ Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
     lista_insere(l, &i, "aberto");
   else
     *p = 0;
+  return (NULL);
 }
 
 Elemento supercomputador_fechar(Elemento e1, Elemento e2, Elemento e3) {
 
-  Lista l;
-  short int *p, i = 1;
   printf("Você fecha o supercomputador. Eu só me pergunto como você conseguiu abrir ele.");
   return (NULL);
 }
