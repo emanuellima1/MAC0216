@@ -27,9 +27,8 @@ typedef struct{
 
 typedef elemento *Elemento;
 
-
 /* A seguinte função cria um elemento, lhe atribuindo um nome
- * e inicializando o resto dos campos como NULL ou 0;*/
+ * e inicializando o resto dos campos como NULL ou 0 */
 Elemento elemento_cria (char *nome);
 
 void elemento_destroi (Elemento el);

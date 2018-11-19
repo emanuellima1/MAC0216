@@ -10,7 +10,7 @@ OBJ_JOGO=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o
 jogo.out: $(OBJ_JOGO)
 	$(CC) $(CFLAGS) -o jogo.out $(OBJ_JOGO) 
 
-teste.out: $(OBJ_FULL) 
+teste.out: $(OBJ_TESTE) 
 	$(CC) $(CFLAGS) -o teste.out $(OBJ_TESTE)
 
 lista.o: src/lista.h
@@ -36,4 +36,4 @@ relatorio:
 
 .PHONY: clean
 clean: 
-	-rm -f teste.out jogo.out $(OBJ_JOGO) relatorio.pdf
+	-rm -f teste.out jogo.out $(OBJ_JOGO) src/teste.o relatorio.pdf
