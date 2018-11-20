@@ -1,7 +1,7 @@
 # MAC0216
 
 ## Aventura!
-Para testar, basta rodar:
+Para testar as bibliotecas de lista, tabela e elemento, basta rodar:
 > make test
 
 Para rodar o jogo:
