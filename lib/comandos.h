@@ -35,13 +35,14 @@ Elemento beber(Elemento e1, Elemento e2, Elemento e3);
 Elemento janela_abrir(Elemento e1, Elemento e2, Elemento e3);
 Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3);
 
+Elemento seu_notebook_abrir(Elemento e1, Elemento e2, Elemento e3);
 Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3);
-
 Elemento notebook_da_alice_abrir(Elemento e1, Elemento e2, Elemento e3);
 Elemento supercomputador_abrir(Elemento e1, Elemento e2, Elemento e3);
 
 Elemento janela_fechar(Elemento e1, Elemento e2, Elemento e3);
 Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3);
+Elemento seu_notebook_fechar(Elemento e1, Elemento e2, Elemento e3);
 Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3);
 Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3);
 Elemento supercomputador_fechar(Elemento e1, Elemento e2, Elemento e3);

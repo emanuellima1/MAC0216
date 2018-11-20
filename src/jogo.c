@@ -60,7 +60,9 @@ int main () {
                           examinar, examinar,
                           pegar, pegar,
                           ir_para, ir_para, // sala do servidor
-                          examinar, pegar};
+                          examinar, pegar,
+                          abrir, fechar, abrir, abrir, fechar, fechar,
+                          comer, beber};
 
 
   /* O vetor abaixo só serve para imprimir na tela que comando
@@ -79,7 +81,9 @@ int main () {
                             "examinar", "examinar",
                             "pegar", "pegar",
                             "ir_para", "ir_para", // sala do servidor
-                            "examinar", "pegar"};
+                            "examinar", "pegar",
+                            "abrir", "fechar", "abrir", "abrir", "fechar", "fechar",
+                            "comer", "beber"};
 
   char *s1[] = {"janela", "notebook do Pedro", "notebook da Alice",
                 "seu notebook", "estante",
@@ -97,7 +101,11 @@ int main () {
                 "cabos", "nobreak",
                 "Pátio",
                 "Sala do servidor",
-                "supercomputador", "supercomputador"};
+                "supercomputador", "supercomputador",
+                "notebook do Pedro", "notebook do Pedro",
+                "notebook da Alice", "notebook da Alice",
+                "notebook da Alice", "notebook da Alice",
+                "xícara", "xícara"};
 
   char *s2[] = {"NULL", "NULL", "NULL", "NULL", "NULL",
                 "Você", "Você", "Você", "Você", "Você",
@@ -111,7 +119,9 @@ int main () {
                 "NULL", "NULL",
                 "Você", "Você",
                 "Você", "Você", // Sala do servidor
-                "NULL", "Você"};
+                "NULL", "Você",
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "NULL", "NULL"};
 
   char *s3[] = {"NULL", "NULL", "NULL", "NULL", "NULL",
                 "Sala dos alunos de IC", "Sala dos alunos de IC",
@@ -129,7 +139,9 @@ int main () {
                 "NULL", "NULL",
                 "Sala de máquinas", "Sala de máquinas",
                 "Sala de máquinas", "Pátio", // Sala do servidor
-                "NULL", "Sala de máquinas"};
+                "NULL", "Sala de máquinas",
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "NULL", "NULL"};
 
   Elemento v_arg1[QTDE_COMANDOS];
   Elemento v_arg2[QTDE_COMANDOS];
@@ -269,11 +281,13 @@ Elemento inicializa_elementos (Tabela tab) {
   el = elemento_cria("seu notebook");
   el->artigo = "o";
   el->curta = "É o seu notebook";
-  el->longa = "É o seu notebook, que você usa para fazer pesquisa. Se você abre ele, você vê um terminal que diz: \n leonardo@CLIAR:~$.";
+  el->longa = "É o seu notebook, velho companheiro de pesquisa.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
   el->carregavel = 1;
+  lista_f_insere(el->acoes, (p_funcao_void)seu_notebook_abrir, "abrir");
+  lista_f_insere(el->acoes, (p_funcao_void)seu_notebook_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 

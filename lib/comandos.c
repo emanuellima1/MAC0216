@@ -227,6 +227,28 @@ Elemento livros_abrir(Elemento e1, Elemento e2, Elemento e3) {
   return (NULL);
 }
 
+Elemento seu_notebook_abrir(Elemento e1, Elemento e2, Elemento e3) {
+  Lista l;
+  short int *p;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (p != NULL && *p == 1) {
+    printf("O notebook já está aberto.\n");
+    return NULL;
+  }
+  printf("Você abre o notebook e vê na tela o seu terminal:\n\n leonardo@CLIAR:~$\n\n");
+  if (p == NULL) {
+    p = malloc(sizeof(int));
+    *p = 1;
+    lista_insere(l, p, "aberto");
+  }
+  else
+    *p = 1;
+
+  return (NULL);
+}
+
 Elemento notebook_do_pedro_abrir(Elemento e1, Elemento e2, Elemento e3) {
   Lista l;
   short int *p;
@@ -256,7 +278,7 @@ Elemento notebook_da_alice_abrir(Elemento e1, Elemento e2, Elemento e3) {
 
   l = e1->detalhe.atributos;
   p = lista_busca(l, "aberto");
-  if (*p == 1) {
+  if (p != NULL && *p == 1) {
     printf("O notebook já está aberto.\n");
     return NULL;
   }
@@ -321,6 +343,26 @@ Elemento livros_fechar(Elemento e1, Elemento e2, Elemento e3) {
   return (NULL);
 }
 
+Elemento seu_notebook_fechar(Elemento e1, Elemento e2, Elemento e3) {
+  Lista l;
+  short int *p, i;
+
+  l = e1->detalhe.atributos;
+  p = lista_busca(l, "aberto");
+  if (p != NULL && *p == 0) {
+    printf("O notebook já está fechado.\n");
+    return NULL;
+  }
+  printf("Você fecha o notebook.\n");
+  if (p == NULL) {
+    i = 0;
+    lista_insere(l, &i, "aberto");
+  }
+  else
+    *p = 0;
+  return (NULL);
+}
+
 Elemento notebook_do_pedro_fechar(Elemento e1, Elemento e2, Elemento e3) {
   Lista l;
   short int *p, i;
@@ -351,6 +393,7 @@ Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3) {
     printf("O notebook já está fechado.\n");
     return NULL;
   }
+  printf("Você fecha o notebook.\n");
   if (p == NULL) {
     p = malloc(sizeof(int));
     *p = 0;
@@ -395,7 +438,7 @@ Elemento xicara_beber(Elemento e1, Elemento e2, Elemento e3) {
     *p = 0;
   }
   else {
-    printf("A xícara esta vazia.");
+    printf("A xícara esta vazia.\n");
   }
   return(NULL);
 }
