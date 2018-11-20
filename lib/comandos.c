@@ -87,6 +87,10 @@ Elemento perguntar(Elemento e1, Elemento e2, Elemento e3) {
 Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
   /* e1 é o objeto, e2 é o jogador e e3 é a sala */
 
+  if (e1 == NULL || e2 == NULL || e3 == NULL) {
+    printf("Erro: chamou pegar com argumentos nulos.\n");
+    return(NULL);
+  }
   p_funcao_void p;
   p_comando q;
   p = lista_f_busca(e1->acoes, "perguntar");
