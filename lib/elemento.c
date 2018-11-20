@@ -17,6 +17,7 @@ Elemento elemento_cria (char *nome) {
   el->ativo = 0;
   el->visivel = 0;
   el->conhecido = 0;
+  el->carregavel = 0;
   el->conteudo = lista_cria();
   el->acoes = lista_f_cria();
   el->animacao = NULL;

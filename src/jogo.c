@@ -270,6 +270,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
+  el->carregavel = 1;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -280,6 +281,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
+  el->carregavel = 1;
   lista_f_insere(el->acoes, (p_funcao_void)notebook_do_pedro_abrir, "abrir");
   lista_f_insere(el->acoes, (p_funcao_void)notebook_do_pedro_fechar, "fechar");
   lista_insere(l, el, el->nome);
@@ -292,6 +294,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 1;
+  el->carregavel = 1;
   lista_f_insere(el->acoes, (p_funcao_void)notebook_da_alice_abrir, "abrir");
   lista_f_insere(el->acoes, (p_funcao_void)notebook_da_alice_fechar, "fechar");
   lista_insere(l, el, el->nome);
@@ -341,6 +344,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  el->carregavel = 1;
   lista_f_insere(el->acoes, (p_funcao_void)papeis_comer, "comer");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
@@ -352,6 +356,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  el->carregavel = 1;
   lista_f_insere(el->acoes, (p_funcao_void)livros_abrir, "abrir");
   lista_f_insere(el->acoes, (p_funcao_void)livros_fechar, "fechar");
   lista_insere(l, el, el->nome);
@@ -374,6 +379,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  el->carregavel = 1;
   lista_f_insere(el->acoes, (p_funcao_void)xicara_comer, "comer");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
@@ -385,6 +391,7 @@ Elemento inicializa_elementos (Tabela tab) {
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
+  el->carregavel = 1;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 

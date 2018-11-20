@@ -15,6 +15,7 @@ typedef struct{
   short int ativo; // Booleano que indica se o elemento está ativo no jogo
   short int visivel; // Booleano que indica se o elemento está visível
   short int conhecido; // Indica se o elemento já é conhecido do jogador
+  short int carregavel; // Indica se o elemento pode fazer parte do inventário
   Lista conteudo; // Lista de objetos contidos no elemento
   Lista_f acoes; // Lista de funções especiais para este elemento.
   p_funcao_void animacao;

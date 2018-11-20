@@ -93,15 +93,19 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
   }
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e1->acoes, "perguntar");
+  p = lista_f_busca(e1->acoes, "pegar");
   if (p != NULL) {
     q = (p_comando)p;
     return(q(e1, e2, e3));
   }
   
-  lista_retira(e3->conteudo, e1->nome);
-  lista_insere(e2->conteudo, e1, e1->nome);
-  printf("Você pegou %s %s\n", e1->artigo, e1->nome);
+  if (e1->carregavel) {
+    lista_retira(e3->conteudo, e1->nome);
+    lista_insere(e2->conteudo, e1, e1->nome);
+    printf("Você pegou %s %s\n", e1->artigo, e1->nome);
+  }
+  else
+    printf("Você não consegue pegar %s %s\n", e1->artigo, e1->nome);
   return(NULL);
 }
 
