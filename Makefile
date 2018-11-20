@@ -7,7 +7,7 @@ EXEC=jogo.out
 OBJ_TESTE=lib/elemento.o lib/lista.o lib/tabela.o src/test/teste.o
 OBJ_JOGO=lib/elemento.o lib/lista.o lib/tabela.o src/jogo.o lib/comandos.o
 
-jogo.out: $(OBJ_JOGO)
+jogo.out: $(OBJ_JOGO) src/jogo.h
 	$(CC) $(CFLAGS) -o jogo.out $(OBJ_JOGO) 
 
 teste.out: $(OBJ_TESTE) 
