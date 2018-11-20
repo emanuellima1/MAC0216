@@ -105,7 +105,7 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
     printf("Você pegou %s %s\n", e1->artigo, e1->nome);
   }
   else
-    printf("Você não consegue pegar %s %s\n", e1->artigo, e1->nome);
+    printf("Você não consegue pegar %s %s.\n", e1->artigo, e1->nome);
   return(NULL);
 }
 
@@ -162,7 +162,7 @@ Elemento comer(Elemento e1, Elemento e2, Elemento e3) {
 Elemento beber(Elemento e1, Elemento e2, Elemento e3) {
   p_funcao_void p;
   p_comando q;
-  p = lista_f_busca(e1->acoes, "comer");
+  p = lista_f_busca(e1->acoes, "beber");
   if (p == NULL) {
     printf("Você não consegue comer %s %s.\n", e1->artigo, e1->nome);
     return(NULL);
@@ -373,6 +373,29 @@ Elemento papeis_comer(Elemento e1, Elemento e2, Elemento e3) {
 }
 
 Elemento xicara_comer(Elemento e1, Elemento e2, Elemento e3) {
-  printf("Você tenta muito mastigar o café, mas tudo que você consegue fazer é babar um pouco e beber o resto!\n");
+  
+  int *p;
+  p = lista_busca(e1->detalhe.atributos, "cheio");
+  if (p == NULL || *p == 1) {
+    printf("Você tenta muito mastigar o café, mas tudo que você consegue fazer é babar um pouco e beber o resto! Ah, e estava horrível. Devia estar parado aí faz umas cinco horas. Blergh! No entanto, você está mais desperto.\n");
+    *p = 0;
+  }
+  else {
+    printf("Nem vai dar pra tentar comer o café, porque a xícara esta vazia.");
+  }
+  return(NULL);
+}
+
+
+Elemento xicara_beber(Elemento e1, Elemento e2, Elemento e3) {
+  int *p;
+  p = lista_busca(e1->detalhe.atributos, "cheio");
+  if (p == NULL || *p == 1) {
+    printf("Você bebe a xícara de café. Estava horrível. Devia estar parado aí faz umas cinco horas. Blergh! No entanto, você está mais desperto.\n");
+    *p = 0;
+  }
+  else {
+    printf("A xícara esta vazia.");
+  }
   return(NULL);
 }

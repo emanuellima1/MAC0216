@@ -42,7 +42,6 @@ int main () {
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
   você desmaiou de exaustão em cima dos seus livros e do seu notebook. Mas agora você está acordado. O que você faz? \n");
 
-
   /* ----- Inicialização dos comandos ------ */
 
   /* Vamos entrar em todas as salas, examinar todos os objetos dela
@@ -166,13 +165,15 @@ int main () {
     
     printf("\n--> Executando o comando %s(%s, %s, %s) <--\n",
            nomes_comandos[i], s1[i], s2[i], s3[i]);
-    el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]);
 
+    el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]);
+    
     /* Caso especial: se o comando é ir_para */    
     if (v_verbos[i] == ir_para && el != NULL) {
       acabei_de_chegar = 1;
       lugar_atual = el;
     }
+   
 
     /* Faz todas as animações */
     animacoes_automaticas(tab_jogo, lugar_atual);
@@ -186,6 +187,8 @@ Elemento inicializa_elementos (Tabela tab) {
   
   Elemento el, el2;
   Lista l;
+  int *p = malloc(sizeof(int));
+
 
   /* Inicializa aventureiro */
   el = elemento_cria("Você");
@@ -380,7 +383,10 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 1;
   el->conhecido = 0;
   el->carregavel = 1;
+  *p = 1;
+  lista_insere(el->detalhe.atributos, p, "cheio");
   lista_f_insere(el->acoes, (p_funcao_void)xicara_comer, "comer");
+  lista_f_insere(el->acoes, (p_funcao_void)xicara_beber, "beber");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
 
@@ -447,6 +453,26 @@ Elemento inicializa_elementos (Tabela tab) {
   el->artigo = "as";
   el->curta = "São duas pequenas palmeiras em dois grandes vasos, uma de cada lado da sala.";
   el->longa = "São duas pequenas palmeiras em dois grandes vasos, uma de cada lado da sala.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  lista_insere(l, el, el->nome);
+  tabela_insere(tab, el->nome, el);
+
+  el = elemento_cria("parede");
+  el->artigo = "a";
+  el->curta = "É uma grande parede do outro lado do pátio, em frente ao café. Atrás dela, a recepção. Nada de especial nela.";
+  el->longa = "É uma grande parede do outro lado do pátio, em frente ao café. Atrás dela, a recepção. Nada de especial nela.";
+  el->ativo = 1;
+  el->visivel = 1;
+  el->conhecido = 0;
+  lista_insere(l, el, el->nome);
+  tabela_insere(tab, el->nome, el);
+
+  el = elemento_cria("recepção");
+  el->artigo = "a";
+  el->curta = "É a recepção do CLIAR. Fica de costas para a parede.";
+  el->longa = "É a recepção do CLIAR. Fica de costas para a parede. A essa hora já não tem mais ninguém trabalhando aqui, então você só vê uma cadeira e uma papelada burocrática em cima do balcão.";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;

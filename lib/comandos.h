@@ -47,3 +47,4 @@ Elemento notebook_da_alice_fechar(Elemento e1, Elemento e2, Elemento e3);
 Elemento supercomputador_fechar(Elemento e1, Elemento e2, Elemento e3);
 Elemento papeis_comer(Elemento e1, Elemento e2, Elemento e3);
 Elemento xicara_comer(Elemento e1, Elemento e2, Elemento e3);
+Elemento xicara_beber(Elemento e1, Elemento e2, Elemento e3);
