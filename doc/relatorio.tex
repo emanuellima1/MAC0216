@@ -3,7 +3,7 @@
 \usepackage{spverbatim}
 
 
-\title{Relatório - Parte I da Aventura}
+\title{Relatório - Parte I e II da Aventura}
 \date{26/09/2018}
 \author{Emanuel Lima (9009493) e João Seckler (4603521)} 
 
@@ -11,16 +11,40 @@
 \begin{document}
 \maketitle
 
-Para usar o programa teste.c, execute:
+Para executar o jogo (que até agora só executa uma série de testes), faça:
 
 \begin{spverbatim}
-$ gcc -Wall -o teste elemento.c lista.c tabela.c teste.c
-$ ./teste.c
+  $ make
+  $ ./jogo.out
 \end{spverbatim}
-  
 \medskip
 
-O programa de teste deve imprimir uma mensagem na saída padrão se houver algum  erro.
+Para testar as bibliotecas de elementos, lista e tabela, execute:
+
+\begin{spverbatim}
+  $ make test
+\end{spverbatim}
+\medskip
+
+O programa de teste deve imprimir uma mensagem na saída padrão se houver algum
+erro. Para recompilar esse relatório, faça
+
+\begin{spverbatim}
+  $ make doc 
+\end{spverbatim}
+\medskip
+
+Para apagar limpar os diretórios:
+
+\begin{spverbatim}
+  $ make clean 
+\end{spverbatim}
+\medskip
+
+
+
+
+\section{Parte I}
 
 Optamos por definir dois tipos para elemento: "elemento" e "Elemento". O segundo é um ponteiro para o primeiro. A desvantagem é que precisamos criar duas funções "elemento\_cria" e "elemento\_destroi", mas em compensação nos parece que o restante do código, nos módulos de lista e tabelas, fica mais limpo e legível. Fazemos isso inspirados na implementação de um módulo de pilhas feita em MAC0121 - Algoritmos e Estruturas de Dados.
 
@@ -66,6 +90,99 @@ Na implementação da função
 \end{spverbatim} \medskip
 optamos por devolver um código de erro se o valor val associado à chave n já estiver armazenado no mesmo índice de T. Esse evento pode ter dois significados: (i) que o usuário tentou associar uma mesma chave a um mesmo valor mais de uma vez ou (ii) que o usuário associou duas chaves a um mesmo valor, e essas chaves colidem na função hash.
 
-Implementamos a função hash da tabela de símboloso inspirados no seguinte material: http://www.cse.yorku.ca/~oz/hash.html 
+Implementamos a função hash da tabela de símbolos inspirados no seguinte material: http://www.cse.yorku.ca/~oz/hash.html 
+
+
+\section{Parte II}
+
+\subsection{Listas e tabelas}
+
+Uma alteração significativa que fizemos da primeira parte para a segunda foi nas
+bibliotecas de lista e de tabela. Agora, não são mais lista de\emph{ Elementos},
+mas são listas genéricas. Ou seja, o valor delas é agora um ponteiro genérico
+(\emph{*void}). Isso permite que sejam usadas nos mais vários tipo de situação.
+
+Além disso, implementamos um sistemas de chaves já na biblioteca de listas (em
+que um nó da lista é composto de um valor, de tipo ponteiro genérico, uma chave,
+de tipo \emph{string}, e um ponteiro para o próximo nó). Isso permite, primeiro,
+que a biblioteca de tabelas não precise de tanto código, pois não precisa
+implementar o sistema de chaves. Depois, permite que se realize busca a partir
+de chaves em situações em que a tabela seria uma estrutura demasiadamente
+grande, o que se mostrou útil na implementação do restante do jogo.
+
+É boa prática não misturar endereços na memória que armazenam dados com
+endereços que armazenam instruções, ou seja, não misturar ponteiros com
+ponteiros de funções (na verdade, os compiladores nem permitem tal intercâmbio).
+Por isso, não seria possível que usássemos a biblioteca de listas, como estava
+feita, para fazer listas de funções. Contudo, precisávamos de listas que
+fizessem isso, pois seriam usada em todo o jogo, continuamente. A solução que
+encontramos, portanto, foi adicionar à biblioteca de lista novamente funções
+iguais às que já estavam lá, mas que serviam para ponteiros de funções. Ou seja,
+agora podemos criar, com essa mesma biblioteca, listas de ponteiros genéricos e
+listas de ponteiros de função genéricas (\emph{void (*)(void)}). Esse segundo
+tipo de lista é usado no campo\emph{ acoes} dos elementos.
+
+\subsection{Comandos}\label{comandos}
+
+A implementação dos comandos, ou verbos, se deu da seguinte maneira.
+Padronizamos o tipo das funções como:
+
+\begin{spverbatim}
+  Elemento funcao(Elemento, Elemento, Elemento);
+\end{spverbatim} \medskip
+
+Escolhemos esse padrão, mais complexo do que o sugerido nas instruções, porque
+optamos por não usar variáveis globais. Algumas funções exigem, portanto, três
+argumentos. Tome um exemplo: o verbo\emph{ pegar}. A função que o implementa
+terá que retirar o elemento da sala onde estava e colocá-lo no inventário do
+jogador. Para isso, terá que acessar o campo\emph{ conteudo} do elemento sala e
+do elemento jogador.
+
+Num nível mais alto, existem os comandos genéricos. Eles são, por exemplo:
+\emph{ir\_para}, \emph{examinar}, \emph{comer}, \emph{beber}, \emph{inventario},
+etc. Todas essas funções, de ``alto nível'', antes de executarem qualquer coisa
+verificam se o elemento que lhes foi passada como argumento tem, no seu campo
+\emph{acoes}, um comando equivalente àquele. Por exemplo: seu eu chamo
+
+\begin{spverbatim}
+  comer(papel, NULL, NULL);
+\end{spverbatim} \medskip
+
+a função comer verifica se há, no campo\emph{ acoes} do elemento\emph{ papel},
+uma função cuja \textbf{chave} é ``comer''. Havendo, ela a executa e não faz
+mais nada. Não havendo, executa algo padrão, que vale para todos os objetos
+(nesse caso, seria algo como imprimir uma mensagem que diz que você não consegue
+comer papel). A implementação disso é muito simples. Há, na biblioteca de
+comandos, uma função chamada \emph{papel\_comer}. Na inicialização do
+objeto\emph{ papel}, essa função é inserida em seu campo\emph{ acoes} com a
+chave ``comer''.
+
+Essa abordagem permite que nenhum comando que o usuário dê fique sem resposta
+(desde que haja \textbf{alguma} implementação para ele). Por mais absurdo que seja o que
+ele esteja pedindo, haverá sempre, no mínimo, uma mensagem padrão de erro.
+
+Ela permite também que não precisemos implementar as saídas das salas como
+elementos. Suponha, por exemplo, que a porta da sala 1, onde está o jogador,
+para a sala 2 esteja trancada. Se o usuário quiser ir para a sala 2, ele dará o
+comando\emph{ ir\_para}. Esse comando vai, antes de tudo, procurar na sala 2, em
+sua lista de verbos, se há lá uma versão de\emph{ ir\_para}, e vai encontrar.
+Esse comando vai imprimir uma mensagem dizendo que a porta está trancada, e não
+vai deixar o jogador passar.
+
+\subsection{Rotina de testes}
+
+Para testar os elementos e os comandos, implementamos uma estrutura um tanto
+primitiva (afinal, ela vai ser substituída, na próxima fase, por código que
+envolve análise léxica e sintática). Ela consiste numa inicialização ``à mão''
+de 4 vetores (à mão porque descrevemos os elementos desses vetores um a um). Um
+é um vetor de funções, os outro três são vetores de elementos. A combinação de
+um elemento de cada vetor é o que é necessário para executar um comando (ver
+\ref{comandos}). Assim, com os quatro vetores é possível executar uma série de
+comandos, o que é feito no laço principal do programa. Note que usamos mais
+quatro vetores de strings auxiliares, para poder imprimir na tela, a cada
+iteração, o que o programa está fazendo.
+
+
+
 
 \end{document}
