@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "elemento.h"
+#include "../../lib/elemento.h"
 
 void gera_string (char *s, int tamanho);
 void testa_elemento();

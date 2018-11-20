@@ -4,7 +4,7 @@
 
 typedef Elemento (*p_comando)(Elemento e1, Elemento e2, Elemento e3);
 
-/* e1 é o jogador e e2 é a sala. Devolve a nova sala */
+/* e1 é o jogador, e2 é a sala nova e e3 é a sala velha. Devolve a nova sala */
 Elemento ir_para(Elemento e1, Elemento e2, Elemento e3);
 
 /* Imprime o inventário. e1 é o jogador*/

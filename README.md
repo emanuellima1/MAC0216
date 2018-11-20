@@ -2,14 +2,14 @@
 
 ## Aventura!
 Para testar, basta rodar:
-> make teste
+> make test
 
 Para rodar o jogo:
 > make
 > ./jogo.out
 
 Outros:
-> make relatorio
+> make doc  
 > make clean
 
 Equipe: 

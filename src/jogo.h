@@ -1,4 +1,4 @@
-#include "comandos.h"
+#include "../lib/comandos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

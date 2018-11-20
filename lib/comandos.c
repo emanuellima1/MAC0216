@@ -14,7 +14,7 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
   }
 
   lista_retira(e3->conteudo, e2->nome); //Remove o jogador da sala antiga
-  lista_insere(e1->conteudo, e2, e2->nome); //Insere o jogador da sala nova
+  lista_insere(e1->conteudo, e2, e2->nome); //Insere o jogador na sala nova
   return (e1);
 }
 

@@ -4,8 +4,8 @@
 CC=gcc
 CFLAGS=-Wall -pedantic -O2
 EXEC=jogo.out
-OBJ_TESTE=src/elemento.o src/lista.o src/tabela.o src/teste.o
-OBJ_JOGO=src/elemento.o src/lista.o src/tabela.o src/jogo.o src/comandos.o 
+OBJ_TESTE=lib/elemento.o lib/lista.o lib/tabela.o src/test/teste.o
+OBJ_JOGO=lib/elemento.o lib/lista.o lib/tabela.o src/jogo.o lib/comandos.o
 
 jogo.out: $(OBJ_JOGO)
 	$(CC) $(CFLAGS) -o jogo.out $(OBJ_JOGO) 
@@ -13,27 +13,27 @@ jogo.out: $(OBJ_JOGO)
 teste.out: $(OBJ_TESTE) 
 	$(CC) $(CFLAGS) -o teste.out $(OBJ_TESTE)
 
-lista.o: src/lista.h
+lista.o: lib/lista.h
 
-tabela.o: src/tabela.h src/lista.h
+tabela.o: lib/tabela.h lib/lista.h
 
-elemento.o: src/elemento.h src/tabela.h src/lista.h
+elemento.o: lib/elemento.h lib/tabela.h lib/lista.h
 
-teste.o: src/elemento.h src/tabela.h src/lista.h 
+teste.o: lib/elemento.h lib/tabela.h lib/lista.h 
 
-comandos.o: src/comandos.h src/elemento.h src/tabela.h src/lista.h
+comandos.o: lib/comandos.h lib/elemento.h lib/tabela.h lib/lista.h
 
-jogo.o: src/jogo.h src/comandos.h src/elemento.h src/tabela.h src/lista.h
+jogo.o: src/jogo.h lib/comandos.h lib/elemento.h lib/tabela.h lib/lista.h
 
-.PHONY: teste
-teste: ./teste.out
+.PHONY: test
+test: ./teste.out
 	./teste.out	
 
-.PHONY: relatorio
-relatorio:
-	pdflatex relatorio/relatorio.tex
+.PHONY: doc
+doc:
+	pdflatex doc/relatorio.tex
 	-rm -f relatorio.aux relatorio.log
 
 .PHONY: clean
 clean: 
-	-rm -f teste.out jogo.out $(OBJ_JOGO) src/teste.o relatorio.pdf
+	-rm -f teste.out jogo.out $(OBJ_JOGO) src/test/teste.o relatorio.pdf

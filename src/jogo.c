@@ -4,6 +4,7 @@ int main () {
 
   int i;
   char ans;
+  const char PROMPT = '>';
 
   /* Tabela principal que contém todos os elementos do jogo */
   Tabela tab_jogo = tabela_cria(TAM_TABELA);
@@ -22,7 +23,6 @@ int main () {
   printf("|_____/_/    \\_\\_|  \\_\\/_/    \\_\\ \n");
   printf("========================================\n");
 
-  printf("\nUma aventura épica sobre amor, ambição e humanidade!\n");
   printf("\nPor Emanuel Lima e João Seckler.\n");
   printf("\nVocê gostaria de ler as instruções? [s/N]\n");
   scanf("%c", &ans);
@@ -36,6 +36,7 @@ int main () {
       break;
   }
 
+  printf("ATO 1\n");
   printf("Dor de cabeça. Esta é a primeira coisa que você sente ao acordar na sua mesa de trabalho.\
   Aos poucos você vai se lembrando do que aconteceu. O seu orientador te pediu para por a nova versão da\
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
@@ -63,9 +64,12 @@ int main () {
   /* Laço principal*/
   for (i = 0; i < QTDE_COMANDOS; i++) {
 
+    printf("%c", PROMPT);
+    printf("\n");
+
     if (acabei_de_chegar) {
       /* Apresenta o local */
-      printf("\n%s\n\n", lugar_atual->nome);  // título (nome da sala)
+      printf("\n%s\n", lugar_atual->nome);  // título (nome da sala)
       if (lugar_atual->conhecido)
         printf("%s", lugar_atual->curta);
       else
@@ -79,7 +83,7 @@ int main () {
       }
     }
     
-    printf("\n--> Executando o comando %s(%s, %s, %s) <--\n\n",
+    printf("\n--> Executando o comando %s(%s, %s, %s) <--\n",
            nomes_comandos[i], s1[i], s2[i], s3[i]);
     el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]);
 
@@ -88,10 +92,11 @@ int main () {
       acabei_de_chegar = 1;
       lugar_atual = el;
     }
-    
+
     /* Faz todas as animações */
     animacoes_automaticas(tab_jogo, lugar_atual);
   }
+  return 0;
 }
 
 Elemento inicializa_elementos (Tabela tab) {
@@ -111,6 +116,15 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 1;
   tabela_insere(tab, el->nome, el);
 
+  /* Inicializa IARA */
+  el = elemento_cria("IARA");
+  el->artigo = "a";
+  el->curta = "Inteligência Artificial Realísticamente Autônoma.\n";
+  el->longa = "A Inteligência Artificial Realísticamente Autônoma, IARA, foi criada por pesquisadores do CLIAR que almeijavam criar uma IA tão inteligente quanto qualquer ser humano.\n";
+  el->ativo = 1;
+  el->visivel = 0;
+  el->conhecido = 0;
+  tabela_insere(tab, el->nome, el);
 
   /* Inicializa salas */
   el = elemento_cria("Sala dos alunos de IC");
