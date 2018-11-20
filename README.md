@@ -8,9 +8,9 @@ Para rodar o jogo:
 > make
 > ./jogo.out
 
-Outros:
+Outros:  
 > make doc  
-> make clean
+> make clean  
 
 Equipe: 
 * Emanuel Lima:  NUSP 9009493    
