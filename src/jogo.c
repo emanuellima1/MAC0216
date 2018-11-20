@@ -42,14 +42,95 @@ int main () {
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
   você desmaiou de exaustão em cima dos seus livros e do seu notebook. Mas agora você está acordado. O que você faz? \n");
 
-  p_comando v_verbos[] = {examinar, examinar, abrir, fechar, ir_para, comer, fechar};
-  /* O vetor abaixo é só para imprimir na tela que comando
-     está sendo executado a cada iteração */
-  char *nomes_comandos[] = {"examinar", "examinar", "abrir", "fechar", "ir_para", "comer", "fechar"};
 
-  char *s1[] = {"janela", "notebook do Pedro", "notebook do Pedro", "notebook do Pedro", "Pátio", "xícara", "notebook do Pedro"};
-  char *s2[] = {"NULL", "NULL", "NULL", "NULL", "Você", "NULL", "NULL"};
-  char *s3[] = {"NULL", "NULL", "NULL", "NULL", "Sala dos alunos de IC", "NULL", "NULL"};
+  /* ----- Inicialização dos comandos ------ */
+
+  /* Vamos entrar em todas as salas, examinar todos os objetos dela
+     tentar pegar todos eles e fazer algumas ações específicas deles */
+
+  p_comando v_verbos[] = {examinar, examinar, examinar, examinar, examinar,
+                          pegar, pegar, pegar, pegar, pegar,
+                          ir_para, // pátio
+                          examinar, examinar, examinar, examinar, examinar,
+                          pegar, pegar, pegar, pegar, pegar,
+                          ir_para, // sala dos pesquisadores
+                          examinar, examinar, examinar,
+                          examinar, examinar, examinar,
+                          pegar, pegar, pegar, pegar, pegar, pegar,
+                          ir_para, ir_para, // sala de máquinas
+                          examinar, examinar,
+                          pegar, pegar,
+                          ir_para, ir_para, // sala do servidor
+                          examinar, pegar};
+
+
+  /* O vetor abaixo só serve para imprimir na tela que comando
+     está sendo executado a cada iteração, e deve ser
+     igual a v_verbos, mas com strings*/
+  char *nomes_comandos[] = {"examinar", "examinar", "examinar", "examinar", "examinar",
+                            "pegar", "pegar", "pegar", "pegar", "pegar",
+                            "ir_para", // pátio
+                            "examinar", "examinar", "examinar", "examinar", "examinar",
+                            "pegar", "pegar", "pegar", "pegar", "pegar",
+                            "ir_para", // sala dos pesquisadores
+                            "examinar", "examinar", "examinar",
+                            "examinar", "examinar", "examinar",
+                            "pegar", "pegar", "pegar", "pegar", "pegar", "pegar",
+                            "ir_para", "ir_para", // sala de máquinas
+                            "examinar", "examinar",
+                            "pegar", "pegar",
+                            "ir_para", "ir_para", // sala do servidor
+                            "examinar", "pegar"};
+
+  char *s1[] = {"janela", "notebook do Pedro", "notebook da Alice",
+                "seu notebook", "estante",
+                "janela""", "notebook do Pedro", "notebook da Alice",
+                "seu notebook", "estante",
+                "Pátio",
+                "café", "mesas", "plantas", "parede", "recepção",
+                "café", "mesas", "plantas", "parede", "recepção",
+                "Sala dos pesquisadores",
+                "mesas", "papéis", "livros", "monitores", "xícara", "retrato",
+                "mesas", "papéis", "livros", "monitores", "xícara", "retrato",
+                "Pátio",
+                "Sala de máquinas",
+                "cabos", "nobreak",
+                "cabos", "nobreak",
+                "Pátio",
+                "Sala do servidor",
+                "supercomputador", "supercomputador"};
+
+  char *s2[] = {"NULL", "NULL", "NULL", "NULL", "NULL",
+                "Você", "Você", "Você", "Você", "Você",
+                "Você", // Pátio
+                "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Você", "Você", "Você", "Você", "Você",
+                "Você", // Sala dos pesquisadores
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Você", "Você", "Você", "Você", "Você", "Você",
+                "Você", "Você", // Sala de máquinas
+                "NULL", "NULL",
+                "Você", "Você",
+                "Você", "Você", // Sala do servidor
+                "NULL", "Você"};
+
+  char *s3[] = {"NULL", "NULL", "NULL", "NULL", "NULL",
+                "Sala dos alunos de IC", "Sala dos alunos de IC",
+                "Sala dos alunos de IC", "Sala dos alunos de IC",
+                "Sala dos alunos de IC",
+                "Sala dos alunos de IC", // Pátio
+                "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Pátio", "Pátio", "Pátio", "Pátio", "Pátio",
+                "Pátio", // Sala dos pesquisadores
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Sala dos pesquisadores", "Sala dos pesquisadores",
+                "Sala dos pesquisadores", "Sala dos pesquisadores",
+                "Sala dos pesquisadores", "Sala dos pesquisadores",
+                "Sala dos pesquisadores", "Pátio", // Sala de máquinas
+                "NULL", "NULL",
+                "Sala de máquinas", "Sala de máquinas",
+                "Sala de máquinas", "Pátio", // Sala do servidor
+                "NULL", "Sala de máquinas"};
 
   Elemento v_arg1[QTDE_COMANDOS];
   Elemento v_arg2[QTDE_COMANDOS];
@@ -172,13 +253,11 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
 
-
   /* Liga as saídas das salas umas nas outras*/
   liga_salas(tab, "Sala dos alunos de IC", "Pátio");
   liga_salas(tab, "Sala dos pesquisadores", "Pátio");
   liga_salas(tab, "Sala de máquinas", "Pátio");
   liga_salas(tab, "Sala do servidor", "Pátio");
-
 
   /* Elementos na sala dos alunos de IC */
   el2 = tabela_busca(tab, "Sala dos alunos de IC");
@@ -368,6 +447,9 @@ Elemento inicializa_elementos (Tabela tab) {
   tabela_insere(tab, el->nome, el);
 
   /* Elementos na Sala do servidor */
+  el2 = tabela_busca(tab, "Sala do servidor");
+  l = el2->conteudo;
+
   el = elemento_cria("supercomputador");
   el->artigo = "o";
   el->curta = "É um computador grande e barulhento.";
