@@ -4,17 +4,15 @@ int main () {
 
   int i;
   char ans;
+  const char PROMPT = '>';
 
   /* Tabela principal que contém todos os elementos do jogo */
   Tabela tab_jogo = tabela_cria(TAM_TABELA);
-  Tabela_f tab_f_jogo = tabela_f_cria(TAM_TABELA);
-  Elemento jogador, lugar_atual = inicializa_elementos(tab_jogo);
-  inicializa_funcoes(tabela_f_jogo);
-  jogador = tabela_busca(tab_jogo, "Você");
+  Elemento el, lugar_atual = inicializa_elementos(tab_jogo);
 
   /* Booleano armazena se acabamos de chegar na sala (indiferente se ela é
      conhecida ou não) */
-  /* short int acabei_de_chegar = 1; */
+  short int acabei_de_chegar = 1;
 
   printf("========================================\n");
   printf("    _____          _____         \n");
@@ -44,61 +42,155 @@ int main () {
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
   você desmaiou de exaustão em cima dos seus livros e do seu notebook. Mas agora você está acordado. O que você faz? \n");
 
-  return yyparse(tab_jogo, tab_f_jogo, jogador, lugar_atual);
+  /* ----- Inicialização dos comandos ------ */
 
-  /* /\* Laço principal*\/ */
-  /* for (i = 0; i < QTDE_COMANDOS; i++) { */
+  /* Vamos entrar em todas as salas, examinar todos os objetos dela
+     tentar pegar todos eles e fazer algumas ações específicas deles */
 
-  /*   printf("%c", PROMPT); */
-  /*   printf("\n"); */
+  p_comando v_verbos[] = {examinar, examinar, examinar, examinar, examinar,
+                          pegar, pegar, pegar, pegar, pegar,
+                          ir_para, // pátio
+                          examinar, examinar, examinar, examinar, examinar,
+                          pegar, pegar, pegar, pegar, pegar,
+                          ir_para, // sala dos pesquisadores
+                          examinar, examinar, examinar,
+                          examinar, examinar, examinar,
+                          pegar, pegar, pegar, pegar, pegar, pegar,
+                          ir_para, ir_para, // sala de máquinas
+                          examinar, examinar,
+                          pegar, pegar,
+                          ir_para, ir_para, // sala do servidor
+                          examinar, pegar,
+                          abrir, fechar, abrir, abrir, fechar, fechar,
+                          comer, beber};
 
-  /*   if (acabei_de_chegar) { */
-  /*     /\* Apresenta o local *\/ */
-  /*     printf("\n%s\n", lugar_atual->nome);  // título (nome da sala) */
-  /*     if (lugar_atual->conhecido) */
-  /*       printf("%s", lugar_atual->curta); */
-  /*     else */
-  /*       printf("%s", lugar_atual->longa); */
-  /*     acabei_de_chegar = 0; */
 
-  /*     /\* Relaciona o conteúdo visível *\/ */
-  /*     if (!lista_vazia(lugar_atual->conteudo)) { */
-  /*       printf("\nAqui você vê:\n"); */
-  /*       elemento_imprime_conteudo(lugar_atual); */
-  /*     } */
-  /*   } */
+  /* O vetor abaixo só serve para imprimir na tela que comando
+     está sendo executado a cada iteração, e deve ser
+     igual a v_verbos, mas com strings*/
+  char *nomes_comandos[] = {"examinar", "examinar", "examinar", "examinar", "examinar",
+                            "pegar", "pegar", "pegar", "pegar", "pegar",
+                            "ir_para", // pátio
+                            "examinar", "examinar", "examinar", "examinar", "examinar",
+                            "pegar", "pegar", "pegar", "pegar", "pegar",
+                            "ir_para", // sala dos pesquisadores
+                            "examinar", "examinar", "examinar",
+                            "examinar", "examinar", "examinar",
+                            "pegar", "pegar", "pegar", "pegar", "pegar", "pegar",
+                            "ir_para", "ir_para", // sala de máquinas
+                            "examinar", "examinar",
+                            "pegar", "pegar",
+                            "ir_para", "ir_para", // sala do servidor
+                            "examinar", "pegar",
+                            "abrir", "fechar", "abrir", "abrir", "fechar", "fechar",
+                            "comer", "beber"};
+
+  char *s1[] = {"janela", "notebook do Pedro", "notebook da Alice",
+                "seu notebook", "estante",
+                "janela""", "notebook do Pedro", "notebook da Alice",
+                "seu notebook", "estante",
+                "Pátio",
+                "café", "mesas", "plantas", "parede", "recepção",
+                "café", "mesas", "plantas", "parede", "recepção",
+                "Sala dos pesquisadores",
+                "mesas", "papéis", "livros", "monitores", "xícara", "retrato",
+                "mesas", "papéis", "livros", "monitores", "xícara", "retrato",
+                "Pátio",
+                "Sala de máquinas",
+                "cabos", "nobreak",
+                "cabos", "nobreak",
+                "Pátio",
+                "Sala do servidor",
+                "supercomputador", "supercomputador",
+                "notebook do Pedro", "notebook do Pedro",
+                "notebook da Alice", "notebook da Alice",
+                "notebook da Alice", "notebook da Alice",
+                "xícara", "xícara"};
+
+  char *s2[] = {"NULL", "NULL", "NULL", "NULL", "NULL",
+                "Você", "Você", "Você", "Você", "Você",
+                "Você", // Pátio
+                "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Você", "Você", "Você", "Você", "Você",
+                "Você", // Sala dos pesquisadores
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Você", "Você", "Você", "Você", "Você", "Você",
+                "Você", "Você", // Sala de máquinas
+                "NULL", "NULL",
+                "Você", "Você",
+                "Você", "Você", // Sala do servidor
+                "NULL", "Você",
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "NULL", "NULL"};
+
+  char *s3[] = {"NULL", "NULL", "NULL", "NULL", "NULL",
+                "Sala dos alunos de IC", "Sala dos alunos de IC",
+                "Sala dos alunos de IC", "Sala dos alunos de IC",
+                "Sala dos alunos de IC",
+                "Sala dos alunos de IC", // Pátio
+                "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Pátio", "Pátio", "Pátio", "Pátio", "Pátio",
+                "Pátio", // Sala dos pesquisadores
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "Sala dos pesquisadores", "Sala dos pesquisadores",
+                "Sala dos pesquisadores", "Sala dos pesquisadores",
+                "Sala dos pesquisadores", "Sala dos pesquisadores",
+                "Sala dos pesquisadores", "Pátio", // Sala de máquinas
+                "NULL", "NULL",
+                "Sala de máquinas", "Sala de máquinas",
+                "Sala de máquinas", "Pátio", // Sala do servidor
+                "NULL", "Sala de máquinas",
+                "NULL", "NULL", "NULL", "NULL", "NULL", "NULL",
+                "NULL", "NULL"};
+
+  Elemento v_arg1[QTDE_COMANDOS];
+  Elemento v_arg2[QTDE_COMANDOS];
+  Elemento v_arg3[QTDE_COMANDOS];
+
+  for (i = 0; i < QTDE_COMANDOS; i++) {
+    v_arg1[i] = tabela_busca(tab_jogo, s1[i]);
+    v_arg2[i] = tabela_busca(tab_jogo, s2[i]);
+    v_arg3[i] = tabela_busca(tab_jogo, s3[i]);
+  }
+
+  /* Laço principal*/
+  for (i = 0; i < QTDE_COMANDOS; i++) {
+
+    printf("%c", PROMPT);
+    printf("\n");
+
+    if (acabei_de_chegar) {
+      /* Apresenta o local */
+      printf("\n%s\n", lugar_atual->nome);  // título (nome da sala)
+      if (lugar_atual->conhecido)
+        printf("%s", lugar_atual->curta);
+      else
+        printf("%s", lugar_atual->longa);
+      acabei_de_chegar = 0;
+
+      /* Relaciona o conteúdo visível */
+      if (!lista_vazia(lugar_atual->conteudo)) {
+        printf("\nAqui você vê:\n");
+        elemento_imprime_conteudo(lugar_atual);
+      }
+    }
     
-  /*   printf("\n--> Executando o comando %s(%s, %s, %s) <--\n", */
-  /*          nomes_comandos[i], s1[i], s2[i], s3[i]); */
+    printf("\n--> Executando o comando %s(%s, %s, %s) <--\n",
+           nomes_comandos[i], s1[i], s2[i], s3[i]);
 
-  /*   el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]); */
+    el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]);
     
-  /*   /\* Caso especial: se o comando é ir_para *\/     */
-  /*   if (v_verbos[i] == ir_para && el != NULL) { */
-  /*     acabei_de_chegar = 1; */
-  /*     lugar_atual = el; */
-  /*   } */
+    /* Caso especial: se o comando é ir_para */    
+    if (v_verbos[i] == ir_para && el != NULL) {
+      acabei_de_chegar = 1;
+      lugar_atual = el;
+    }
    
 
-  /*   /\* Faz todas as animações *\/ */
-  /*   animacoes_automaticas(tab_jogo, lugar_atual); */
-  /* } */
-  /* return 0; */
-}
-
-void inicializa_funcoes (Tabela_f tab) {
-
-  tabela_f_insere(tab, "ir_para", ir_para);
-  tabela_f_insere(tab, "inventario", inventario);
-  tabela_f_insere(tab, "examinar", examinar);
-  tabela_f_insere(tab, "falar", falar);
-  tabela_f_insere(tab, "perguntar", perguntar);
-  tabela_f_insere(tab, "pegar", pegar);
-  tabela_f_insere(tab, "deixar", deixar);
-  tabela_f_insere(tab, "abrir", abrir);
-  tabela_f_insere(tab, "fechar", fechar);
-  tabela_f_insere(tab, "comer", comer);
-  tabela_f_insere(tab, "beber", beber);
+    /* Faz todas as animações */
+    animacoes_automaticas(tab_jogo, lugar_atual);
+  }
+  return 0;
 }
 
 Elemento inicializa_elementos (Tabela tab) {

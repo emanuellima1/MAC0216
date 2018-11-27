@@ -22,3 +22,22 @@ void * tabela_busca (Tabela T, char *n);
 
 int tabela_retira (Tabela T, char *n);
 // Devolve 1 se o elemento foi retirado com sucesso, 0 caso contrário.
+
+
+/* TABELA DE PONTEIRO DE FUNÇÃO */
+/* As funções abaixo impelementam uma biblioteca de tabela equivalente, mas para
+   ponteiros de função
+*/
+
+typedef struct {
+  Lista_f *v;
+  int tam;
+} tabela_f;
+
+typedef tabela_f *Tabela_f;
+
+Tabela_f tabela_cria (int tam);
+void tabela_f_destroi (Tabela_f T);
+int tabela_f_insere (Tabela_f T, char *n, void *val);
+void * tabela_f_busca (Tabela_f T, char *n);
+int tabela_f_retira (Tabela_f T, char *n);
