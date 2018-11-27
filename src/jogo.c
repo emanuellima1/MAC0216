@@ -2,14 +2,13 @@
 
 int main () {
 
-  int i;
   char ans;
 
   /* Tabela principal que contém todos os elementos do jogo */
   Tabela tab_jogo = tabela_cria(TAM_TABELA);
   Tabela_f tab_f_jogo = tabela_f_cria(TAM_TABELA);
   Elemento jogador, lugar_atual = inicializa_elementos(tab_jogo);
-  inicializa_funcoes(tabela_f_jogo);
+  inicializa_funcoes(tab_f_jogo);
   jogador = tabela_busca(tab_jogo, "Você");
 
   /* Booleano armazena se acabamos de chegar na sala (indiferente se ela é
@@ -44,7 +43,7 @@ int main () {
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
   você desmaiou de exaustão em cima dos seus livros e do seu notebook. Mas agora você está acordado. O que você faz? \n");
 
-  return yyparse(tab_jogo, tab_f_jogo, jogador, lugar_atual);
+  return yyparse(tab_jogo, tab_f_jogo, jogador, &lugar_atual);
 
   /* /\* Laço principal*\/ */
   /* for (i = 0; i < QTDE_COMANDOS; i++) { */

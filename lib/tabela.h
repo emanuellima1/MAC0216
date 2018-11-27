@@ -36,7 +36,7 @@ typedef struct {
 
 typedef tabela_f *Tabela_f;
 
-Tabela_f tabela_cria (int tam);
+Tabela_f tabela_f_cria (int tam);
 void tabela_f_destroi (Tabela_f T);
 int tabela_f_insere (Tabela_f T, char *n, void *val);
 void * tabela_f_busca (Tabela_f T, char *n);

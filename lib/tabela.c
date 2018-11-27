@@ -68,7 +68,7 @@ int tabela_retira (Tabela T, char *n) {
 Tabela_f tabela_f_cria (int tam) {
   int i;
   Tabela_f T = malloc (sizeof(tabela_f));
-  T->v = malloc (tam * sizeof(lista_f));
+  T->v = malloc (tam * sizeof(Lista_f));
   T->tam = tam;
   for (i = 0; i < tam; i++)
     T->v[i] = lista_f_cria ();
@@ -85,7 +85,7 @@ void tabela_f_destroi (Tabela_f T) {
 
 int tabela_f_insere(Tabela_f T, char *n, void * val) {
   int i;
-  i = tabela_f_hash (n, T->tam);
+  i = tabela_hash (n, T->tam);
 
   // Checa se o Elemento é repetido
   if (lista_f_busca(T->v[i], n) == NULL) {
@@ -101,13 +101,13 @@ void * tabela_f_busca (Tabela_f T, char *n) {
   if (n == NULL || n[0] == '\0')
     return NULL;
 
-  i = tabela_f_hash(n, T->tam);
+  i = tabela_hash(n, T->tam);
   return (lista_f_busca(T->v[i], n));
 }
 
 int tabela_f_retira (Tabela_f T, char *n) {
   int i;
-  i = tabela_f_hash(n, T->tam);
+  i = tabela_hash(n, T->tam);
 
   if (lista_f_busca(T->v[i], n) == NULL) {
     return FALHA;

@@ -539,41 +539,43 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "jogo.l"
 #line 2 "jogo.l"
+
+#include "../lib/comandos.h"
 #include "jogo.tab.h"
-#include "elemento.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
 /* Redefinição da entrada do Flex para usar o readline */
-#define YY_INPUT(buf,result,max_size) result = mygetinput(buf, max_size);
+#define YY_INPUT(buf, result, max_size) result = mygetinput(buf, max_size);
 
 /* Função que substitui a entrada */
 static int mygetinput(char *buf, int size) {
-char *line;
-/* final de arquivo */
-if (feof(yyin))  return YY_NULL;
+  char *line;
+  /* final de arquivo */
+  if (feof(yyin))
+    return YY_NULL;
 
-/* Lê uma linha, com o prompt "> " */
-line = readline("--> ");
-if(!line)        return YY_NULL;
+  /* Lê uma linha, com o prompt "> " */
+  line = readline("--> ");
+  if(!line)
+    return YY_NULL;
 
-/* segurança */
-if(strlen(line) > size-2){
-fprintf(stderr,"input line too long\n");
-return YY_NULL;
-}
+  /* segurança */
+  if(strlen(line) > size-2) {
+    fprintf(stderr,"input line too long\n");
+    return YY_NULL;
+  }
 
-/* copia para o buffer de enrtada */
-sprintf(buf,"%s\n",line);
-/* adiciona ao histórico */
-add_history(line);
+  /* copia para o buffer de enrtada */
+  sprintf(buf,"%s\n",line);
+  /* adiciona ao histórico */
+  add_history(line);
 
-/* libera memória */
-free(line);
-return strlen(buf);
+  /* libera memória */
+  free(line);
+  return strlen(buf);
 }   
-#line 577 "lex.yy.c"
+#line 579 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -794,10 +796,10 @@ YY_DECL
 		}
 
 	{
-#line 40 "jogo.l"
+#line 42 "jogo.l"
 
 
-#line 801 "lex.yy.c"
+#line 803 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -857,60 +859,60 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 42 "jogo.l"
+#line 44 "jogo.l"
 {return SAIR;}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 43 "jogo.l"
+#line 45 "jogo.l"
 {return SAIR;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 44 "jogo.l"
+#line 46 "jogo.l"
 {return INVENTARIO;}
 	YY_BREAK
 /* Ignora artigos, espaços e preposições seguidos de palavras */
 case 3:
 YY_RULE_SETUP
-#line 48 "jogo.l"
+#line 50 "jogo.l"
 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 49 "jogo.l"
+#line 51 "jogo.l"
 
 	YY_BREAK
 /* Isso vai ter que alterar! porque ele quer um adjetivo */
 /* (ver segunda bolinha do ponto 5.2) */
 case 5:
 YY_RULE_SETUP
-#line 53 "jogo.l"
+#line 55 "jogo.l"
 
 	YY_BREAK
 /* Se for a primeira palavra, é verbo (pode ter espaço antes dela)*/
 case 6:
 YY_RULE_SETUP
-#line 57 "jogo.l"
+#line 59 "jogo.l"
 {yylval.s = yytext; return VERBO;}
 	YY_BREAK
 /* As demais palavras são objetos*/
 case 7:
 YY_RULE_SETUP
-#line 60 "jogo.l"
-{yylval.s = yytext; return OBJETO;} 
+#line 62 "jogo.l"
+{yylval.s = yytext; return ELEMENTO;} 
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 61 "jogo.l"
+#line 63 "jogo.l"
 {return EOL;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 64 "jogo.l"
+#line 66 "jogo.l"
 ECHO;
 	YY_BREAK
-#line 914 "lex.yy.c"
+#line 916 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1912,7 +1914,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 64 "jogo.l"
+#line 66 "jogo.l"
 
 
 
