@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 #include "../lib/comandos.h"
 int yylex();
 void yyerror(Tabela, Tabela_f, Elemento, Elemento *, char *s);
@@ -17,31 +18,37 @@ void yyerror(Tabela, Tabela_f, Elemento, Elemento *, char *s);
   char *s;
 }
 
-%token <s> VERBO ELEMENTO
+%token <s> OBJ
 %token SAIR INVENTARIO EOL
+
 
 %%
 
+input   : EOL                     {printf("tô perando\n");}
+        | cmd               
+        | SAIR                    {printf("saindo\n"); exit(0);}
+        | INVENTARIO              {printf("inventario\n"); inventario(NULL, NULL, NULL);} eol
+        | input EOL               {printf("to perando\n");}
+        | input cmd
+        | input SAIR              {printf("saindo\n"); exit(0);}
+        | input INVENTARIO        {printf("inventario\n"); inventario(NULL, NULL, NULL);} eol
+        ; 
 
-input  : EOL                {printf("Tô perando...\n");}
-       | INVENTARIO eol     {inventario(jogador, NULL, NULL);}
-       | SAIR eol          {printf("Saindo...\n"); return 0;} 
-       | cmd eol
 
-
-
-cmd    : VERBO eol {
-
+cmd     : OBJ {
+  
+  printf("procurando %s na tab_f_jogo\n", $1);
   p_comando f = tabela_f_busca(tab_f_jogo, $1);
   if (f != NULL)
     f(NULL, NULL, NULL);
   else
-    printf("Acho que não sei %s", $1);
-}
+    printf("Acho que não sei %s\n", $1);
+} eol
 
 
-       | VERBO ELEMENTO eol {
+        | OBJ OBJ {
 
+  printf("chamando um verbo e um elemento\n");
   p_comando f = tabela_f_busca(tab_f_jogo, $1);
   Elemento nova_sala, e = tabela_busca(tab_jogo, $1);
 
@@ -55,13 +62,13 @@ cmd    : VERBO eol {
 
   if (nova_sala != NULL)
     *pos_atual = nova_sala;
-}
+} eol
 
 
 
+        | OBJ OBJ OBJ {
 
-      | VERBO ELEMENTO ELEMENTO eol {
-
+  printf("chamando um verbo e um elemento\n");
   p_comando f = tabela_f_busca(tab_f_jogo, $1);
   Elemento e1 = tabela_busca(tab_jogo, $2);
   Elemento e2 = tabela_busca(tab_jogo, $3);
@@ -73,13 +80,17 @@ cmd    : VERBO eol {
      printf("Não sei %s essas coisas\n", $1);
   else
     f(e1, e2, NULL);
-}
+  
+ } eol
+        | error 
 
-eol    : EOL {return (1);}
+;
+
+eol: EOL {return 1;}
 
 %%
 
 void yyerror (Tabela t, Tabela_f t_f, Elemento e1, Elemento * e2, char *s)
 {
-  fprintf(stderr, "%s\n", s);
+  fprintf(stderr, "Não entendi...\n");
 }

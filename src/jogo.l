@@ -2,11 +2,14 @@
 
 #include "../lib/comandos.h"
 #include "jogo.tab.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
 /* Redefinição da entrada do Flex para usar o readline */
-#define YY_INPUT(buf, result, max_size) result = mygetinput(buf, max_size);
+#define YY_INPUT(buf,result,max_size) result = mygetinput(buf, max_size);
 
 /* Função que substitui a entrada */
 static int mygetinput(char *buf, int size) {
@@ -35,6 +38,7 @@ static int mygetinput(char *buf, int size) {
   free(line);
   return strlen(buf);
 }   
+
 %}
 
 %option caseless
@@ -55,12 +59,13 @@ i(nvent(a|á|Á)rio)?               {return INVENTARIO;}
 (d[oae]|em|n[ao])[ \t]+[[:alnum:]]+
 
 
-    /* Se for a primeira palavra, é verbo (pode ter espaço antes dela)*/
-^[ \t]?[[:alnum:]]+               {yylval.s = yytext; return VERBO;}
+[a-zA-Z_]+ {
+  yylval.s = malloc(sizeof(yytext));
+  strcpy(yylval.s, yytext);
+  return OBJ;
+}
 
-    /* As demais palavras são objetos*/
-[[:alnum:]]                       {yylval.s = yytext; return ELEMENTO;} 
-[\n;]                             {return EOL;}
+[\n;]                              {return EOL;}
 
 
 %%

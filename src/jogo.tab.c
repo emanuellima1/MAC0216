@@ -65,11 +65,12 @@
 #line 1 "jogo.y" /* yacc.c:339  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "../lib/comandos.h"
 int yylex();
 void yyerror(Tabela, Tabela_f, Elemento, Elemento *, char *s);
 
-#line 73 "jogo.tab.c" /* yacc.c:339  */
+#line 74 "jogo.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -104,11 +105,10 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    VERBO = 258,
-    ELEMENTO = 259,
-    SAIR = 260,
-    INVENTARIO = 261,
-    EOL = 262
+    OBJ = 258,
+    SAIR = 259,
+    INVENTARIO = 260,
+    EOL = 261
   };
 #endif
 
@@ -117,7 +117,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 16 "jogo.y" /* yacc.c:355  */
+#line 17 "jogo.y" /* yacc.c:355  */
 
   char *s;
 
@@ -378,23 +378,23 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  12
+#define YYFINAL  11
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   16
+#define YYLAST   19
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  8
+#define YYNTOKENS  7
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  4
+#define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  9
+#define YYNRULES  19
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  17
+#define YYNSTATES  26
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   262
+#define YYMAXUTOK   261
 
 #define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -429,14 +429,15 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7
+       5,     6
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    26,    26,    27,    28,    29,    33,    43,    63,    78
+       0,    27,    27,    28,    29,    30,    30,    31,    32,    33,
+      34,    34,    38,    38,    49,    49,    69,    69,    85,    89
 };
 #endif
 
@@ -445,8 +446,8 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "VERBO", "ELEMENTO", "SAIR",
-  "INVENTARIO", "EOL", "$accept", "input", "cmd", "eol", YY_NULLPTR
+  "$end", "error", "$undefined", "OBJ", "SAIR", "INVENTARIO", "EOL",
+  "$accept", "input", "$@1", "$@2", "cmd", "$@3", "$@4", "$@5", "eol", YY_NULLPTR
 };
 #endif
 
@@ -455,14 +456,14 @@ static const char *const yytname[] =
    (internal) symbol number NUM (which must be that of a token).  */
 static const yytype_uint16 yytoknum[] =
 {
-       0,   256,   257,   258,   259,   260,   261,   262
+       0,   256,   257,   258,   259,   260,   261
 };
 # endif
 
-#define YYPACT_NINF -6
+#define YYPACT_NINF -11
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-6)))
+  (!!((Yystate) == (-11)))
 
 #define YYTABLE_NINF -1
 
@@ -473,8 +474,9 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       3,     7,    -5,    -5,    -6,    15,    -5,     9,    -6,    -6,
-      -6,    -6,    -6,    -6,    -5,    -6,    -6
+       0,   -11,    -1,   -11,   -11,   -11,    13,   -11,     5,     3,
+       3,   -11,   -11,   -11,   -11,   -11,   -11,     3,   -11,   -11,
+     -11,     3,     3,   -11,   -11,   -11
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -482,20 +484,21 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,     0,     2,     0,     0,     0,     9,     6,
-       4,     3,     1,     5,     0,     7,     8
+       0,    18,    12,     4,     5,     2,     0,     3,    14,     0,
+       0,     1,     9,    10,     7,     8,    16,     0,    19,    13,
+       6,     0,     0,    15,    11,    17
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -6,    -6,    -6,    -2
+     -11,   -11,   -11,   -11,     4,   -11,   -11,   -11,   -10
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     5,     6,     9
+      -1,     6,    10,    21,     7,     9,    17,    22,    19
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -503,34 +506,37 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      10,    11,     8,     0,    13,    15,     1,     0,     2,     3,
-       4,     7,    16,    14,     8,    12,     8
+      20,     1,     8,     2,     3,     4,     5,    23,    16,    18,
+      15,    24,    25,    11,     1,     0,     2,    12,    13,    14
 };
 
 static const yytype_int8 yycheck[] =
 {
-       2,     3,     7,    -1,     6,     7,     3,    -1,     5,     6,
-       7,     4,    14,     4,     7,     0,     7
+      10,     1,     3,     3,     4,     5,     6,    17,     3,     6,
+       6,    21,    22,     0,     1,    -1,     3,     4,     5,     6
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,     5,     6,     7,     9,    10,     4,     7,    11,
-      11,    11,     0,    11,     4,    11,    11
+       0,     1,     3,     4,     5,     6,     8,    11,     3,    12,
+       9,     0,     4,     5,     6,    11,     3,    13,     6,    15,
+      15,    10,    14,    15,    15,    15
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,     8,     9,     9,     9,     9,    10,    10,    10,    11
+       0,     7,     8,     8,     8,     9,     8,     8,     8,     8,
+      10,     8,    12,    11,    13,    11,    14,    11,    11,    15
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     2,     2,     2,     2,     3,     4,     1
+       0,     2,     1,     1,     1,     0,     3,     2,     2,     2,
+       0,     4,     0,     3,     0,     4,     0,     5,     1,     1
 };
 
 
@@ -1215,45 +1221,65 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 26 "jogo.y" /* yacc.c:1646  */
-    {printf("Tô perando...\n");}
-#line 1221 "jogo.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 3:
 #line 27 "jogo.y" /* yacc.c:1646  */
-    {inventario(jogador, NULL, NULL);}
+    {printf("tô perando\n");}
 #line 1227 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 28 "jogo.y" /* yacc.c:1646  */
-    {printf("Saindo...\n"); return 0;}
+#line 29 "jogo.y" /* yacc.c:1646  */
+    {printf("saindo\n"); exit(0);}
 #line 1233 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
-  case 6:
-#line 33 "jogo.y" /* yacc.c:1646  */
-    {
-
-  p_comando f = tabela_f_busca(tab_f_jogo, (yyvsp[-1].s));
-  if (f != NULL)
-    f(NULL, NULL, NULL);
-  else
-    printf("Acho que não sei %s", (yyvsp[-1].s));
-}
-#line 1246 "jogo.tab.c" /* yacc.c:1646  */
+  case 5:
+#line 30 "jogo.y" /* yacc.c:1646  */
+    {printf("inventario\n"); inventario(NULL, NULL, NULL);}
+#line 1239 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 43 "jogo.y" /* yacc.c:1646  */
+#line 31 "jogo.y" /* yacc.c:1646  */
+    {printf("to perando\n");}
+#line 1245 "jogo.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 9:
+#line 33 "jogo.y" /* yacc.c:1646  */
+    {printf("saindo\n"); exit(0);}
+#line 1251 "jogo.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 10:
+#line 34 "jogo.y" /* yacc.c:1646  */
+    {printf("inventario\n"); inventario(NULL, NULL, NULL);}
+#line 1257 "jogo.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 12:
+#line 38 "jogo.y" /* yacc.c:1646  */
+    {
+  
+  printf("procurando %s na tab_f_jogo\n", (yyvsp[0].s));
+  p_comando f = tabela_f_busca(tab_f_jogo, (yyvsp[0].s));
+  if (f != NULL)
+    f(NULL, NULL, NULL);
+  else
+    printf("Acho que não sei %s\n", (yyvsp[0].s));
+}
+#line 1271 "jogo.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 14:
+#line 49 "jogo.y" /* yacc.c:1646  */
     {
 
-  p_comando f = tabela_f_busca(tab_f_jogo, (yyvsp[-2].s));
-  Elemento nova_sala, e = tabela_busca(tab_jogo, (yyvsp[-2].s));
+  printf("chamando um verbo e um elemento\n");
+  p_comando f = tabela_f_busca(tab_f_jogo, (yyvsp[-1].s));
+  Elemento nova_sala, e = tabela_busca(tab_jogo, (yyvsp[-1].s));
 
   if (f == NULL)
-    printf("Acho que não sei %s\n", (yyvsp[-2].s));
+    printf("Acho que não sei %s\n", (yyvsp[-1].s));
   
   if (f == pegar || f == deixar || f == ir_para)
     nova_sala = f(e, jogador, *pos_atual);
@@ -1263,36 +1289,38 @@ yyreduce:
   if (nova_sala != NULL)
     *pos_atual = nova_sala;
 }
-#line 1267 "jogo.tab.c" /* yacc.c:1646  */
+#line 1293 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
-  case 8:
-#line 63 "jogo.y" /* yacc.c:1646  */
+  case 16:
+#line 69 "jogo.y" /* yacc.c:1646  */
     {
 
-  p_comando f = tabela_f_busca(tab_f_jogo, (yyvsp[-3].s));
-  Elemento e1 = tabela_busca(tab_jogo, (yyvsp[-2].s));
-  Elemento e2 = tabela_busca(tab_jogo, (yyvsp[-1].s));
+  printf("chamando um verbo e um elemento\n");
+  p_comando f = tabela_f_busca(tab_f_jogo, (yyvsp[-2].s));
+  Elemento e1 = tabela_busca(tab_jogo, (yyvsp[-1].s));
+  Elemento e2 = tabela_busca(tab_jogo, (yyvsp[0].s));
 
   if (f == NULL)
-    printf("Acho que não sei %s\n", (yyvsp[-3].s));
+    printf("Acho que não sei %s\n", (yyvsp[-2].s));
   
   else if (f == pegar || f == deixar || f == ir_para)
-     printf("Não sei %s essas coisas\n", (yyvsp[-3].s));
+     printf("Não sei %s essas coisas\n", (yyvsp[-2].s));
   else
     f(e1, e2, NULL);
-}
-#line 1286 "jogo.tab.c" /* yacc.c:1646  */
+  
+ }
+#line 1314 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
-  case 9:
-#line 78 "jogo.y" /* yacc.c:1646  */
-    {return (1);}
-#line 1292 "jogo.tab.c" /* yacc.c:1646  */
+  case 19:
+#line 89 "jogo.y" /* yacc.c:1646  */
+    {return 1;}
+#line 1320 "jogo.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1296 "jogo.tab.c" /* yacc.c:1646  */
+#line 1324 "jogo.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1520,10 +1548,10 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 80 "jogo.y" /* yacc.c:1906  */
+#line 91 "jogo.y" /* yacc.c:1906  */
 
 
 void yyerror (Tabela t, Tabela_f t_f, Elemento e1, Elemento * e2, char *s)
 {
-  fprintf(stderr, "%s\n", s);
+  fprintf(stderr, "Não entendi...\n");
 }

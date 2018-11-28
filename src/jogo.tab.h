@@ -45,11 +45,10 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    VERBO = 258,
-    ELEMENTO = 259,
-    SAIR = 260,
-    INVENTARIO = 261,
-    EOL = 262
+    OBJ = 258,
+    SAIR = 259,
+    INVENTARIO = 260,
+    EOL = 261
   };
 #endif
 
@@ -58,11 +57,11 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 16 "jogo.y" /* yacc.c:1909  */
+#line 17 "jogo.y" /* yacc.c:1909  */
 
   char *s;
 
-#line 66 "jogo.tab.h" /* yacc.c:1909  */
+#line 65 "jogo.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

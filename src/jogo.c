@@ -30,7 +30,7 @@ int main () {
   switch (ans) {
     case 'S':
     case 's':
-      printf("\nInstruções: Por enquanto, nada. Eu só me auto-testo.\n\n");
+      printf("\nInstruções: Por enquanto, nada.\n\n");
       break;
   
     default:
@@ -43,7 +43,9 @@ int main () {
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
   você desmaiou de exaustão em cima dos seus livros e do seu notebook. Mas agora você está acordado. O que você faz? \n");
 
-  return yyparse(tab_jogo, tab_f_jogo, jogador, &lugar_atual);
+  while (yyparse(tab_jogo, tab_f_jogo, jogador, &lugar_atual));
+  return (0);
+
 
   /* /\* Laço principal*\/ */
   /* for (i = 0; i < QTDE_COMANDOS; i++) { */
@@ -403,7 +405,7 @@ Elemento inicializa_elementos (Tabela tab) {
   /* Elementos na Sala do servidor */
   el2 = tabela_busca(tab, "Sala do servidor");
   l = el2->conteudo;
-
+  
   el = elemento_cria("supercomputador");
   el->artigo = "o";
   el->curta = "É um computador grande e barulhento.";
