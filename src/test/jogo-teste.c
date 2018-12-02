@@ -1,4 +1,5 @@
-#include "jogo.h"
+#include "../jogo.h"
+#define QTDE_COMANDOS 52
 
 int main () {
 
