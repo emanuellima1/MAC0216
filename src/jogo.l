@@ -42,6 +42,8 @@ static int mygetinput(char *buf, int size) {
 %}
 
 %option caseless
+%option nounput
+%option noinput
 
 %%
 
@@ -52,11 +54,12 @@ i(nvent(a|á|Á)rio)?               {return INVENTARIO;}
     /* Ignora artigos, espaços e preposições seguidos de palavras */
 
 [ \t]+
-[ao]|uma?                         
+[ao]|uma?|seu|sua
+
 
     /* Isso vai ter que alterar! porque ele quer um adjetivo */
     /* (ver segunda bolinha do ponto 5.2) */
-(d[oae]|em|n[ao])[ \t]+[[:alnum:]]+
+(d[oae]|em|n[ao]|para)[ \t]+[[:alnum:]]+
 
 
 [a-zA-Z_]+ {
