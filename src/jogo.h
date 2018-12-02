@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define TAM_TABELA 50
-#define QTDE_COMANDOS 52 
+#define NELEMS(x)  (sizeof(x) / sizeof((x)[0]))
 
 /* Inicializa todos os elementos do jogo e devolve o lugar de inicio */
 Elemento inicializa_elementos (Tabela tab);
@@ -24,4 +24,4 @@ void liga_salas(Tabela tab, char * s1, char * s2);
 
 /* Definições para flex */
 
-int yyparse(Tabela, Tabela_f, Elemento, Elemento *);
+int yyparse(Tabela, Tabela_f, Elemento, Elemento *, int *);
