@@ -22,12 +22,12 @@ teste.out: $(OBJ_TESTE1)
 src/lex.yy.c: src/jogo.l
 	flex -o src/lex.yy.c src/jogo.l 
 
-src/lex.yy.o: src/lex.yy.c
+src/lex.yy.o: src/lex.yy.c src/jogo.tab.h
 
 src/jogo.tab.c: src/jogo.y
 	bison -d src/jogo.y -o src/jogo.tab.c
 
-src/jogo.tab.o: src/jogo.c
+src/jogo.tab.o: src/jogo.tab.c
 
 lista.o: lib/lista.h
 

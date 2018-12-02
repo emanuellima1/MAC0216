@@ -7,6 +7,13 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
      Devolve a nova sala
   */
 
+  if (e1 == NULL || e2 == NULL || e3 == NULL) {
+    printf("ir_para recebeu argumentos nulos\n");
+    return(NULL);
+  }
+  printf("indo de %s para %s\n", e3->nome, e1->nome);
+
+
   if (lista_busca_valor(e3->detalhe.saidas, e1) == NULL) {
     printf("Não é possível ir para %s %s a partir daqui.\n",
            e1->artigo, e1->nome);
@@ -26,8 +33,12 @@ Elemento inventario(Elemento e1, Elemento e2, Elemento e3) {
     return (NULL);
   }
 
-  printf("Inventário:\n");
-  elemento_imprime_conteudo(e1);
+  if (lista_vazia(e1->conteudo))
+    printf("Voce não está carregando nada neste momento.\n");
+  else {
+    printf("Inventário:\n");
+    elemento_imprime_conteudo(e1);
+  }
   return (NULL);
 }
 
@@ -99,13 +110,27 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
     return(q(e1, e2, e3));
   }
   
+  if (lista_busca(e2->conteudo, e1->nome) != NULL) {
+    if (e1->artigo[0] == '\0')
+      printf("Você já está carregando %s\n", e1->nome);
+    else
+      printf("Você já está carregando %s %s\n", e1->artigo, e1->nome);
+    return (NULL);
+  }
+
   if (e1->carregavel) {
     lista_retira(e3->conteudo, e1->nome);
     lista_insere(e2->conteudo, e1, e1->nome);
-    printf("Você pegou %s %s\n", e1->artigo, e1->nome);
+    if (e1->artigo[0] == '\0')
+      printf("Você pegou %s\n", e1->nome);
+    else
+      printf("Você pegou %s %s\n", e1->artigo, e1->nome);
   }
   else
-    printf("Você não consegue pegar %s %s.\n", e1->artigo, e1->nome);
+    if (e1->artigo[0] == '\0')
+      printf("Você não consegue pegar %s\n", e1->nome);
+    else
+      printf("Você não consegue pegar%s %s\n", e1->artigo, e1->nome);
   return(NULL);
 }
 
@@ -116,8 +141,10 @@ Elemento abrir(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
   p = lista_f_busca(e1->acoes, "abrir");
   if (p == NULL) {
-    printf("Você não consegue abrir %s %s.\n",
-           e1->artigo, e1->nome);
+    if (e1->artigo[0] == '\0')
+      printf("Você não consegue abrir %s\n", e1->nome);
+    else
+      printf("Você não consegue abrir %s %s\n", e1->artigo, e1->nome);
     return(NULL);
   }
   q = (p_comando)p;
@@ -135,7 +162,6 @@ Elemento fechar(Elemento e1, Elemento e2, Elemento e3) {
   }
   q = (p_comando)p;
   return(q(e1, e2, e3));
-
 }
 
 Elemento deixar(Elemento e1, Elemento e2, Elemento e3) {

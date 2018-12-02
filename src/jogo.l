@@ -54,13 +54,36 @@ i(nvent(a|á|Á)rio)?               {return INVENTARIO;}
     /* Ignora artigos, espaços e preposições seguidos de palavras */
 
 [ \t]+
-[ao]|uma?|seu|sua
+[ao]|uma?|seu|sua|para|pr[oa]
+(d[oae]s?|em|n[ao])[ \t]+[[:alnum:]]+    
 
 
-    /* Isso vai ter que alterar! porque ele quer um adjetivo */
-    /* (ver segunda bolinha do ponto 5.2) */
-(d[oae]|em|n[ao]|para)[ \t]+[[:alnum:]]+
+  /* Casos especiais */
 
+sala[ \t]+(d[eoa]s?)?[ \t]+(m(a|á)quinas?) {
+  yylval.s = "maquinas";
+  return OBJ;
+} 
+sala[ \t]+(d[eoa]s?)?[ \t]+(servidor(es)?) {
+  yylval.s = "servidores";
+  return OBJ;
+} 
+sala[ \t]+(d[eoa]s?)?[ \t]+(pesquisa(dor)?([ea]s)?) {
+  yylval.s = "pesquisadores";
+  return OBJ;
+} 
+sala[ \t]+(d[eoa]s?)?[ \t]+(alunos?)?[ \t]*(d[eoa]s?)?[ \t]*(i|I)?(c|C)? {
+  yylval.s = "ic";
+  return OBJ;
+} 
+notebook[ \t]do[ \t]pedro {
+  yylval.s = "pedro";
+  return OBJ;
+}
+notebook[ ]da[ ]alice {
+  yylval.s = "alice";
+  return OBJ;
+}
 
 [a-zA-Z_]+ {
   yylval.s = malloc(sizeof(yytext));
