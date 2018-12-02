@@ -16,6 +16,8 @@ int tabela_hash (char *n, int tam) {
   int h = 5831;
   for(int i = 0; n[i] != '\0'; i++)
     h = ((h * 33) ^ n[i]) % tam;
+  if (h < 0)
+    h = -h;
   return h;
 }
 
@@ -36,6 +38,7 @@ int tabela_insere(Tabela T, char *n, void * val) {
     lista_insere(T->v[i], val, n);
     return SUCESSO;
   }
+  printf("Tentou colocar um cara (%s) repetido!\n", (char *)n);
   return FALHA;
 }
 
@@ -83,7 +86,7 @@ void tabela_f_destroi (Tabela_f T) {
   free (T);
 }
 
-int tabela_f_insere(Tabela_f T, char *n, void * val) {
+int tabela_f_insere(Tabela_f T, char *n, p_funcao_void val) {
   int i;
   i = tabela_hash (n, T->tam);
 
@@ -95,7 +98,7 @@ int tabela_f_insere(Tabela_f T, char *n, void * val) {
   return FALHA;
 }
 
-void * tabela_f_busca (Tabela_f T, char *n) {
+p_funcao_void tabela_f_busca (Tabela_f T, char *n) {
   int i;
   
   if (n == NULL || n[0] == '\0')
