@@ -2,7 +2,6 @@
 
 int main () {
 
-  char ans;
 
   /* Tabela principal que contém todos os elementos do jogo */
   Tabela tab_jogo = tabela_cria(TAM_TABELA);
@@ -11,9 +10,9 @@ int main () {
   inicializa_funcoes(tab_f_jogo);
   jogador = tabela_busca(tab_jogo, "Você");
 
-  /* Booleano armazena se acabamos de chegar na sala (indiferente se ela é
-     conhecida ou não) */
-  /* short int acabei_de_chegar = 1; */
+  /* Booleano armazena se acabamos de chegar na sala (indiferente se ela é */
+  /*    conhecida ou não) */
+  int acabei_de_chegar = 1;
 
   printf("========================================\n");
   printf("    _____          _____         \n");
@@ -25,17 +24,17 @@ int main () {
   printf("========================================\n");
 
   printf("\nPor Emanuel Lima e João Seckler.\n");
-  printf("\nVocê gostaria de ler as instruções? [s/N]\n");
-  scanf("%c", &ans);
-  switch (ans) {
-    case 'S':
-    case 's':
-      printf("\nInstruções: Por enquanto, nada.\n\n");
-      break;
+  /* printf("\nVocê gostaria de ler as instruções? [s/N]\n"); */
+  /* scanf("%c", &ans); */
+  /* switch (ans) { */
+  /*   case 'S': */
+  /*   case 's': */
+  /*     printf("\nInstruções: Por enquanto, nada.\n\n"); */
+  /*     break; */
   
-    default:
-      break;
-  }
+  /*   default: */
+  /*     break; */
+  /* } */
 
   printf("ATO 1\n");
   printf("Dor de cabeça. Esta é a primeira coisa que você sente ao acordar na sua mesa de trabalho.\
@@ -43,63 +42,67 @@ int main () {
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
   você desmaiou de exaustão em cima dos seus livros e do seu notebook. Mas agora você está acordado. O que você faz? \n");
 
-  while (yyparse(tab_jogo, tab_f_jogo, jogador, &lugar_atual));
+  while (yyparse(tab_jogo, tab_f_jogo, jogador,
+                 &lugar_atual, &acabei_de_chegar)) {
+      if (acabei_de_chegar) {
+        /* Apresenta o local */
+        printf("\n%s\n", lugar_atual->nome);  // título (nome da sala)
+        if (lugar_atual->conhecido)
+          printf("%s", lugar_atual->curta);
+        else
+          printf("%s", lugar_atual->longa);
+        acabei_de_chegar = 0;
+        
+        /* Relaciona o conteúdo visível */
+        if (!lista_vazia(lugar_atual->conteudo)) {
+          printf("\n\nAqui você vê:\n");
+          elemento_imprime_conteudo(lugar_atual);
+        }
+      }
+      /* Faz todas as animações */
+      animacoes_automaticas(tab_jogo, lugar_atual);
+  }
+
   return (0);
-
-
-  /* /\* Laço principal*\/ */
-  /* for (i = 0; i < QTDE_COMANDOS; i++) { */
-
-  /*   printf("%c", PROMPT); */
-  /*   printf("\n"); */
-
-  /*   if (acabei_de_chegar) { */
-  /*     /\* Apresenta o local *\/ */
-  /*     printf("\n%s\n", lugar_atual->nome);  // título (nome da sala) */
-  /*     if (lugar_atual->conhecido) */
-  /*       printf("%s", lugar_atual->curta); */
-  /*     else */
-  /*       printf("%s", lugar_atual->longa); */
-  /*     acabei_de_chegar = 0; */
-
-  /*     /\* Relaciona o conteúdo visível *\/ */
-  /*     if (!lista_vazia(lugar_atual->conteudo)) { */
-  /*       printf("\nAqui você vê:\n"); */
-  /*       elemento_imprime_conteudo(lugar_atual); */
-  /*     } */
-  /*   } */
-    
-  /*   printf("\n--> Executando o comando %s(%s, %s, %s) <--\n", */
-  /*          nomes_comandos[i], s1[i], s2[i], s3[i]); */
-
-  /*   el = v_verbos[i](v_arg1[i], v_arg2[i], v_arg3[i]); */
-    
-  /*   /\* Caso especial: se o comando é ir_para *\/     */
-  /*   if (v_verbos[i] == ir_para && el != NULL) { */
-  /*     acabei_de_chegar = 1; */
-  /*     lugar_atual = el; */
-  /*   } */
-   
-
-  /*   /\* Faz todas as animações *\/ */
-  /*   animacoes_automaticas(tab_jogo, lugar_atual); */
-  /* } */
-  /* return 0; */
 }
 
 void inicializa_funcoes (Tabela_f tab) {
 
-  tabela_f_insere(tab, "ir_para", ir_para);
-  tabela_f_insere(tab, "inventario", inventario);
-  tabela_f_insere(tab, "examinar", examinar);
-  tabela_f_insere(tab, "falar", falar);
-  tabela_f_insere(tab, "perguntar", perguntar);
-  tabela_f_insere(tab, "pegar", pegar);
-  tabela_f_insere(tab, "deixar", deixar);
-  tabela_f_insere(tab, "abrir", abrir);
-  tabela_f_insere(tab, "fechar", fechar);
-  tabela_f_insere(tab, "comer", comer);
-  tabela_f_insere(tab, "beber", beber);
+  int i;
+
+  char *c0[] = {"ir_para", "ir", "vá", "va", "ande"};
+  for (i = 0; i < NELEMS(c0); i++)
+    tabela_f_insere(tab, c0[i], (p_funcao_void)ir_para);
+  char *c1[] = {"inventário"};
+  for (i = 0; i < NELEMS(c1); i++)
+    tabela_f_insere(tab, c1[i], (p_funcao_void)inventario);
+  char *c2[] = {"examinar", "olhar", "observar", "examine", "olhe", "observe"};
+  for (i = 0; i < NELEMS(c2); i++)
+    tabela_f_insere(tab, c2[i], (p_funcao_void)examinar);
+  char *c3[] = {"fale", "falar", "tagarelar", "tagarele"};
+  for (i = 0; i < NELEMS(c3); i++)
+    tabela_f_insere(tab, c3[i], (p_funcao_void)falar);
+  char *c4[] = {"perguntar", "pergunte", "questionar", "questione"};
+  for (i = 0; i < NELEMS(c4); i++)
+    tabela_f_insere(tab, c4[i], (p_funcao_void)perguntar);
+  char *c5[] = {"pegar", "pegue", "agarrar", "agarre", "portar", "porte"};
+  for (i = 0; i < NELEMS(c5); i++)
+    tabela_f_insere(tab, c5[i], (p_funcao_void)pegar);
+  char *c6[] = {"deixe", "deixar", "largue", "largar", "soltar", "solte"};
+  for (i = 0; i < NELEMS(c6); i++)
+    tabela_f_insere(tab, c6[i], (p_funcao_void)deixar);
+  char *c7[] = {"abrir", "abra", "destampar", "destampe"};
+  for (i = 0; i < NELEMS(c7); i++)
+    tabela_f_insere(tab, c7[i], (p_funcao_void)abrir);
+  char *c8[] = {"feche", "fechar", "tampe", "tampar"};
+  for (i = 0; i < NELEMS(c8); i++)
+    tabela_f_insere(tab, c8[i], (p_funcao_void)fechar);
+  char *c9[] = {"comer", "coma", "degluta", "deglutir", "pape", "papar"};
+  for (i = 0; i < NELEMS(c9); i++)
+    tabela_f_insere(tab, c9[i], (p_funcao_void)comer);
+  char *c10[] = {"beber", "beba", "tomar", "tome"};
+  for (i = 0; i < NELEMS(c10); i++)
+    tabela_f_insere(tab, c10[i], (p_funcao_void)beber);
 }
 
 Elemento inicializa_elementos (Tabela tab) {
@@ -108,7 +111,7 @@ Elemento inicializa_elementos (Tabela tab) {
   
   Elemento el, el2;
   Lista l;
-  int *p = malloc(sizeof(int));
+  int *p = malloc(sizeof(int)), i;
 
 
   /* Inicializa aventureiro */
@@ -120,6 +123,10 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 1;
   el->conhecido = 1;
   tabela_insere(tab, el->nome, el);
+
+  char *c[] = {};
+  for (i = 0; i < NELEMS(c); i++)
+    tabela_f_insere(tab, c[i], el);
 
   /* Inicializa IARA */
   el = elemento_cria("IARA");
