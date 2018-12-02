@@ -124,9 +124,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 1;
   tabela_insere(tab, el->nome, el);
 
-  char *c[] = {};
-  for (i = 0; i < NELEMS(c); i++)
-    tabela_f_insere(tab, c[i], el);
+  char *c0[] = {};
+  for (i = 0; i < NELEMS(c0); i++)
+    tabela_f_insere(tab, c0[i], (p_funcao_void)el);
 
   /* Inicializa IARA */
   el = elemento_cria("IARA");
@@ -137,6 +137,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 0;
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
+  char *c1[] = {};
+  for (i = 0; i < NELEMS(c1); i++)
+    tabela_f_insere(tab, c1[i], (p_funcao_void)el);
 
   /* Inicializa salas */
   el = elemento_cria("Sala dos alunos de IC");
@@ -147,6 +150,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 1;
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
+  char *c2[] = {};
+  for (i = 0; i < NELEMS(c2); i++)
+    tabela_f_insere(tab, c2[i], (p_funcao_void)el);
 
   el = elemento_cria("Sala dos pesquisadores");
   el->artigo = "a";
@@ -156,6 +162,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 1;
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
+  char *c3[] = {};
+  for (i = 0; i < NELEMS(c3); i++)
+    tabela_f_insere(tab, c3[i], (p_funcao_void)el);
 
   el = elemento_cria("Sala de máquinas");
   el->artigo = "a";
@@ -165,6 +174,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 1;
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
+  char *c4[] = {};
+  for (i = 0; i < NELEMS(c4); i++)
+    tabela_f_insere(tab, c4[i], (p_funcao_void)el);
 
   el = elemento_cria("Pátio");
   el->artigo = "o";
@@ -174,7 +186,10 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 1;
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
-  
+  char *c5[] = {};
+  for (i = 0; i < NELEMS(c5); i++)
+    tabela_f_insere(tab, c5[i], (p_funcao_void)el);
+
   el = elemento_cria("Sala do servidor");
   el->artigo = "a";
   el->curta = "A maior sala do andar. Muito fria e barulhenta. Possui um supercomputador enorme que ocupa quase toda a sala.";
@@ -183,6 +198,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->visivel = 1;
   el->conhecido = 0;
   tabela_insere(tab, el->nome, el);
+  char *c6[] = {};
+  for (i = 0; i < NELEMS(c6); i++)
+    tabela_f_insere(tab, c6[i], (p_funcao_void)el);
 
   /* Liga as saídas das salas umas nas outras*/
   liga_salas(tab, "Sala dos alunos de IC", "Pátio");
@@ -206,6 +224,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)seu_notebook_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c7[] = {};
+  for (i = 0; i < NELEMS(c7); i++)
+    tabela_f_insere(tab, c7[i], (p_funcao_void)el);
 
   el = elemento_cria("notebook do Pedro");
   el->artigo = "o";
@@ -219,6 +240,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)notebook_do_pedro_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c8[] = {};
+  for (i = 0; i < NELEMS(c8); i++)
+    tabel8_f_insere(tab, c3[i], (p_funcao_void)el);
 
   el = elemento_cria("notebook da Alice");
   el->artigo = "o";
@@ -232,6 +256,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)notebook_da_alice_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c9[] = {};
+  for (i = 0; i < NELEMS(c9); i++)
+    tabela_f_insere(tab, c9[i], (p_funcao_void)el);
 
   el = elemento_cria("estante");
   el->artigo = "a";
@@ -242,6 +269,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 1;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c10[] = {};
+  for (i = 0; i < NELEMS(c10); i++)
+    tabela_f_insere(tab, c10[i], (p_funcao_void)el);
 
   el = elemento_cria("janela");
   el->artigo = "a";
@@ -254,6 +284,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)janela_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+char *c11[] = {};
+for (i = 0; i < NELEMS(c11); i++)
+  tabela_f_insere(tab, c11[i], (p_funcao_void)el);
 
 
   /* Elementos na sala dos pesquisadores */
@@ -269,6 +302,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  12[] = {};
+  for (i = 0; i < NELEMS(c12); i++)
+    tabela_f_insere(tab, c12[i], (p_funcao_void)el);
 
   el = elemento_cria("papéis");
   el->artigo = "os";
@@ -281,6 +317,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)papeis_comer, "comer");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  13[] = {};
+  for (i = 0; i < NELEMS(c13); i++)
+    tabela_f_insere(tab, c13[i], (p_funcao_void)el);
   
   el = elemento_cria("livros");
   el->artigo = "os";
@@ -294,6 +333,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)livros_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  14[] = {};
+  for (i = 0; i < NELEMS(c14); i++)
+    tabela_f_insere(tab, c14[i], (p_funcao_void)el);
 
   el = elemento_cria("monitores");
   el->artigo = "os";
@@ -304,6 +346,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  15[] = {};
+  for (i = 0; i < NELEMS(c15); i++)
+    tabela_f_insere(tab, c15[i], (p_funcao_void)el);
 
   el = elemento_cria("xícara");
   el->artigo = "a";
@@ -319,6 +364,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)xicara_beber, "beber");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  16[] = {};
+  for (i = 0; i < NELEMS(c16); i++)
+    tabela_f_insere(tab, c16[i], (p_funcao_void)el);
 
   el = elemento_cria("retrato");
   el->artigo = "o";
@@ -330,6 +378,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->carregavel = 1;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  17[] = {};
+  for (i = 0; i < NELEMS(c17); i++)
+    tabela_f_insere(tab, c17[i], (p_funcao_void)el);
 
   /* Elementos na sala de máquinas */
   el2 = tabela_busca(tab, "Sala de máquinas");
@@ -344,6 +395,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  18[] = {};
+  for (i = 0; i < NELEMS(c18); i++)
+    tabela_f_insere(tab, c18[i], (p_funcao_void)el);
 
   el = elemento_cria("nobreak");
   el->artigo = "o";
@@ -354,6 +408,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  19[] = {};
+  for (i = 0; i < NELEMS(c19); i++)
+    tabela_f_insere(tab, c19[i], (p_funcao_void)el);
 
   /* Elementos no Pátio */
   el2 = tabela_busca(tab, "Pátio");
@@ -368,6 +425,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  20[] = {};
+  for (i = 0; i < NELEMS(c20); i++)
+    tabela_f_insere(tab, c20[i], (p_funcao_void)el);
 
   el = elemento_cria("mesas");
   el->artigo = "as";
@@ -378,6 +438,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  21[] = {};
+  for (i = 0; i < NELEMS(c21); i++)
+    tabela_f_insere(tab, c21[i], (p_funcao_void)el);
 
   el = elemento_cria("plantas");
   el->artigo = "as";
@@ -388,6 +451,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  22[] = {};
+  for (i = 0; i < NELEMS(c22); i++)
+    tabela_f_insere(tab, c22[i], (p_funcao_void)el);
 
   el = elemento_cria("parede");
   el->artigo = "a";
@@ -398,6 +464,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  23[] = {};
+  for (i = 0; i < NELEMS(c23); i++)
+    tabela_f_insere(tab, c23[i], (p_funcao_void)el);
 
   el = elemento_cria("recepção");
   el->artigo = "a";
@@ -408,6 +477,9 @@ Elemento inicializa_elementos (Tabela tab) {
   el->conhecido = 0;
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  24[] = {};
+  for (i = 0; i < NELEMS(c24); i++)
+    tabela_f_insere(tab, c24[i], (p_funcao_void)el);
 
   /* Elementos na Sala do servidor */
   el2 = tabela_busca(tab, "Sala do servidor");
@@ -424,6 +496,9 @@ Elemento inicializa_elementos (Tabela tab) {
   lista_f_insere(el->acoes, (p_funcao_void)supercomputador_fechar, "fechar");
   lista_insere(l, el, el->nome);
   tabela_insere(tab, el->nome, el);
+  char *c  25[] = {};
+  for (i = 0; i < NELEMS(c25); i++)
+    tabela_f_insere(tab, c25[i], (p_funcao_void)el);
 
   /* Aventureiro é conteúdo da sala do início */
   el = tabela_busca(tab, "Você");
