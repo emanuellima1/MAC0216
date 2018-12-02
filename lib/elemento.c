@@ -44,8 +44,12 @@ void elemento_imprime_conteudo (Elemento el) {
 
   while (l != NULL) {
     el = l->val;
-    if (el->visivel)
-      printf("%s %s\n", el->artigo, el->nome);
+    if (el->visivel) {
+      if (el->artigo[0] == '\0')
+        printf("%s\n", el->nome);
+      else
+        printf("%s %s\n", el->artigo, el->nome);
+    }
     l = l->next;
   }
 }
