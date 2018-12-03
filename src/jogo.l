@@ -47,15 +47,25 @@ static int mygetinput(char *buf, int size) {
 
 %%
 
+(a[jc]ud[ae]|help)                {return AJUDA;}
 (fim|chega|sair|quit)             {return SAIR;}
 <<EOF>>                           {return SAIR;}
 i(nvent(a|á|Á)rio)?               {return INVENTARIO;}
 
+(n|N|Norte|NORTE)                 {return NORTE;}
+(s|S|Sul|SUL)                     {return SUL;}
+(l|L|Leste|LESTE)                 {return LESTE;}
+(w|W|Oeste|OESTE)                 {return OESTE;} 
+
+
+
+
+
     /* Ignora artigos, espaços e preposições seguidos de palavras */
 
 [ \t]+
-[ao]|uma?|seu|sua|para|pr[oa]
-(d[oae]s?|em|n[ao])[ \t]+[[:alnum:]]+    
+[ao]s?|uma?|seu|sua|para|pr[oa]
+(d[oae]s?|em|n[ao])[ \t]+[a-zA-Z_áéíóúÁÉÍÓÚçÇàÀ]+    
 
 
   /* Casos especiais */
@@ -85,14 +95,14 @@ notebook[ ]da[ ]alice {
   return OBJ;
 }
 
-[a-zA-Z_]+ {
+[a-zA-Z_áéíóúÁÉÍÓÚçÇàÀêÊôÔãÃõÕ]+ {
   yylval.s = malloc(sizeof(yytext));
   strcpy(yylval.s, yytext);
   return OBJ;
 }
 
 [\n;]                              {return EOL;}
-
+.
 
 %%
 

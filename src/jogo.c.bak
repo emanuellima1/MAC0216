@@ -13,8 +13,6 @@ int main () {
   /*    conhecida ou não) */
   int acabei_de_chegar = 1;
 
-  
-
   printf("========================================\n");
   printf("    _____          _____         \n");
   printf("   |_   _|   /\\   |  __ \\     /\\   \n");
@@ -546,5 +544,4 @@ void animacoes_automaticas(Tabela tab, Elemento lugar_atual) {
       p = p->next;
     }
   }
-} 
-
+}

@@ -1,5 +1,6 @@
 ## Lista de afazeres:  
 
+* Mudar as mensagens de erros das funções para ficar amigável ao usuário. Por exemplo, ao invés de imprimir "chamou a função ir_para com argumentos NULL", imprimir "quer ir para onde?"
 * Consertar o make que, quando jogo.y foi alterado, sobrescreve jogo.c 
 * Descrever, em cada sala, suas saídas
 * Escrever mais exemplos de comandos e testá-los;  

@@ -20,7 +20,7 @@ void animacoes_automaticas(Tabela tab, Elemento lugar_atual);
 /* Recebe duas strings que são o nome de duas salas, e liga a saida
    uma na outra
 */
-void liga_salas(Tabela tab, char * s1, char * s2);
+void liga_salas(Tabela tab, char * s1, char * s2, char dir1, char dir2);
 
 /* Definições para flex */
 

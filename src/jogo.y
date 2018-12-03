@@ -4,6 +4,7 @@
 #include "../lib/comandos.h"
 int yylex();
 void yyerror(Tabela, Tabela_f, Elemento, Elemento *, int *, char *s);
+ void rosa_dos_ventos(Elemento *, Elemento, int *, char);
 %}
 
 %parse-param {Tabela tab_jogo} {Tabela_f tab_f_jogo} {Elemento jogador} {Elemento * pos_atual} {int * acabei_de_chegar}
@@ -19,18 +20,19 @@ void yyerror(Tabela, Tabela_f, Elemento, Elemento *, int *, char *s);
 }
 
 %token <s> OBJ
-%token SAIR INVENTARIO EOL
-
+%token SAIR INVENTARIO EOL AJUDA NORTE SUL LESTE OESTE
 
 %%
 
-input   : EOL                     {printf("tô perando\n");}
+input   : EOL                     {printf("Tô perando!\n");}
         | cmd               
-        | SAIR                    {printf("saindo\n"); exit(0);}
+        | SAIR                    {printf("\nSaindo...\n"); exit(0);}
         | INVENTARIO              {inventario(jogador, NULL, NULL);} eol
+        | AJUDA                   {printf("Digite algum verbo que você queira fazer. Tente fazer referência às coisas que já foram descritas. Digite i para ver seu inventário. Digite ir para ir para outras sala.\n");} eol
         | input cmd               
-        | input SAIR                    {printf("saindo\n"); exit(0);}
-        | input INVENTARIO              {inventario(jogador, NULL, NULL);} eol
+        | input SAIR              {printf("\nSaindo...\n"); exit(0);}
+        | input INVENTARIO        {inventario(jogador, NULL, NULL);} eol
+        | input AJUDA             {printf("Digite algum verbo que você queira fazer. Tente fazer referência às coisas que já foram descritas. Digite i para ver seu inventário. Digite ir para ir para outra sala.\n");} eol
         ;
 
 
@@ -47,6 +49,7 @@ cmd     : OBJ {
 
   p_comando f = (p_comando)tabela_f_busca(tab_f_jogo, $1);
   Elemento nova_sala, e = tabela_busca(tab_jogo, $2);
+
 
   if (f != NULL) {
     if (e != NULL) {
@@ -87,10 +90,24 @@ cmd     : OBJ {
     f(e1, e2, NULL);
   
  } eol
+        | dir
+        | OBJ dir
         | error 
-
 ;
 
+dir     : NORTE {rosa_dos_ventos(pos_atual, jogador, acabei_de_chegar, 'N');} eol
+        | SUL   {rosa_dos_ventos(pos_atual, jogador, acabei_de_chegar, 'S');} eol
+        | LESTE {rosa_dos_ventos(pos_atual, jogador, acabei_de_chegar, 'L');} eol
+        | OESTE {
+
+          if (*pos_atual == tabela_busca(tab_jogo, "Pátio")) {
+            printf("Daqui do pátio tem três saídas a oeste: a sala dos alunos de IC, a sala dos pesquisadores e a sala de máquinas.\n");
+          }
+          else
+            rosa_dos_ventos(pos_atual, jogador, acabei_de_chegar, 'O');
+          } eol
+        ;
+          
 eol: EOL {return 1;}
 
 %%
@@ -100,3 +117,33 @@ void yyerror (Tabela t, Tabela_f t_f, Elemento e1, Elemento * e2,
 {
   fprintf(stderr, "Não entendi...\n");
 }
+
+void rosa_dos_ventos(Elemento * pos_atual, Elemento jogador,
+                     int * acabei_de_chegar, char dir)
+{
+  /* Elemento temp = *pos_atual; */
+  /* printf("saidas da sala atual: \n\n"); */
+  /* lista_imprime_chaves(temp->detalhe.saidas); */
+  /* printf("\n"); */
+  char *s = malloc(sizeof(char));
+  *s = dir;
+
+
+  Elemento nova_sala, e = lista_busca((*pos_atual)->detalhe.saidas, s);
+  if (e == NULL) {
+    printf("Essa sala não tem saída ");
+    switch (dir) {
+    case 'N': printf("ao norte.\n"); break;
+    case 'S': printf("ao sul.\n"); break;
+    case 'L': printf("a leste.\n"); break;
+    case 'O': printf("a oeste.\n"); break;
+    }
+    return;
+  }
+  nova_sala = ir_para(e, jogador, *pos_atual);
+  if (nova_sala != NULL) {
+    *pos_atual = nova_sala;
+    *acabei_de_chegar = 1;
+  }
+}
+

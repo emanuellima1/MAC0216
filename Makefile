@@ -3,7 +3,6 @@
 
 CC=gcc
 CFLAGS=-Wall -lreadline -pedantic -O2
-EXEC=jogo.out
 OBJ_TESTE1=lib/elemento.o lib/lista.o lib/tabela.o src/test/teste.o
 OBJ_TESTE2=lib/elemento.o lib/lista.o lib/tabela.o \
 src/test/jogo-teste.o  lib/comandos.o
