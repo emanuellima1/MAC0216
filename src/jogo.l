@@ -55,7 +55,7 @@ i(nvent(a|á|Á)rio)?               {return INVENTARIO;}
 (n|N|Norte|NORTE)                 {return NORTE;}
 (s|S|Sul|SUL)                     {return SUL;}
 (l|L|Leste|LESTE)                 {return LESTE;}
-(w|W|Oeste|OESTE)                 {return OESTE;} 
+(w|W|Oeste|OESTE)              {return OESTE;} 
 
 
 
@@ -101,7 +101,7 @@ notebook[ ]da[ ]alice {
   return OBJ;
 }
 
-[\n;]                              {return EOL;}
+[;\n]                              {return EOL;}
 .
 
 %%
