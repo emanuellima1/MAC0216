@@ -47,7 +47,7 @@ static int mygetinput(char *buf, int size) {
 
 %%
 
-(a[jc]ud[ae]|help)                {return AJUDA;}
+(a[jc]ud[ae]|help|\?|h)             {return AJUDA;}
 (fim|chega|sair|quit)             {return SAIR;}
 <<EOF>>                           {return SAIR;}
 i(nvent(a|á|Á)rio)?               {return INVENTARIO;}

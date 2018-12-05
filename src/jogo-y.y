@@ -28,7 +28,7 @@ input   : EOL                     {printf("Tô perando!\n");}
         | cmd               
         | SAIR                    {printf("\nSaindo...\n"); exit(0);}
         | INVENTARIO              {inventario(jogador, NULL, NULL);} eol
-        | AJUDA                   {printf("Digite algum verbo que você queira fazer. Tente fazer referência às coisas que já foram descritas. Digite i para ver seu inventário. Digite ir para ir para outras sala.\n");} eol
+        | AJUDA                   {printf("Digite, começando com um verbo, o que é que você quer fazer (tente examinar, pegar, ir...). Tente fazer referência às coisas que já foram descritas. Digite i para ver seu inventário. Digite \"ir\" para ir para outras sala.\n");} eol
         | input cmd               
         | input SAIR              {printf("\nSaindo...\n"); exit(0);}
         | input AJUDA             {printf("Digite algum verbo que você queira fazer. Tente fazer referência às coisas que já foram descritas. Digite i para ver seu inventário. Digite ir para ir para outra sala.\n");} eol
