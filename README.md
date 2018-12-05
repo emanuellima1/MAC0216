@@ -5,8 +5,8 @@
 Para rodar o jogo:
 
 ```
-make
-./jogo.out
+$ make
+$ ./jogo.out
 ```
 
 

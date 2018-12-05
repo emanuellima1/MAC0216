@@ -1,17 +1,19 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{spverbatim}
+\usepackage[portuguese]{babel}
 
 
-\title{Relatório - Parte I e II da Aventura}
-\date{26/09/2018}
+\title{Relatório - Parte I, II e III da Aventura\footnote{Trabalho para a discplina
+    MAC0216 - Técnicas de programação I, ministrada pelo professor Marco Dimas
+    Gubitoso no segundo semestre de 2018.}}
 \author{Emanuel Lima (9009493) e João Seckler (4603521)} 
 
 
 \begin{document}
 \maketitle
 
-Para executar o jogo (que até agora só executa uma série de testes), faça:
+Para executar o jogo, faça:
 
 \begin{spverbatim}
   $ make
@@ -19,29 +21,31 @@ Para executar o jogo (que até agora só executa uma série de testes), faça:
 \end{spverbatim}
 \medskip
 
-Para testar as bibliotecas de elementos, lista e tabela, execute:
+Para executar rotinas de teste (partes I e II do projeto), faça:
 
 \begin{spverbatim}
-  $ make test
+  \$ make test
+\end{spverbatim}
+\medskip
+
+Em seguida, para testar as bibliotecas de elementos, lista e tabela, ou para
+testar o funcionamento básico do jogo e de seus comandos, faça, respectivamente:
+
+\begin{spverbatim}
+  $ ./lib-test.out
+  $ ./jogo-test.out
 \end{spverbatim}
 \medskip
 
 O programa de teste deve imprimir uma mensagem na saída padrão se houver algum
-erro. Para recompilar esse relatório, faça
+erro.
+
+Para limpar os diretórios:
 
 \begin{spverbatim}
-  $ make doc 
+  \$ make clean 
 \end{spverbatim}
 \medskip
-
-Para apagar limpar os diretórios:
-
-\begin{spverbatim}
-  $ make clean 
-\end{spverbatim}
-\medskip
-
-
 
 
 \section{Parte I}
@@ -182,7 +186,32 @@ comandos, o que é feito no laço principal do programa. Note que usamos mais
 quatro vetores de strings auxiliares, para poder imprimir na tela, a cada
 iteração, o que o programa está fazendo.
 
+\section{Parte III}
 
+Mais uma vez, vamos explicar as diferenças do nosso código para o que foi
+sugerido.
 
+A principal diferença talvez seja um menor número de \emph{tokens} na análise léxica.
+Enquanto a sugestão definia um token para cada tipo de elemento ou verbo (os
+tokens ``VERBO'', ``OBJ'' e ``LUGAR''), optamos por colapsar esses três em um
+só. Um verbo fica definido como a primeira palavra do comando. Um lugar é um
+tipo de objeto, de qualquer jeito. Logo, definimos só um token, ``OBJ''. Mais
+tratamentos de erro acontecem nas funções chamadas. Mantivemos, como na
+sugestão, os\emph{ tokens} ``SAIR'', ``INVENTÁRIO'', ``EOL'' e aqueles de
+direção (norte, sul, lesto, oeste). Esses últimos funcionam, no nosso código,
+como uma espécie de ``wrapper'' para um comando de movimento (no nosso código,
+um comando de movimento é tratado como um comando qualquer, vide seção 2). Além
+disso, adicionamos um token ``AJUDA'', que imprime uma mensagem de ajuda.
+
+Além disso, optamos por carregar menos de código aqueles arquivos de análise de
+linguagem. Um exemplo: quando recebemos inventário, simplesmente chamamos uma
+função da biblioteca de \emph{comandos}. Na sugestão que recebemos, esse código
+estava no próprio arquivo \emph{.y}.
+
+Por fim, optamos por não usar mais variáveis globais além das que \emph{Flex} e
+\emph{Bison} já usam. Precisávamos, no entanto, que a interpretação gramatical
+alterasse variáveis do programa principal. Para isso, usamos uma
+opção do bison chamada ``\%parse-param'', que define parâmetros para a
+função\emph{ yyparse} (que é chamada no programa principal).  
 
 \end{document}
