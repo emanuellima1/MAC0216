@@ -494,6 +494,14 @@ Elemento inicializa_elementos (Tabela tab) {
   el2 = tabela_busca(tab, "Sala dos alunos de IC"); 
   lista_insere(el2->conteudo, el, el->nome);
 
+  /* Sala de início é conhecida, assim como seus elementos */
+  el2->conhecido = 1;
+  Elo *p_elo = el2->conteudo->next;
+  while (p_elo != NULL) {
+    ((Elemento)p_elo->val)->conhecido = 1;
+    p_elo = p_elo->next;
+  }
+
   /* Devolve o lugar de início */
   return(el2);
 }

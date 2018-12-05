@@ -1,7 +1,6 @@
 ## Lista de afazeres:  
 
 # Para entregar (urgente)
-* Adicionar na descrição das salas as saídas que elas tem
 * Escrever as funções específicas da IARA (as de "animação", principalmente, que é requisito da entrega) 
 * Atualizar relatório
 * Fazer as coisas ficarem conhecidas (salas, principalmente)

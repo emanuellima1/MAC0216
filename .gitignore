@@ -5,6 +5,9 @@
 *.log
 mapa.jpeg
 relatorio/auto
+src/jogo-y.c
+src/jogo-y.h
+src/jogo-l.c
 
 # Prerequisites
 *.d

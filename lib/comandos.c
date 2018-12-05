@@ -21,6 +21,14 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
     return (NULL);
   }
 
+  /* Elementos do sala e a sala tornam-se conhecidos */
+  e1->conhecido = 1;
+  Elo *p = e1->conteudo->next;
+  while (p != NULL) {
+    ((Elemento)p->val)->conhecido = 1;
+    p = p->next;
+  }
+
   lista_retira(e3->conteudo, e2->nome); //Remove o jogador da sala antiga
   lista_insere(e1->conteudo, e2, e2->nome); //Insere o jogador na sala nova
   return (e1);
