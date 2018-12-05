@@ -4,27 +4,37 @@
 
 Para rodar o jogo:
 
->$ make
-
->$ ./jogo.out
+```
+make
+./jogo.out
+```
 
 
 Para rodar testes:
 
->$ make test
+```
+$ make test
+```
 
 Em seguida, para testar as bibliotecas de lista, tabela, e elemento:
 
->$ ./lib-test
+```
+$ ./lib-test
+```
 
 E para testar o funcionamento básico do jogo:
 
+```
 >$ ./jogo-test
+```
+
 
 
 Para apagar arquivos temporários:
 
+```
 >$ make clean
+```
 
 
 Relatório completo encontra-se em doc/relatório.pdf
