@@ -2,7 +2,9 @@ CC = gcc -Wall -pedantic -O2
 LIB_OBJ = lib/comandos.o lib/elemento.o lib/tabela.o lib/lista.o
 LANG_OBJ = src/jogo-y.o src/jogo-l.o
 
+##################################
 # Programa principal
+##################################
 
 jogo.out: src/jogo.o src/jogo-y.o src/jogo-l.o
 	${CC} -lreadline -o jogo.out ${LIB_OBJ} ${LANG_OBJ} src/jogo.o
@@ -33,8 +35,9 @@ clean:
 	rm -f src/jogo-y.c src/jogo-y.h src/jogo-l.c *.out
 	rm -f src/*.o src/test/*.o lib/*.o
 
-
+##################################
 # Rotinas de teste (partes 1 e 2)
+##################################
 
 test: jogo-test.out lib-test
 

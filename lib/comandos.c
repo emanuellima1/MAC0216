@@ -8,15 +8,16 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
   */
 
   if (e1 == NULL || e2 == NULL || e3 == NULL) {
-    printf("ir_para recebeu argumentos nulos\n");
+    printf("Você quer ir para onde?\n");
     return(NULL);
   }
-  printf("indo de %s para %s\n", e3->nome, e1->nome);
-
 
   if (lista_busca_valor(e3->detalhe.saidas, e1) == NULL) {
-    printf("Não é possível ir para %s %s a partir daqui.\n",
-           e1->artigo, e1->nome);
+    if (e1->conhecido)
+      printf("Não é possível ir para %s%s a partir daqui.\n",
+             e1->artigo, e1->nome);
+    else
+      printf("Você quer ir para onde?\n");
     return (NULL);
   }
 
@@ -29,12 +30,13 @@ Elemento inventario(Elemento e1, Elemento e2, Elemento e3) {
 
   /* e1 é o jogador */
   if (e1 == NULL) {
-    printf("Erro: tentou mostrar o inventário mas não passou o jogador como parâmetro\n");
+    /* printf("Erro: tentou mostrar o inventário mas não passou o jogador como parâmetro\n"); */
+    printf("O que que é?\n");
     return (NULL);
   }
 
   if (lista_vazia(e1->conteudo))
-    printf("Voce não está carregando nada neste momento.\n");
+    printf("Você não está carregando nada neste momento.\n");
   else {
     printf("Inventário:\n");
     elemento_imprime_conteudo(e1);
@@ -48,7 +50,8 @@ Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
 
   if (e1 == NULL) {
-    printf("Erro: chamou a funcao examinar sem nenhum elemento\n");
+    /* printf("Erro: chamou a funcao examinar sem nenhum elemento\n"); */
+    printf("O que que é?\n");
     return(NULL);
   }
 
@@ -60,7 +63,7 @@ Elemento examinar(Elemento e1, Elemento e2, Elemento e3) {
 
   p = lista_f_busca(e2->acoes, "examinar");
   if (p == NULL) {
-    printf("Não consigo examinar %s %s com %s %s.\n",
+    printf("Não consigo examinar %s%s com %s%s.\n",
            e1->artigo, e1->nome, e2->artigo, e2->nome);
    return(NULL);
   }
@@ -73,7 +76,7 @@ Elemento falar(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
   p = lista_f_busca(e1->acoes, "falar");
   if (p == NULL) {
-    printf("Acho que você não quer falar com %s %s.\n", e1->artigo, e1->nome);
+    printf("Acho que você não quer falar com %s%s.\n", e1->artigo, e1->nome);
     return(NULL);
   }
   q = (p_comando)p;
@@ -86,7 +89,7 @@ Elemento perguntar(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
   p = lista_f_busca(e1->acoes, "perguntar");
   if (p == NULL) {
-    printf("Acho que você não quer perguntar sobre %s %s para %s %s.\n",
+    printf("Acho que você não quer perguntar sobre %s%s para %s%s.\n",
            e2->artigo, e2->nome, e1->artigo, e1->nome);
     return(NULL);
   }
@@ -100,7 +103,7 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
 
   if (e1 
 == NULL || e2 == NULL || e3 == NULL) {
-    printf("Erro: chamou pegar com argumentos nulos.\n");
+    printf("Você quer pegar o que?.\n");
     return(NULL);
   }
   p_funcao_void p;
@@ -112,26 +115,17 @@ Elemento pegar(Elemento e1, Elemento e2, Elemento e3) {
   }
   
   if (lista_busca(e2->conteudo, e1->nome) != NULL) {
-    if (e1->artigo[0] == '\0')
-      printf("Você já está carregando %s\n", e1->nome);
-    else
-      printf("Você já está carregando %s %s\n", e1->artigo, e1->nome);
+    printf("Você já está carregando %s%s\n", e1->artigo, e1->nome);
     return (NULL);
   }
 
   if (e1->carregavel) {
     lista_retira(e3->conteudo, e1->nome);
     lista_insere(e2->conteudo, e1, e1->nome);
-    if (e1->artigo[0] == '\0')
-      printf("Você pegou %s\n", e1->nome);
-    else
-      printf("Você pegou %s %s\n", e1->artigo, e1->nome);
+    printf("Você pegou %s%s\n", e1->artigo, e1->nome);
   }
   else
-    if (e1->artigo[0] == '\0')
-      printf("Você não consegue pegar %s\n", e1->nome);
-    else
-      printf("Você não consegue pegar %s %s\n", e1->artigo, e1->nome);
+    printf("Você não consegue pegar %s%s\n", e1->artigo, e1->nome);
   return(NULL);
 }
 
@@ -142,10 +136,7 @@ Elemento abrir(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
   p = lista_f_busca(e1->acoes, "abrir");
   if (p == NULL) {
-    if (e1->artigo[0] == '\0')
-      printf("Você não consegue abrir %s\n", e1->nome);
-    else
-      printf("Você não consegue abrir %s %s\n", e1->artigo, e1->nome);
+    printf("Você não consegue abrir %s%s\n", e1->artigo, e1->nome);
     return(NULL);
   }
   q = (p_comando)p;
@@ -157,7 +148,7 @@ Elemento fechar(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
   p = lista_f_busca(e1->acoes, "fechar");
   if (p == NULL) {
-    printf("Você não consegue fechar %s %s.\n",
+    printf("Você não consegue fechar %s%s.\n",
            e1->artigo, e1->nome);
     return(NULL);
   }
@@ -170,7 +161,7 @@ Elemento deixar(Elemento e1, Elemento e2, Elemento e3) {
 
   lista_retira(e2->conteudo, e1->nome);
   lista_insere(e3->conteudo, e1, e1->nome);
-  printf("Você deixou %s %s aí.\n", e1->artigo, e1->nome);
+  printf("Você deixou %s%s aí.\n", e1->artigo, e1->nome);
   return(NULL);
 }
 
@@ -179,7 +170,7 @@ Elemento comer(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
   p = lista_f_busca(e1->acoes, "comer");
   if (p == NULL) {
-    printf("Você não consegue comer %s %s.\n", e1->artigo, e1->nome);
+    printf("Você não consegue comer %s%s.\n", e1->artigo, e1->nome);
     return(NULL);
   }
   q = (p_comando)p;
@@ -191,7 +182,7 @@ Elemento beber(Elemento e1, Elemento e2, Elemento e3) {
   p_comando q;
   p = lista_f_busca(e1->acoes, "beber");
   if (p == NULL) {
-    printf("Você não consegue comer %s %s.\n", e1->artigo, e1->nome);
+    printf("Você não consegue comer %s%s.\n", e1->artigo, e1->nome);
     return(NULL);
   }
   q = (p_comando)p;

@@ -1,11 +1,11 @@
 ## Lista de afazeres:  
 
 # Para entregar (urgente)
-* (URGENTE) Consertar o make que, quando jogo.y foi alterado, sobrescreve jogo.c 
-* Mudar as mensagens de erros das funções para ficar amigável ao usuário. Por exemplo, ao invés de imprimir "chamou a função ir_para com argumentos NULL", imprimir "quer ir para onde?"
 * Adicionar na descrição das salas as saídas que elas tem
 * Escrever as funções específicas da IARA (as de "animação", principalmente, que é requisito da entrega) 
 * Atualizar relatório
+* Fazer as coisas ficarem conhecidas (salas, principalmente)
+* Não deixar o jogador acessar objetos em outros lugares que eles não conheçam
 
 # Para terminar o jogo
 * Escrever mais exemplos de comandos e testá-los;  

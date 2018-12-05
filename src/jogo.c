@@ -119,7 +119,7 @@ Elemento inicializa_elementos (Tabela tab) {
 
   /* Inicializa IARA */
   el = elemento_cria("IARA");
-  el->artigo = "a";
+  el->artigo = "a ";
   el->curta = "Inteligência Artificial Realísticamente Autônoma.\n";
   el->longa = "A Inteligência Artificial Realísticamente Autônoma, IARA, foi criada por pesquisadores do CLIAR que almeijavam criar uma IA tão inteligente quanto qualquer ser humano.\n";
   el->ativo = 1;
@@ -132,9 +132,9 @@ Elemento inicializa_elementos (Tabela tab) {
 
   /* Inicializa salas */
   el = elemento_cria("Sala dos alunos de IC");
-  el->artigo = "a";
-  el->curta = "Tomando duas paredes, há uma mesa grande, em L, usada por todos os alunos, cheia de papéis, livros e alguns notebooks espalhados.";
-  el->longa = "Tomando duas paredes, há uma mesa grande, em L, usada por todos os alunos, cheia de papéis e livros espalhados. Vários notebooks repousam sobre a mesa, apenas o seu aberto. Em outra parede, uma estante de madeira repleta de livros sobre inteligência artificial, álgebra linear e probabilidade.\nDe uma pequena janela é possível ver o céu noturno.";
+  el->artigo = "a ";
+  el->curta = "Tomando duas paredes, há uma mesa grande, em L, usada por todos os alunos, cheia de papéis, livros e alguns notebooks espalhados. A leste, uma porta leva ao Pátio.";
+  el->longa = "Tomando duas paredes, há uma mesa grande, em L, usada por todos os alunos, cheia de papéis e livros espalhados. Vários notebooks repousam sobre a mesa, apenas o seu aberto. Em outra parede, uma estante de madeira repleta de livros sobre inteligência artificial, álgebra linear e probabilidade.\nDe uma pequena janela é possível ver o céu noturno. A leste, uma porta leva ao Pátio.\n";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
@@ -144,9 +144,9 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c2[i], el);
 
   el = elemento_cria("Sala dos pesquisadores");
-  el->artigo = "a";
-  el->curta = "Três mesas em frente a três paredes compõem o visual da sala. Cada mesa contém um misto de papéis, livros e monitores de computador.";
-  el->longa = "Três mesas em frente a três paredes compõem o visual da sala. Cada mesa contém um misto de papéis, livros e monitores de computador. Em uma das mesas, uma xícara de café frio faz as vezes de peso de papel. Em outra, há um porta retrato com a foto de uma mulher sorridente. O porta retrato está úmido. Você reconhece na foto a esposa do seu orientador. Um calafrio sobe a sua coluna quando você lembra que recentemente ela se envolveu num acidente de carro e que atualmente está de coma num hospital.\n Os computadores da sala estão desligados.";
+  el->artigo = "a ";
+  el->curta = "Três mesas em frente a três paredes compõem o visual da sala. Cada mesa contém um misto de papéis, livros e monitores de computador. A leste, uma porta leva ao Pátio.";
+  el->longa = "Três mesas em frente a três paredes compõem o visual da sala. Cada mesa contém um misto de papéis, livros e monitores de computador. Em uma das mesas, uma xícara de café frio faz as vezes de peso de papel. Em outra, há um porta retrato com a foto de uma mulher sorridente. O porta retrato está úmido. Você reconhece na foto a esposa do seu orientador. Um calafrio sobe a sua coluna quando você lembra que recentemente ela se envolveu num acidente de carro e que atualmente está de coma num hospital.\n Os computadores da sala estão desligados. A leste, uma porta leva ao Pátio.\n";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
@@ -156,9 +156,9 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c3[i], el);
 
   el = elemento_cria("Sala de máquinas");
-  el->artigo = "a";
-  el->curta = "Uma sala fria e barulhenta que guarda um nobreak imponente que toma a maior parte do espaço da sala.";
-  el->longa = "É uma sala fria e barulhenta, repleta de cabos espalhados pelo chão. Um nobreak imponente toma a maior parte do espaço da sala.";
+  el->artigo = "a ";
+  el->curta = "Uma sala fria e barulhenta que guarda um nobreak imponente que toma a maior parte do espaço da sala. A leste, uma porta leva ao Pátio.";
+  el->longa = "É uma sala fria e barulhenta, repleta de cabos espalhados pelo chão. Um nobreak imponente toma a maior parte do espaço da sala. A leste, uma porta leva ao Pátio.\n";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
@@ -168,9 +168,9 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c4[i], el);
 
   el = elemento_cria("Pátio");
-  el->artigo = "o";
-  el->curta = "Um grande pátio, atualmente vazio, que se estende por todo o comprimento do andar. Possui um café, mesas e várias plantas decorativas. A porta de saída se encontra logo à frente. Bossa nova está a tocar no sistema de som.";
-  el->longa = "Um grande pátio que se estende por todo o comprimento do andar. Bossa nova está a tocar no sistema de som. Não se econtra um ser humano no café lindamente decorado que ocupa a parte sul do ambiente. Uma parede de mármore carrara separa a área de convivência da imensa mesa de madeira da recepção. Uma porta automática de saída se encontra logo à frente.";
+  el->artigo = "o ";
+  el->curta = "Um grande pátio, atualmente vazio, que se estende por todo o comprimento do andar. Possui um café, mesas e várias plantas decorativas. A porta de saída se encontra logo à frente. Bossa nova está a tocar no sistema de som. A oeste, você vê três portas: uma para a sala dos alunos de IC, uma para a sala dos pesquisadores, e uma para a sala de máquinas.";
+  el->longa = "Um grande pátio que se estende por todo o comprimento do andar. Bossa nova está a tocar no sistema de som. Não se econtra um ser humano no café lindamente decorado que ocupa a parte sul do ambiente. Uma parede de mármore carrara separa a área de convivência da imensa mesa de madeira da recepção. Uma porta automática de saída se encontra logo à frente. A oeste, você vê três portas: uma para a sala dos alunos de IC, uma para a sala dos pesquisadores, e uma para a sala de máquinas.\n";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
@@ -180,9 +180,9 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c5[i], el);
 
   el = elemento_cria("Sala do servidor");
-  el->artigo = "a";
-  el->curta = "A maior sala do andar. Muito fria e barulhenta. Possui um supercomputador enorme que ocupa quase toda a sala.";
-  el->longa = "A maior sala do andar. Muito fria e barulhenta. Você se lembra que aqui é onde fica o enorme supercomputador onde você deveria ter feito o deploy da IA.";
+  el->artigo = "a ";
+  el->curta = "A maior sala do andar. Muito fria e barulhenta. Possui um supercomputador enorme que ocupa quase toda a sala. A oeste, você vê a porta que leva ao pátio.\n";
+  el->longa = "A maior sala do andar. Muito fria e barulhenta. Você se lembra que aqui é onde fica o enorme supercomputador onde você deveria ter feito o deploy da IA. A oeste, você vê a porta que leva ao pátio.\n";
   el->ativo = 1;
   el->visivel = 1;
   el->conhecido = 0;
@@ -202,7 +202,7 @@ Elemento inicializa_elementos (Tabela tab) {
   l = el2->conteudo;
 
   el = elemento_cria("seu notebook");
-  el->artigo = "o";
+  el->artigo = "o ";
   el->curta = "É o seu notebook";
   el->longa = "É o seu notebook, velho companheiro de pesquisa.";
   el->ativo = 1;
@@ -218,7 +218,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c7[i], el);
 
   el = elemento_cria("notebook do Pedro");
-  el->artigo = "o";
+  el->artigo = "o ";
   el->curta = "É o notebook do seu colega Pedro";
   el->longa = "É o notebook do seu colega Pedro, que também pesquisa inteligência artificial aqui no CLIAR.";
   el->ativo = 1;
@@ -234,7 +234,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c8[i], el);
 
   el = elemento_cria("notebook da Alice");
-  el->artigo = "o";
+  el->artigo = "o ";
   el->curta = "É o notebook da sua colega Alice";
   el->longa = "É o notebook da sua colega Alice que também pesquisa inteligência artificial aqui no CLIAR.";
   el->ativo = 1;
@@ -250,7 +250,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c9[i], el);
 
   el = elemento_cria("estante");
-  el->artigo = "a";
+  el->artigo = "a ";
   el->curta = "É uma estante de livros dos alunos de IC.";
   el->longa = "É uma estante de livros dos alunos de IC. Tem livros principalmente sobre inteligência artificial, álgebra linear e probabilidade. Você estudou alguns deles.";
   el->ativo = 1;
@@ -263,7 +263,7 @@ Elemento inicializa_elementos (Tabela tab) {
   /*   tabela_insere(tab, c10[i], el); */
 
   el = elemento_cria("janela");
-  el->artigo = "a";
+  el->artigo = "a ";
   el->curta = "É uma pequena janela no canto da parede";
   el->longa = "É uma pequena janela no canto da parede. Vê-se o céu noturno, sem estrelas, por causa das luzes da cidade.";
   el->ativo = 1;
@@ -283,7 +283,7 @@ Elemento inicializa_elementos (Tabela tab) {
   l = el2->conteudo;
 
   el = elemento_cria("mesas");
-  el->artigo = "as";
+  el->artigo = "as ";
   el->curta = "São três mesas em frente a três paredes. As três estão cheias de papéis, anotações e livros, além de um monitor em cima de cada.";
   el->longa = "São três mesas em frente a três paredes. Em cima delas, você vê anotações à mão, cadernos, papers impressos e monitores. Em uma das mesas, uma xícara de café frio faz as vezes de peso de papel. Em outra, a do seu orientador, há um porta retrato com a foto de uma mulher sorridente.";
   el->ativo = 1;
@@ -296,7 +296,7 @@ Elemento inicializa_elementos (Tabela tab) {
   /*   tabela_insere(tab, c12[i], el); */
 
   el = elemento_cria("papéis");
-  el->artigo = "os";
+  el->artigo = "os ";
   el->curta = "São anotações e impressões de quem pesquisa inteligência artificial";
   el->longa = "São anotações e impressões de quem pesquisa inteligência artificial: papers, cadernos, anotações à mão, etc.";
   el->ativo = 1;
@@ -311,7 +311,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c13[i], el);
   
   el = elemento_cria("livros");
-  el->artigo = "os";
+  el->artigo = "os ";
   el->curta = "São livros que os pesquisadores estão estudando e deixaram em cima da mesa essa noite.";
   el->longa = "São livros que os pesquisadores estão estudando e deixaram em cima da mesa essa noite. São principalmente sobre álgebra linear e inteligência artificial. Exceto os Grundrisse, que está na mesa da direita. Alguns deles você já viu na estante da sala de interligência artificial.";
   el->ativo = 1;
@@ -327,7 +327,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c14[i], el);
 
   el = elemento_cria("monitores");
-  el->artigo = "os";
+  el->artigo = "os ";
   el->curta = "São três monitores das torres dos pesquisadores.";
   el->longa = "São três monitores das torres dos pesquisadores. Todos estão protegidos por senha. Cada um está sobre uma mesa.";
   el->ativo = 1;
@@ -340,7 +340,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c15[i], el);
 
   el = elemento_cria("xícara");
-  el->artigo = "a";
+  el->artigo = "a ";
   el->curta = "É uma xícara meio cheia de café frio";
   el->longa = "É uma xícara meio cheia de café frio. Nela lê-se: \"XVII Symposium Künstliche Intelligenz\". Embaixo dela, alguns papéis soltos, onde se vê algumas gotas secas desse mesmo café derramado.";
   el->ativo = 1;
@@ -358,7 +358,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c16[i], el);
 
   el = elemento_cria("retrato");
-  el->artigo = "o";
+  el->artigo = "o ";
   el->curta = "É o retrato da esposa do seu orientador.";
   el->longa = "É o retrato da esposa do seu orientador. Um calafrio sobe a sua coluna quando você lembra que recentemente ela se envolveu num acidente de carro e que atualmente está de coma num hospital.";
   el->ativo = 1;
@@ -376,7 +376,7 @@ Elemento inicializa_elementos (Tabela tab) {
   l = el2->conteudo;
 
   el = elemento_cria("cabos");
-  el->artigo = "os";
+  el->artigo = "os ";
   el->curta = "São vários cabos de energia e força que atravessam a sala, se ligam às máquinas e saem pelas paredes.";
   el->longa = "São vários cabos que saem da parede, e se ligam nas máquinas. Os cabos que saem do nobreak são especialmente grandes; aqui se consome muita energia. Fora os de força, há alguns cabos de internet. Atravessando a sala."; 
   el->ativo = 1;
@@ -389,7 +389,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c18[i], el);
 
   el = elemento_cria("nobreak");
-  el->artigo = "o";
+  el->artigo = "o ";
   el->curta = "É um grande nobreak no meio da sala.";
   el->longa = "É um grande nobreak no meio da sala. Existe uma tela de LCD onde se lê: \"Todos os sistemas: OK\" .";
   el->ativo = 1;
@@ -406,7 +406,7 @@ Elemento inicializa_elementos (Tabela tab) {
   l = el2->conteudo;
   
   el = elemento_cria("café");
-  el->artigo = "o";
+  el->artigo = "o ";
   el->curta = "É o café do CLIAR.";
   el->longa = "É o café do CLIAR. Aqui você sempre pega o seu café e senta na mesa, muitas vezes sozinho. Agora, no entanto, ele está fechado, e todos os funcionários foram para casa.";
   el->ativo = 1;
@@ -419,7 +419,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c20[i], el);
 
   el = elemento_cria("mesinhas");
-  el->artigo = "as";
+  el->artigo = "as ";
   el->curta = "São cinco mesinhas com cadeiras no meio do pátio.";
   el->longa = "São cinco mesas com cadeiras no meio do pátio. Você sempre toma café aqui. Uma delas está suja de (surprise, surprise) café.";
   el->ativo = 1;
@@ -432,7 +432,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c21[i], el);
 
   el = elemento_cria("plantas");
-  el->artigo = "as";
+  el->artigo = "as ";
   el->curta = "São duas pequenas palmeiras em dois grandes vasos, uma de cada lado da sala.";
   el->longa = "São duas pequenas palmeiras em dois grandes vasos, uma de cada lado da sala.";
   el->ativo = 1;
@@ -445,7 +445,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c22[i], el);
 
   el = elemento_cria("parede");
-  el->artigo = "a";
+  el->artigo = "a ";
   el->curta = "É uma grande parede do outro lado do pátio, em frente ao café. Atrás dela, a recepção. Nada de especial nela.";
   el->longa = "É uma grande parede do outro lado do pátio, em frente ao café. Atrás dela, a recepção. Nada de especial nela.";
   el->ativo = 1;
@@ -458,7 +458,7 @@ Elemento inicializa_elementos (Tabela tab) {
     tabela_insere(tab, c23[i], el);
 
   el = elemento_cria("recepção");
-  el->artigo = "a";
+  el->artigo = "a ";
   el->curta = "É a recepção do CLIAR. Fica de costas para a parede.";
   el->longa = "É a recepção do CLIAR. Fica de costas para a parede. A essa hora já não tem mais ninguém trabalhando aqui, então você só vê uma cadeira e uma papelada burocrática em cima do balcão.";
   el->ativo = 1;
@@ -475,7 +475,7 @@ Elemento inicializa_elementos (Tabela tab) {
   l = el2->conteudo;
   
   el = elemento_cria("supercomputador");
-  el->artigo = "o";
+  el->artigo = "o ";
   el->curta = "É um computador grande e barulhento.";
   el->longa = "É um computador grande e barulhento. Você sabe que aí rodam os programas mais sofisticados de inteligência artificial que esse centro de pesquisa produz.";
   el->ativo = 1;
