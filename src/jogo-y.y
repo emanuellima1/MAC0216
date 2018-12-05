@@ -31,7 +31,6 @@ input   : EOL                     {printf("Tô perando!\n");}
         | AJUDA                   {printf("Digite algum verbo que você queira fazer. Tente fazer referência às coisas que já foram descritas. Digite i para ver seu inventário. Digite ir para ir para outras sala.\n");} eol
         | input cmd               
         | input SAIR              {printf("\nSaindo...\n"); exit(0);}
-        | input INVENTARIO        {inventario(jogador, NULL, NULL);} eol
         | input AJUDA             {printf("Digite algum verbo que você queira fazer. Tente fazer referência às coisas que já foram descritas. Digite i para ver seu inventário. Digite ir para ir para outra sala.\n");} eol
         ;
 
@@ -52,7 +51,7 @@ cmd     : OBJ {
 
 
   if (f != NULL) {
-    if (e != NULL) {
+    if (e != NULL && e->conhecido) {
       if (f == pegar || f == deixar || f == ir_para)
         nova_sala = f(e, jogador, *pos_atual);
       else
@@ -82,10 +81,10 @@ cmd     : OBJ {
   Elemento e2 = tabela_busca(tab_jogo, $3);
 
   if (f == NULL)
-    printf("Acho que não sei %s\n", $1);
-  
-  else if (f == pegar || f == deixar || f == ir_para)
-     printf("Não sei %s essas coisas\n", $1);
+    printf("Acho que não sei fazer isso\n");
+  else if (f == pegar || f == deixar || f == ir_para ||
+           e1 == NULL || e2 == NULL || !(e1->conhecido) || !(e2->conhecido))
+    printf("Não sei fazer isso com essas coisas\n");
   else
     f(e1, e2, NULL);
   

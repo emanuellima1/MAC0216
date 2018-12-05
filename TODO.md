@@ -3,7 +3,6 @@
 # Para entregar (urgente)
 * Escrever as funções específicas da IARA (as de "animação", principalmente, que é requisito da entrega) 
 * Atualizar relatório
-* Fazer as coisas ficarem conhecidas (salas, principalmente)
 * Não deixar o jogador acessar objetos em outros lugares que eles não conheçam
 
 # Para terminar o jogo

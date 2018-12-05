@@ -21,9 +21,14 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
     return (NULL);
   }
 
-  /* Elementos do sala e a sala tornam-se conhecidos */
+  /* Elementos da sala, a sala e as salas vizinhas tornam-se conhecidos */
   e1->conhecido = 1;
   Elo *p = e1->conteudo->next;
+  while (p != NULL) {
+    ((Elemento)p->val)->conhecido = 1;
+    p = p->next;
+  }
+  p = e1->detalhe.saidas->next;
   while (p != NULL) {
     ((Elemento)p->val)->conhecido = 1;
     p = p->next;

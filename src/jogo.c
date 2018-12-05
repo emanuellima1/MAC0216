@@ -501,6 +501,12 @@ Elemento inicializa_elementos (Tabela tab) {
     ((Elemento)p_elo->val)->conhecido = 1;
     p_elo = p_elo->next;
   }
+  p_elo = el2->detalhe.saidas->next;
+  while (p_elo != NULL) {
+    ((Elemento)p_elo->val)->conhecido = 1;
+    p_elo = p_elo->next;
+  }
+
 
   /* Devolve o lugar de início */
   return(el2);
