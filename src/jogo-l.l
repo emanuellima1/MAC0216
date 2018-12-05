@@ -64,7 +64,7 @@ i(nvent(a|á|Á)rio)?               {return INVENTARIO;}
     /* Ignora artigos, espaços e preposições seguidos de palavras */
 
 [ \t]+
-[ao]s?|uma?|seu|sua|para|pr[oa]
+[ao]s?|uma?|seu|sua|para|pr[oa]|com
 (d[oae]s?|em|n[ao])[ \t]+[a-zA-Z_áéíóúÁÉÍÓÚçÇàÀ]+    
 
 
