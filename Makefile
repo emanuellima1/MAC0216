@@ -1,56 +1,51 @@
-# Makefile do Projeto Aventura
-# Emanuel Lima e João Seckler
+CC = gcc -Wall -pedantic -O2
+LIB_OBJ = lib/comandos.o lib/elemento.o lib/tabela.o lib/lista.o
+LANG_OBJ = src/jogo-y.o src/jogo-l.o
 
-CC=gcc
-CFLAGS=-Wall -lreadline -pedantic -O2
-OBJ_TESTE1=lib/elemento.o lib/lista.o lib/tabela.o src/test/teste.o
-OBJ_TESTE2=lib/elemento.o lib/lista.o lib/tabela.o \
-src/test/jogo-teste.o  lib/comandos.o
-OBJ_JOGO=src/jogo.o lib/elemento.o lib/lista.o lib/tabela.o lib/comandos.o \
-src/jogo.tab.o src/lex.yy.o
+# Programa principal
 
-jogo.out: $(OBJ_JOGO) src/jogo.h
-	$(CC) $(CFLAGS) -o jogo.out $(OBJ_JOGO)
+jogo.out: src/jogo.o src/jogo-y.o src/jogo-l.o
+	${CC} -lreadline -o jogo.out ${LIB_OBJ} ${LANG_OBJ} src/jogo.o
 
-jogo-teste.out: $(OBJ_TESTE2) src/jogo.h
-	$(CC) $(CFLAGS) -o jogo-teste.out $(OBJ_TESTE2) 
+src/jogo-y.o: src/jogo-y.c
 
-teste.out: $(OBJ_TESTE1) 
-	$(CC) $(CFLAGS) -o teste.out $(OBJ_TESTE1)
+src/jogo-y.c: src/jogo-y.y
+	bison -d src/jogo-y.y -o src/jogo-y.c
 
-src/lex.yy.c: src/jogo.l
-	flex -o src/lex.yy.c src/jogo.l 
+src/jogo-l.o: src/jogo-l.c
 
-src/lex.yy.o: src/lex.yy.c src/jogo.tab.h
+src/jogo-l.c: src/jogo-l.l
 
-src/jogo.tab.c: src/jogo.y
-	bison -d src/jogo.y -o src/jogo.tab.c
+src/jogo.o: lib/comandos.o
 
-src/jogo.tab.o: src/jogo.tab.c
+lib/comandos.o: lib/elemento.o 
 
-lista.o: lib/lista.h
+lib/elemento.o: lib/tabela.o
 
-tabela.o: lib/tabela.h lib/lista.h
+lib/tabela.o: lib/lista.o
 
-elemento.o: lib/elemento.h lib/tabela.h lib/lista.h
+lib/lista.o: 
 
-teste.o: lib/elemento.h lib/tabela.h lib/lista.h 
+%.o: %.c %.h
+	${CC} -c $< -o $@
 
-comandos.o: lib/comandos.h lib/elemento.h lib/tabela.h lib/lista.h
+clean:
+	rm -f src/jogo-y.c src/jogo-y.h src/jogo-l.c *.out
+	rm -f src/*.o src/test/*.o lib/*.o
 
-jogo-teste.o: src/jogo.h lib/comandos.h lib/elemento.h lib/tabela.h lib/lista.h
 
-jogo.o: src/jogo.h lib/comandos.h lib/elemento.h lib/tabela.h lib/lista.h src/tab.jogo.h
+# Rotinas de teste (partes 1 e 2)
 
-.PHONY: test
-test: ./teste.out ./jogo-teste.out
-	./teste.out	&& ./jogo-teste.out
+test: jogo-test.out lib-test
 
-.PHONY: doc
-doc:
-	pdflatex doc/relatorio.tex
-	-rm -f relatorio.aux relatorio.log
+jogo-test.out: src/test/jogo-test.o 
+	${CC} -o $@ ${LIB_OBJ} src/test/jogo-test.o
+src/test/jogo-test.o: lib/comandos.o
 
-.PHONY: clean
-clean: 
-	-rm -f teste.out jogo-teste.out jogo.out $(OBJ_JOGO) $(OBJ_TESTE2) src/lex.yy.c src/*tab* src/jogo.o
+lib-test: src/test/lib-test.o
+	${CC} -o $@ lib/lista.o lib/tabela.o lib/elemento.o src/test/lib-test.o
+
+src/test/lib-test.o: lib/elemento.o
+
+clean-test:
+	rm -f src/test/*.o lib-test jogo-test.out

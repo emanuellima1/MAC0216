@@ -1,7 +1,7 @@
 %{
 
 #include "../lib/comandos.h"
-#include "jogo.tab.h"
+#include "jogo-y.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

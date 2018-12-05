@@ -4,7 +4,6 @@
 int main () {
 
   int i;
-  char ans;
   const char PROMPT = '>';
 
   /* Tabela principal que contém todos os elementos do jogo */
@@ -25,19 +24,8 @@ int main () {
   printf("========================================\n");
 
   printf("\nPor Emanuel Lima e João Seckler.\n");
-  printf("\nVocê gostaria de ler as instruções? [s/N]\n");
-  scanf("%c", &ans);
-  switch (ans) {
-    case 'S':
-    case 's':
-      printf("\nInstruções: Por enquanto, nada. Eu só me auto-testo.\n\n");
-      break;
-  
-    default:
-      break;
-  }
 
-  printf("ATO 1\n");
+  printf("\n");
   printf("Dor de cabeça. Esta é a primeira coisa que você sente ao acordar na sua mesa de trabalho.\
   Aos poucos você vai se lembrando do que aconteceu. O seu orientador te pediu para por a nova versão da\
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
@@ -270,10 +258,10 @@ Elemento inicializa_elementos (Tabela tab) {
   tabela_insere(tab, el->nome, el);
 
   /* Liga as saídas das salas umas nas outras*/
-  liga_salas(tab, "Sala dos alunos de IC", "Pátio");
-  liga_salas(tab, "Sala dos pesquisadores", "Pátio");
-  liga_salas(tab, "Sala de máquinas", "Pátio");
-  liga_salas(tab, "Sala do servidor", "Pátio");
+  liga_salas(tab, "Sala dos alunos de IC", "Pátio", 'L', 'O');
+  liga_salas(tab, "Sala dos pesquisadores", "Pátio", 'L', 'O');
+  liga_salas(tab, "Sala de máquinas", "Pátio", 'L', 'O');
+  liga_salas(tab, "Sala do servidor", "Pátio", 'O', 'L');
 
   /* Elementos na sala dos alunos de IC */
   el2 = tabela_busca(tab, "Sala dos alunos de IC");
@@ -520,9 +508,12 @@ Elemento inicializa_elementos (Tabela tab) {
 }
 
 
-void liga_salas(Tabela tab, char * s1, char * s2) {
+void liga_salas(Tabela tab, char * s1, char * s2, char dir1, char dir2) {
 
   Elemento el1, el2;
+  char *c1 = malloc(sizeof(char)), *c2 = malloc(sizeof(char));
+  *c1 = dir1; *c2 = dir1;
+
   el1 = tabela_busca(tab, s1);
   el2 = tabela_busca(tab, s2);
   if (el1 == NULL || el2 == NULL) {
@@ -530,7 +521,9 @@ void liga_salas(Tabela tab, char * s1, char * s2) {
     return;
   }
   lista_insere(el1->detalhe.saidas, el2, el2->nome);
+  lista_insere(el1->detalhe.saidas, el2, c1);
   lista_insere(el2->detalhe.saidas, el1, el1->nome);
+  lista_insere(el2->detalhe.saidas, el1, c1);
 }
 
 void animacoes_automaticas(Tabela tab, Elemento lugar_atual) {

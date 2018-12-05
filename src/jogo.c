@@ -25,23 +25,13 @@ int main () {
   printf("========================================\n");
 
   printf("\nPor Emanuel Lima e João Seckler.\n");
-  /* printf("\nVocê gostaria de ler as instruções? [s/N]\n"); */
-  /* scanf("%c", &ans); */
-  /* switch (ans) { */
-  /*   case 'S': */
-  /*   case 's': */
-  /*     printf("\nInstruções: Por enquanto, nada.\n\n"); */
-  /*     break; */
-  
-  /*   default: */
-  /*     break; */
-  /* } */
 
-  printf("ATO 1\n");
+  printf("\n");
   printf("Dor de cabeça. Esta é a primeira coisa que você sente ao acordar na sua mesa de trabalho.\
   Aos poucos você vai se lembrando do que aconteceu. O seu orientador te pediu para por a nova versão da\
   inteligência artificial que vocês construíram juntos em produção. Depois de 48h acordado tentando completar a tarefa,\
   você desmaiou de exaustão em cima dos seus livros e do seu notebook. Mas agora você está acordado. O que você faz? \n");
+
   do {
     if (acabei_de_chegar) {
       /* Apresenta o local */
@@ -60,6 +50,7 @@ int main () {
     }
     /* Faz todas as animações */
     animacoes_automaticas(tab_jogo, lugar_atual);
+
   } while (yyparse(tab_jogo, tab_f_jogo, jogador,
                    &lugar_atual, &acabei_de_chegar));
   return (0);
