@@ -6,10 +6,17 @@ Elemento ir_para(Elemento e1, Elemento e2, Elemento e3) {
   /* e1 é a nova sala, e2 é o jogador e e3 é a velha sala.
      Devolve a nova sala
   */
+  p_funcao_void pf;
 
   if (e1 == NULL || e2 == NULL || e3 == NULL) {
     printf("Você quer ir para onde?\n");
     return(NULL);
+  }
+
+  /* Vê se a sala aonde queremos ir tem uma função específica */
+  pf = lista_f_busca(e2->acoes, "ir_para");
+  if (pf != NULL) {
+    return(((p_comando)pf)(e1, e2, e3));
   }
 
   if (lista_busca_valor(e3->detalhe.saidas, e1) == NULL) {

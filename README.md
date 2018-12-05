@@ -25,7 +25,7 @@ $ ./lib-test
 E para testar o funcionamento básico do jogo:
 
 ```
->$ ./jogo-test
+$ ./jogo-test
 ```
 
 
@@ -33,7 +33,7 @@ E para testar o funcionamento básico do jogo:
 Para apagar arquivos temporários:
 
 ```
->$ make clean
+$ make clean
 ```
 
 
