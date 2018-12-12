@@ -36,9 +36,14 @@ Para apagar arquivos temporários:
 $ make clean
 ```
 
+Você precisará instalar a biblioteca Readline. Em sistemas baseados no Debian:  
 
-Relatório completo encontra-se em doc/relatório.pdf
+```
+$ sudo apt-get install libreadline-dev
+```
+
+Este é um trabalho em estado alpha e poderá conter erros.   
 
 Equipe: 
-* Emanuel Lima:  NUSP 9009493
-* João Seckler:  NUSP 4603521
+* Emanuel Lima
+* João Seckler

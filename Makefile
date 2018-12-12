@@ -7,7 +7,7 @@ LANG_OBJ = src/jogo-y.o src/jogo-l.o
 ##################################
 
 jogo.out: src/jogo.o src/jogo-y.o src/jogo-l.o
-	${CC} -lreadline -o jogo.out ${LIB_OBJ} ${LANG_OBJ} src/jogo.o
+	${CC} -o jogo.out ${LIB_OBJ} ${LANG_OBJ} src/jogo.o -lreadline
 
 src/jogo-y.o: src/jogo-y.c
 
